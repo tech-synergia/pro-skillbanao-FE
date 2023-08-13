@@ -79,12 +79,12 @@ const App = () => {
           <Select value={role} onChange={(value) => setRole(value)} required>
             <Option value="">Select Role</Option>
             <Option value="CA">CA</Option>
-            <Option value="CA">CS</Option>
-            <Option value="CA">MBA</Option>
-            <Option value="CA">Lawyer</Option>
-            <Option value="CA">Makeup Artist</Option>
-            <Option value="Lawyer">Hair Stylist</Option>
-            <Option value="Lawyer">Astrologer</Option>
+            <Option value="CS">CS</Option>
+            <Option value="MBA">MBA</Option>
+            <Option value="Lawyer">Lawyer</Option>
+            <Option value="Makeup Artist">Makeup Artist</Option>
+            <Option value="Hair Stylist">Hair Stylist</Option>
+            <Option value="Astrologer">Astrologer</Option>
           </Select>
         </Form.Item>
         <Form.Item label="Gender">
