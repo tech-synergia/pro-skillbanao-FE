@@ -20,13 +20,16 @@ const App = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8000/add-user", {
-        name,
-        role,
-        gender,
-        phoneNumber,
-        image,
-      });
+      const response = await axios.post(
+        "https://skillbanaobe.onrender.com/add-user",
+        {
+          name,
+          role,
+          gender,
+          phoneNumber,
+          image,
+        }
+      );
 
       console.log(response);
       alert("Success!");
