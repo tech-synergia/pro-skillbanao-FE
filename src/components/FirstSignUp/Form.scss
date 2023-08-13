@@ -1,0 +1,121 @@
+#logo 
+{
+  width:200px;
+  margin:0 auto;
+}
+
+.select-user-type
+{
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30vh;
+    text-align: center;
+    .btns
+    {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      button 
+      {
+        padding: 5px;
+        width: 120px;
+      }
+    }
+}
+
+/* App.css */
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 20vh;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  @media (max-width: 767px) {
+    margin-top: 0;
+    height: 100vh;
+  }
+}
+
+.logo-image {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.custom-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  margin-bottom: 15px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.upload-button {
+  margin-bottom: 15px;
+}
+
+.custom-button {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.uploaded-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+  button 
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  button:hover {
+    background-color: #eee;
+  }
+  .send-button {
+    background-color: #52c41a;
+    border-color: #52c41a;
+    color: #fff;
+  }
+  
+  .go-back-button {
+    background-color: #f0f2f5;
+    border-color: #f0f2f5;
+    color: #333;
+  }
+}
+
+
+
+

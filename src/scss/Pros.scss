@@ -1,0 +1,61 @@
+@use "./modules/flex";
+@use "./modules/vrs";
+@use "./modules/grid";
+
+#section-1 {
+  @include flex.flexbox;
+
+  .content {
+    @include flex.flexbox(column);
+
+    h2 {
+      margin-bottom: 0;
+    }
+
+    & > p {
+      margin-bottom: 25px;
+    }
+
+    .pros-grid {
+      @include grid.gridbox(4, 25px);
+
+      .professional {
+        @include flex.flexbox(column);
+        background-color: white;
+        padding: 25px 50px;
+        border-radius: 20px;
+        border: 8px solid rgba($color: grey, $alpha: 0.1);
+        transition: all 0.3s ease-out;
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: vrs.$prim-shadow;
+        }
+
+        img {
+          width: 125px;
+          height: 125px;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 8px solid rgba($color: #000000, $alpha: 0);
+          transition: all 0.3s ease-out;
+        }
+
+        &:hover img {
+          box-shadow: vrs.$prim-shadow;
+        }
+
+        h3,
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1140px) {
+  #section-1 .content .pros-grid {
+    @include grid.gridbox(1, 15px);
+  }
+}

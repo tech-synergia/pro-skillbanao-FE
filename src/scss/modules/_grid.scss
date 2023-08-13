@@ -1,0 +1,5 @@
+@mixin gridbox($col, $gap: 0) {
+  display: grid;
+  grid-template-columns: repeat($col, 1fr);
+  gap: $gap;
+}

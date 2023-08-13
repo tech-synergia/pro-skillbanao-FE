@@ -1,0 +1,126 @@
+@use "./modules/vrs";
+.chat-page 
+{
+    
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid;
+    height: 100vh;
+    overflow: auto;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    @media (max-width: 599px) {
+        width: 100%;
+        border-radius: 0;
+    }
+    .chat-head 
+    {
+        display: flex;
+        background-color: white;
+        justify-content: space-between;
+        align-items: center;
+        padding:20px;
+        .info 
+        {
+            display: flex;
+            justify-content: flex-start;
+            width: 80%;
+            gap:20px;
+            align-items: center;
+            img 
+            {
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+            }
+        }
+       
+    }
+    .chat-timer 
+    {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background-color:rgb(0, 131, 239);
+        color:white;
+        gap: 20px;
+    }
+
+    .chat-area 
+    {
+        height: 100vh;
+        box-sizing: border-box;
+        overflow-y: auto;
+        padding: 20px;
+        gap: 20px;
+        display: flex;
+        flex-direction:column-reverse;
+        background-color: whitesmoke;
+        .recieved 
+        {
+            display: flex;
+            justify-content: left;
+            align-items: flex-end;
+            gap:5px;
+            width: 100%;
+            margin-left:0 auto;
+
+            img 
+            {
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+            }
+            .chat 
+            {
+                padding: 10px;
+                width: 80%;
+                background-color: rgb(4, 187, 4);
+                border-radius: 5px 5px 5px 0;
+            }
+        }
+        .sent 
+        {
+            
+            width: 100%;
+            right: 0 px;
+            display: flex;
+            justify-content: right;
+            .chat 
+            {
+                padding: 10px;
+                width: 90%;
+                background-color: white;
+                border-radius: 5px 5px 0 5px ;
+            }
+        }
+    }
+
+    .send-box 
+    {
+       
+        box-sizing: border-box;
+        width: 100%;
+        padding: 5px 20px;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+        textarea 
+        {
+            width: 90%; resize: none;
+            border-radius: 10px 0 0 10px;
+            padding: 5px; 
+        }
+        button 
+        {
+            font-size: 30px;
+            border: 0;
+            background-color: white;
+            color: green;
+        }
+    }
+
+}
+
