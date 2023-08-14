@@ -49,11 +49,9 @@ const User = () => {
         "https://skillbanaobe.onrender.com/user/register",
         userData
       );
-
-      console.log(response);
-      navigate("/success");
+      navigate("/userSuccess");
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.msg);
     }
   };
 
@@ -137,7 +135,7 @@ const User = () => {
             className="send-button"
             onClick={handleSubmit}
           >
-            Send
+            Register
           </Button>
           <Button
             type="button"
@@ -148,7 +146,7 @@ const User = () => {
           </Button>
         </div>
         <p>
-          Already have an account? <a href="/login">Sign In Here</a>
+          Already have an account? <a href="/login">Login</a>
         </p>
       </Form>
     </div>
