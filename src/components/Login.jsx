@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import logo from "../images/logo.png";
 import Password from "antd/es/input/Password";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     phone: "",
     password: "",
@@ -23,7 +25,7 @@ const Login = () => {
       );
 
       console.log(response);
-      navigate("/success");
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
