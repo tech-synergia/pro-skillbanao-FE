@@ -1,3 +1,4 @@
+
 #logo 
 {
   width:200px;
@@ -24,6 +25,9 @@
       justify-content: space-between;
       button 
       {
+        border: none;
+        color: #0255a3;
+        font-size: 18px;
         padding: 5px;
         width: 120px;
       }
@@ -34,8 +38,8 @@
 
 .form-container {
   max-width: 500px;
-  margin: 0 auto;
-  margin-top: 20vh;
+  margin: 5vh auto;
+ 
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -115,6 +119,25 @@
     color: #333;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

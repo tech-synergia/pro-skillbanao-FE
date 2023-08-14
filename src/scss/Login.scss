@@ -24,76 +24,91 @@ div{
   padding: 25px;
   margin-bottom: 30px;
   border-radius: 10px;
-}
-.login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.login h6{
-  margin-bottom: 30px;
- span{
-  color: #fff;
- }
-}
-
-button {
-  width: 25%;
-  height: 40px;
-  color: rgb(62, 62, 180);
-  border: none;
-  border-radius: 15px;
-  img{
-    width: 20px;
-    height: 20px;
-    margin: 6px;
+  .login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .h6{
+      margin-bottom: 30px;
+     span{
+      color: #fff;
+     }
+    }
+    button {
+      width: 25%;
+      height: 40px;
+      color: rgb(62, 62, 180);
+      border: none;
+      border-radius: 15px;
+      img{
+        width: 20px;
+        height: 20px;
+        margin: 6px;
+      }
+    }
+    .number {
+      background-color: #fff;
+      /* padding: 15px; */
+      width: 100%;
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 10px;
+      .vr {
+        width: 5px;
+        background-color: #fff;
+      }
+      input {
+        border: none;
+        padding: 15px;
+        width: 69.5%;
+        outline: none;
+      }
+      select {
+        border: none;
+        padding: 15px 0px;
+        border-radius: 5px;
+        outline: none;
+        background-color: white;
+      }
+    }
+    .choose{
+      width: 25%;
+      margin-bottom: 30px;
+      text-align: center;
+      border-bottom: 2px solid #d8d6d6;
+      line-height: 0.1em;
+      span {
+        background-color: rgb(62, 62, 180);
+        color: #fff;
+        padding: 0 10px;
+      }
+    }
+    .privacy-policy {
+      text-align: center;
+      a{
+        color: #fff;
+      }
+    }
   }
-}
-.number .vr {
-  width: 5px;
-  background-color: #fff;
-}
-.number {
-  background-color: #fff;
-  /* padding: 15px; */
-  width: 100%;
-  border-radius: 10px;
-  padding: 3px;
-  margin-bottom: 10px;
+ } 
 }
 
-.number input {
-  border: none;
-  padding: 15px;
-  width: 69.5%;
-  outline: none;
-}
-
-.number select {
-  border: none;
-  padding: 15px 0px;
-  border-radius: 5px;
-  outline: none;
-  background-color: white;
-}
-
-.choose{
-  width: 25%;
-  text-align: center;
-  border-bottom: 2px solid #d8d6d6;
-  line-height: 0.1em;
-}
-
-.choose span {
-  background-color: rgb(62, 62, 180);
-  color: #fff;
-  padding: 0 10px;
-}
-
-.privacy-policy {
-  text-align: center;
-  a{
-    color: #fff;
+@media screen and (max-width: 768px) {
+  div{
+    margin: 0;
+    padding: 0;
+  .container {
+    
+    .login {
+      button {
+        width: 75%;
+      
+      }
+      .choose{
+        width: 75%;
+      
+      }
+    }
+   } 
   }
-}
 }

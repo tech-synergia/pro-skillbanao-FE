@@ -11,6 +11,7 @@ const User = () => {
   const [image, setImage] = useState('');
   const [dob, setDob] = useState('');
   const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate(); // Initialize useNavigate
 
@@ -33,6 +34,7 @@ const User = () => {
       formData.append('image', info.file.originFileObj); // Append the image file
       formData.append('dob', dob);
       formData.append('phoneNumber', phoneNumber);
+      formData.append('password', password);
 
       const response = await fetch('YOUR_API_ENDPOINT', {
         method: 'POST',
@@ -80,8 +82,8 @@ const User = () => {
           </Radio.Group>
         </Form.Item>
         <Form.Item label="Upload Profile Pic" >
-          <Upload customRequest={handleImageUpload} showUploadList={false}>
-            <Button icon={<UploadOutlined />}>Upload</Button>
+          <Upload className='p-1' customRequest={handleImageUpload} showUploadList={false}>
+            <Button icon={<UploadOutlined style={{fontSize: "20px"}}/>}> Upload </Button>
           </Upload>
           {image && <img className="uploaded-image" src={image} alt="Uploaded" />}
         </Form.Item>
@@ -96,6 +98,9 @@ const User = () => {
         <Form.Item label="Phone Number" name="phone" rules={[{ required: true, message: 'Please enter your phone number' }]}>
           <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
         </Form.Item>
+        <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please enter your password' }]}>
+          <Input type="tel" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </Form.Item>
         <div className="button-group">
           <Button type="primary" htmlType="submit" className="send-button">
             Send
@@ -104,6 +109,7 @@ const User = () => {
             Back
           </Button>
         </div>
+        <p>Already have an account? <a href="/login">Sign In Here</a></p>
       </Form>
     </div>
   );

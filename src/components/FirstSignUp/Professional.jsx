@@ -12,8 +12,22 @@ const App = () => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [gender, setGender] = useState("");
-  const [image, setImage] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [dob, setDOB] = useState("");
+  const [image, setImage] = useState('');
+  const [houseNumber, setHouseNumber] = useState("");
+  const [locality, setLocality] = useState("");
+  const [state, setState] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [primarySkills, setPrimarySkills] = useState([]);
+  const [allSkills, setAllSkills] = useState([]);
+  const [language, setLanguage] = useState("");
+  const [experience, setExperience] = useState("");
+  const [dailyContribution, setDailyContribution] = useState("");
+  const [skillbanaoSource, setSkillbanaoSource] = useState("");
+
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = async (e) => {
@@ -27,6 +41,19 @@ const App = () => {
           role,
           gender,
           phoneNumber,
+          email,
+          password,
+          dob,
+          houseNumber,
+          locality,
+          state,
+          pincode,
+          primarySkills,
+          allSkills,
+          language,
+          experience,
+          dailyContribution,
+          skillbanaoSource,
           image,
         }
       );
@@ -39,28 +66,19 @@ const App = () => {
     }
   };
 
-  const handleimageUpload = (info) => {
-    if (info.file.status === "done") {
+  const handleReload = () => {
+    navigate(0); 
+  };
+
+  const handleImageUpload = (info) => {
+    if (info.file.status === 'done') {
+      // Show a preview of the uploaded image
       const reader = new FileReader();
       reader.onload = (e) => {
-        setPhoto(e.target.result);
-      };
-      reader.onerror = (error) => {
-        console.error("Error reading the image:", error);
+        setImage(e.target.result);
       };
       reader.readAsDataURL(info.file.originFileObj);
     }
-  };
-
-  const handleimageChange = (info) => {
-    if (info.file.status === "done") {
-      // Update the image state after successful upload
-      setImage(info.file.response.url);
-    }
-  };
-
-  const handleReload = () => {
-    navigate(0); // Navigate to home page using navigate
   };
 
   return (
@@ -69,23 +87,33 @@ const App = () => {
         <img id="logo" src={logo} alt="" />
         <h2>Start As Professional</h2>
         <Form.Item label="Name">
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+          />
+        </Form.Item>
+        <Form.Item label="Phone Number">
           <Input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={phoneNumber}
+            pattern="[0-9]{10}"
+            onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
         </Form.Item>
-        <Form.Item label="Role">
-          <Select value={role} onChange={(value) => setRole(value)} required>
-            <Option value="">Select Role</Option>
-            <Option value="CA">CA</Option>
-            <Option value="CS">CS</Option>
-            <Option value="MBA">MBA</Option>
-            <Option value="Lawyer">Lawyer</Option>
-            <Option value="Makeup Artist">Makeup Artist</Option>
-            <Option value="Hair Stylist">Hair Stylist</Option>
-            <Option value="Astrologer">Astrologer</Option>
-          </Select>
+        <Form.Item label="Email">
+          <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </Form.Item>
+        <Form.Item label="Password">
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </Form.Item>
         <Form.Item label="Gender">
           <Radio.Group
@@ -97,25 +125,152 @@ const App = () => {
             <Radio value="other">Other</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="Upload Profile Pic">
-          <Upload
-            accept="image/*"
-            customRequest={handleimageUpload}
-            showUploadList={false}
-            onChange={handleimageChange}
-          >
-            <Button icon={<UploadOutlined />}>Upload</Button>
+        <Form.Item label="Upload Profile Pic" >
+          <Upload customRequest={handleImageUpload} showUploadList={false}>
+            <Button className="custom-button" icon={<UploadOutlined style={{fontSize: "20px"}}/>}> Upload </Button>
           </Upload>
-
-          {image && (
-            <img className="uploaded-image" src={image} alt="Uploaded" />
-          )}
+          {image && <img className="uploaded-image" src={image} alt="Uploaded" />}
         </Form.Item>
-        <Form.Item label="Phone Number">
+        <Form.Item label="Date of Birth">
           <Input
-            value={phoneNumber}
-            pattern="[0-9]{10}"
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            type="date"
+            value={dob}
+            onChange={(e) => setDOB(e.target.value)}
+            required
+          />
+        </Form.Item>
+        <h6>Permanent Address Details*</h6>
+        <Form.Item label="House No.">
+          <Input
+            value={houseNumber}
+            onChange={(e) =>
+              setHouseNumber({
+                ...houseNumber,
+                houseNumber: e.target.value,
+              })
+            }
+            required
+          />
+          </Form.Item>
+          <Form.Item label="Locality">
+          <Input
+            value={locality}
+            onChange={(e) =>
+              setLocality({
+                ...locality,
+                locality: e.target.value,
+              })
+            }
+            required
+          />
+          </Form.Item>
+          <Form.Item label="State">
+          <Input
+            value={state}
+            onChange={(e) =>
+            setState({
+                ...state,
+                state: e.target.value,
+              })
+            }
+            required
+          />
+          </Form.Item>
+          <Form.Item label="Pin Code">
+          <Input
+            value={pincode}
+            onChange={(e) =>
+              setPincode({
+                ...pincode,
+                pincode: e.target.value,
+              })
+            }
+            required
+          />
+          </Form.Item>
+          
+         
+        <Form.Item label="Primary Skills">
+        <Input
+            value={primarySkills}
+            onChange={(e) =>
+              setPrimarySkills({
+                ...primarySkills,
+                primarySkills: e.target.value,
+              })
+            }
+            required
+          />
+        </Form.Item>
+        <Form.Item label="All Skills">
+        <Input
+            value={allSkills}
+            onChange={(e) =>
+              setAllSkills({
+                ...allSkills,
+                allSkills: e.target.value,
+              })
+            }
+            required
+          />
+        </Form.Item>
+        <Form.Item label="Language">
+        <Input
+            value={language}
+            onChange={(e) =>
+              setLanguage({
+                ...language,
+                language: e.target.value,
+              })
+            }
+            required
+          />
+        </Form.Item>
+        <Form.Item label="Experience">
+        <Input
+            value={experience}
+            onChange={(e) =>
+              setExperience({
+                ...experience,
+                experience: e.target.value,
+              })
+            }
+            required
+          />
+        </Form.Item>
+        <Form.Item label="How many hours you can contribute daily?">
+        <Input
+            value={dailyContribution}
+            onChange={(e) =>
+              setDailyContribution({
+                ...dailyContribution,
+                dailyContribution: e.target.value,
+              })
+            }
+            required
+          />
+        </Form.Item>
+        <Form.Item label="Where did you hear about Skillbanao?">
+        <Input
+            value={skillbanaoSource}
+            onChange={(e) =>
+              setSkillbanaoSource({
+                ...skillbanaoSource,
+                skillbanaoSource: e.target.value,
+              })
+            }
+            required
+          />
+        </Form.Item>
+        <Form.Item label="Are you working on any other online platform BC?">
+        <Input
+            value={skillbanaoSource}
+            onChange={(e) =>
+              setSkillbanaoSource({
+                ...skillbanaoSource,
+                skillbanaoSource: e.target.value,
+              })
+            }
             required
           />
         </Form.Item>
@@ -125,7 +280,9 @@ const App = () => {
           </Button>
           <Button onClick={handleReload}>Back</Button>
         </div>
+        <p>Already have an account? <a href="/login">Sign In Here</a></p>
       </Form>
+     
     </div>
   );
 };
