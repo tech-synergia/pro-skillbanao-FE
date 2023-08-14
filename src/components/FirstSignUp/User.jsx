@@ -1,57 +1,59 @@
-import React, { useState } from 'react';
-import { Form, Input, Radio, Upload, Button } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import logo from '../../images/logo.png';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
-import './Form.scss';
+import React, { useState } from "react";
+import { Form, Input, Radio, Upload, Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import logo from "../../images/logo.png";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import "./Form.scss";
+import axios from "axios";
 
 const User = () => {
-  const [name, setName] = useState('');
-  const [gender, setGender] = useState('');
-  const [image, setImage] = useState('');
-  const [dob, setDob] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState({
+    name: "",
+    gender: "",
+    image: "",
+    dob: "",
+    phone: "",
+    password: "",
+  });
 
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleImageUpload = (info) => {
-    if (info.file.status === 'done') {
-      // Show a preview of the uploaded image
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
-      };
-      reader.readAsDataURL(info.file.originFileObj);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleImageUpload = async (e) => {
+    const imageFile = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    try {
+      const response = await axios.post(
+        "https://skillbanaobe.onrender.com/user/uploadImage",
+        formData
+      );
+      setUserData((prevData) => ({
+        ...prevData,
+        image: response.data.image.src,
+      }));
+    } catch (error) {
+      console.error("Image upload error:", error);
     }
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (e) => {
     try {
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('gender', gender);
-      formData.append('image', info.file.originFileObj); // Append the image file
-      formData.append('dob', dob);
-      formData.append('phoneNumber', phoneNumber);
-      formData.append('password', password);
+      const response = await axios.post(
+        "https://skillbanaobe.onrender.com/user/register",
+        userData
+      );
 
-      const response = await fetch('YOUR_API_ENDPOINT', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        // Handle successful response
-        console.log('Form submitted successfully');
-        navigate('/');
-      } else {
-        // Handle error response
-        console.error('Form submission error');
-      }
+      console.log(response);
+      navigate("/success");
     } catch (error) {
-      // Handle fetch error
-      console.error('Fetch error:', error);
+      console.log(error);
     }
   };
 
@@ -61,55 +63,93 @@ const User = () => {
 
   return (
     <div className="form-container">
-      <Form onFinish={handleSubmit}>
+      <Form>
         <img id="logo" src={logo} alt="" />
         <h2>Start Your Journey</h2>
-        <Form.Item label="Name" rules={[{ required: true, message: 'Please enter your name' }]}>
-          <Input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+        <Form.Item
+          label="Name"
+          rules={[{ required: true, message: "Please enter your name" }]}
+        >
+          <Input name="name" id="name" onChange={handleInputChange} required />
         </Form.Item>
         <Form.Item label="Gender">
-          <Radio.Group
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-          >
+          <Radio.Group name="gender" id="gender" onChange={handleInputChange}>
             <Radio value="male">Male</Radio>
             <Radio value="female">Female</Radio>
             <Radio value="other">Other</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="Upload Profile Pic" >
-          <Upload className='p-1' customRequest={handleImageUpload} showUploadList={false}>
-            <Button icon={<UploadOutlined style={{fontSize: "20px"}}/>}> Upload </Button>
+        <Form.Item label="Upload Profile Pic">
+          <Upload
+            className="p-1"
+            customRequest={handleImageUpload}
+            showUploadList={false}
+          >
+            <Button icon={<UploadOutlined style={{ fontSize: "20px" }} />}>
+              Upload
+            </Button>
           </Upload>
-          {image && <img className="uploaded-image" src={image} alt="Uploaded" />}
         </Form.Item>
-        <Form.Item label="Date of Birth" rules={[{ required: true, message: 'Please select your date of birth' }]}>
+        <Form.Item
+          label="Date of Birth"
+          rules={[
+            { required: true, message: "Please select your date of birth" },
+          ]}
+        >
           <Input
-            type='date'
-            value={dob}
-            onChange={(e) => setName(e.target.value)}
+            type="date"
+            name="dob"
+            id="dob"
+            onChange={handleInputChange}
             required
           />
         </Form.Item>
-        <Form.Item label="Phone Number" name="phone" rules={[{ required: true, message: 'Please enter your phone number' }]}>
-          <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <Form.Item
+          label="Phone Number"
+          name="phone"
+          rules={[
+            { required: true, message: "Please enter your phone number" },
+          ]}
+        >
+          <Input
+            type="phone"
+            name="phone"
+            id="phone"
+            onChange={handleInputChange}
+          />
         </Form.Item>
-        <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please enter your password' }]}>
-          <Input type="tel" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please enter your password" }]}
+        >
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            onChange={handleInputChange}
+          />
         </Form.Item>
         <div className="button-group">
-          <Button type="primary" htmlType="submit" className="send-button">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="send-button"
+            onClick={handleSubmit}
+          >
             Send
           </Button>
-          <Button type="button" className="go-back-button" onClick={handleReload}>
+          <Button
+            type="button"
+            className="go-back-button"
+            onClick={handleReload}
+          >
             Back
           </Button>
         </div>
-        <p>Already have an account? <a href="/login">Sign In Here</a></p>
+        <p>
+          Already have an account? <a href="/login">Sign In Here</a>
+        </p>
       </Form>
     </div>
   );
