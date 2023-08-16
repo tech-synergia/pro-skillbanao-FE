@@ -192,13 +192,14 @@ const App = () => {
         </Form.Item>
 
         <Form.Item label="Primary Skills" htmlFor="pSkills">
-          {/* <Input
+          <Select
             name="pSkills"
             id="pSkills"
-            onChange={handleInputChange}
-            required
-          /> */}
-          <Select>
+            onChange={(value) =>
+              handleInputChange({ target: { name: "pSkills", value } })
+            }
+            defaultValue="Select primary skills"
+          >
             <Option value="">Select primary skills</Option>
             <Option value="Financial Coach">Financial Coach</Option>
             <Option value="Love & Relationship Coach">
@@ -208,7 +209,7 @@ const App = () => {
               Mental Health & Stress Management Coach
             </Option>
             <Option value="Fashion Coach">Fashion Coach</Option>
-            <Option value=" Makeup & Hairstyle Coach">
+            <Option value="Makeup & Hairstyle Coach">
               Makeup & Hairstyle Coach
             </Option>
             <Option value="Fitness & Nutrition Coach">
