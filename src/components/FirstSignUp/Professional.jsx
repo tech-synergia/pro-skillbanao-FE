@@ -119,8 +119,15 @@ const App = () => {
             required
           />
         </Form.Item>
-        <Form.Item label="Role">
-          <Select name="role" id="role" onChange={handleInputChange} required>
+        <Form.Item label="Role" htmlFor="role">
+          <Select
+            name="role"
+            id="role"
+            onChange={(value) =>
+              handleInputChange({ target: { name: "role", value } })
+            }
+            defaultValue="Select Role"
+          >
             <Option value="">Select Role</Option>
             <Option value="CA">CA</Option>
             <Option value="CS">CS</Option>
@@ -241,7 +248,7 @@ const App = () => {
           />
         </Form.Item>
         <Form.Item
-          label="Are you working on any other online platform BC?"
+          label="Are you working on any other online platform?"
           htmlFor="working"
         >
           <Input

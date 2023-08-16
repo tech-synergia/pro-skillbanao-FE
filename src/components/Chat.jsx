@@ -1,106 +1,67 @@
-import { useState ,useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import '../scss/Chat.scss';
-import { FaArrowLeft ,FaEllipsisVertical , FaTelegram } from "react-icons/fa6";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import io from "socket.io-client";
 
+const socket = io.connect("https://skillbanaobe.onrender.com"); // Replace with your server URL
 
-const CountdownTimer = () => {
-  const [minutes, setMinutes] = useState(30);
-  const [seconds, setSeconds] = useState(20);
+function Chat() {
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    let intervalId;
-
-    const tick = () => {
-      if (minutes === 0 && seconds === 0) {
-        // Timer has reached zero, you can perform any action here
-        clearInterval(intervalId);
-        return;
+    (async () => {
+      const res = await axios.post(
+        "https://skillbanaobe.onrender.com/chat/start-chat",
+        {
+          userId: localStorage.getItem("userId"),
+          professionalId: localStorage.getItem("professionalId"),
+        }
+      );
+      if (res.status === 200) {
+        socket.on(
+          `${localStorage.getItem("userId")}-${localStorage.getItem(
+            "professionalId"
+          )}-chat`,
+          (message) => {
+            setMessages((prevMessages) => [...prevMessages, message]);
+          }
+        );
       }
+    })();
+  }, []);
 
-      if (seconds === 0) {
-        setMinutes((prevMinutes) => prevMinutes - 1);
-        setSeconds(59);
-      } else {
-        setSeconds((prevSeconds) => prevSeconds - 1);
-      }
-    };
+  const handleSendMessage = () => {
+    if (message.trim() !== "") {
+      socket.emit(
+        `${localStorage.getItem("userId")}-${localStorage.getItem(
+          "professionalId"
+        )}-chat`,
+        message
+      );
+      setMessage("");
+    }
+  };
 
-    intervalId = setInterval(tick, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [minutes, seconds]);
-
-  return (<>
-    <span>Time Left </span>
-        <span>
-        {minutes.toString().padStart(2, '0')} : {seconds.toString().padStart(2, '0')}
-        </span>
-        </>
-  );
-};
-
-
-
-
-const Chat = ()=>
-{
-       
-        let [seconds, setSeconds] = useState(5);
-        let [minute, setMinute] = useState(30);
-
-        // setInterval(() => {
-        //     //alert(seconds);
-        //     setSeconds(seconds-=1);
-        //     if (seconds <0) {
-        //       setSeconds(59);
-        //       setMinute(minute - 1);
-        //     }
-            
-        // }, 1000);
-
-
-    return(
-        <div className="chat-page">
-           <div className="chat-head">
-             <NavLink to = {'/'}> <FaArrowLeft /> </NavLink>
-             <div className="info">
-                <img src="https://picsum.photos/800/600?random=2" alt="consultant Photo" />
-                <h3>Consultant name</h3>
-             </div>
-             <div> <FaEllipsisVertical /> </div>
-           </div>
-           <div className="chat-timer">
-            <CountdownTimer />
-            
-           </div>
-           <div className="chat-area">
-                  {
-                    Array(20).fill(<>
-                    <div class="recieved">
-                        <img src="https://picsum.photos/800/600?random=2" alt="" width="50"></img>
-                        <div class="chat">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quaerat maxime soluta aut, nostrum
-                            accusamus! Soluta ex beatae exercitationem, cupiditate delectus suscipit in illo. Sunt ad molestias
-                            fugit ea repellat!
-                        </div>
-                    </div>
-                   
-        
-                    <div class="sent">
-                        <div class="chat">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quaerat maxime soluta aut, nostrum
-                                    accusamus! Soluta ex beatae exercitationem, cupiditate delectus suscipit in illo. Sunt ad molestias
-                                    fugit ea repellat!
-                         </div>
-                      </div>
-                    </>)
-                  }
-           </div>
-           <div className="send-box" >
-            <textarea name="" id="" rows="2" placeholder="Type a message"></textarea> <button> <FaTelegram /></button>
-           </div>
+  return (
+    <div>
+      <div>
+        <h1>Chat Application</h1>
+        <div>
+          {messages.map((msg, index) => (
+            <div key={index}>{msg}</div>
+          ))}
         </div>
-    )
+      </div>
+      <div>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button onClick={handleSendMessage}>Send</button>
+      </div>
+    </div>
+  );
 }
+
 export default Chat;

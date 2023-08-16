@@ -61,9 +61,9 @@ const User = () => {
 
   return (
     <div className="form-container">
+      <img id="logo" src={logo} alt="" />
       <Form>
-        <img id="logo" src={logo} alt="" />
-        <h2>Start Your Journey</h2>
+        <h2>Register</h2>
         <Form.Item
           label="Name"
           rules={[{ required: true, message: "Please enter your name" }]}
@@ -76,17 +76,6 @@ const User = () => {
             <Radio value="female">Female</Radio>
             <Radio value="other">Other</Radio>
           </Radio.Group>
-        </Form.Item>
-        <Form.Item label="Upload Profile Pic">
-          <Upload
-            className="p-1"
-            customRequest={handleImageUpload}
-            showUploadList={false}
-          >
-            <Button icon={<UploadOutlined style={{ fontSize: "20px" }} />}>
-              Upload
-            </Button>
-          </Upload>
         </Form.Item>
         <Form.Item
           label="Date of Birth"

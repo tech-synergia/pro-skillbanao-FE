@@ -10,19 +10,23 @@ import SuccessMessage from "./components/FirstSignUp/Success";
 import UerSuccess from "./components/FirstSignUp/userSuccess";
 import AdminPanel from "./components/AdminPanel";
 
+import Blogs from "./components/Blogs";
+
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/chat-with-CA" element={<ChatWithCA />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/all-pro" element={<ChatWithCA />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<FirstSignUp />} />
+        <Route path="/signup" element={<FirstSignUp />} />
         <Route path="/success" element={<SuccessMessage />} />
         <Route path="/userSuccess" element={<UerSuccess />} />
         <Route path="/users" element={<UserList />} />
         <Route path='/adminPanel' element={<AdminPanel/>} />
+        <Route path="/blogs" element={<Blogs />} />
       </Routes>
     </BrowserRouter>
   );
