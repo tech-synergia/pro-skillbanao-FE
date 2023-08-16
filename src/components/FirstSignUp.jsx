@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import User from "./FirstSignUp/User";
 import Professional from "./FirstSignUp/Professional";
-import './FirstSignUp/Form.scss';
-import logo from '../images/logo.png';
+import "./FirstSignUp/Form.scss";
+import logo from "../images/logo.jpeg";
 
 const FirstSignUp = () => {
   const [showform, setShowform] = useState(false);
@@ -21,10 +21,10 @@ const FirstSignUp = () => {
   return (
     <div className="first-sign-up">
       {showform ? (
-        <>{isuser ? <User /> : <Professional /> }</>
+        <>{isuser ? <User /> : <Professional />}</>
       ) : (
         <div className="select-user-type">
-        <img id="logo" src={logo} alt="" />
+          <img id="logo" src={logo} alt="" />
           <h3>You Are Here As</h3>
           <div className="btns">
             <button onClick={handleUserClick}>User</button>
