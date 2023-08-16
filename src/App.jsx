@@ -8,7 +8,10 @@ import FirstSignUp from "./components/FirstSignUp";
 import UserList from "./components/Userlist";
 import SuccessMessage from "./components/FirstSignUp/Success";
 import UerSuccess from "./components/FirstSignUp/userSuccess";
+import AdminPanel from "./components/AdminPanel";
+
 import Blogs from "./components/Blogs";
+
 
 function App() {
   return (
@@ -22,6 +25,7 @@ function App() {
         <Route path="/success" element={<SuccessMessage />} />
         <Route path="/userSuccess" element={<UerSuccess />} />
         <Route path="/users" element={<UserList />} />
+        <Route path='/adminPanel' element={<AdminPanel/>} />
         <Route path="/blogs" element={<Blogs />} />
       </Routes>
     </BrowserRouter>

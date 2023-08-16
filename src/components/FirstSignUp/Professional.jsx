@@ -6,6 +6,7 @@ import logo from "../../images/logo.png";
 import "./Form.scss";
 import axios from "axios";
 
+
 const { Option } = Select;
 
 const App = () => {
@@ -31,7 +32,7 @@ const App = () => {
     reference: "",
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -73,11 +74,12 @@ const App = () => {
   };
 
   const handleReload = () => {
-    navigate(0); // Navigate to home page using navigate
+    navigate(0); 
   };
 
   return (
     <div className="form-container">
+     
       <Form>
         <img id="logo" src={logo} alt="" />
         <h2>Start As Professional</h2>
