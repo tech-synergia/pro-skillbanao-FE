@@ -25,28 +25,23 @@ function Navbar() {
           {/* Add a class based on the state to show/hide the menu */}
           <ul className={`links ${isMenuOpen ? "open" : ""}`}>
             <li>
-              <NavLink to={"/chat-with-CA"} onClick={toggleMenu}>
-                Chat with CA
+              <NavLink to={"/all-pro"} onClick={toggleMenu}>
+                Chat with Professionals
               </NavLink>
             </li>
             <li>
-              <a href="#" onClick={toggleMenu}>
-                Chat with Lawyer
-              </a>
+              <NavLink to={"/blogs"} onClick={toggleMenu}>
+                Blogs
+              </NavLink>
             </li>
             <li>
-              <a href="#" onClick={toggleMenu}>
-                Book a Chat
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={toggleMenu}>
-                Skillmail
-              </a>
+              <NavLink to={"/signup"} onClick={toggleMenu}>
+                Register as Professional
+              </NavLink>
             </li>
             <li>
               <NavLink to={"/login"} onClick={toggleMenu}>
-                <i className="bi bi-person-fill"></i>Signin
+                Login
               </NavLink>
             </li>
           </ul>

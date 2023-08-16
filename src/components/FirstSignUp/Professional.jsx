@@ -239,7 +239,7 @@ const App = () => {
           />
         </Form.Item>
         <Form.Item
-          label="Are you working on any other online platform BC?"
+          label="Are you working on any other online platform?"
           htmlFor="working"
         >
           <Input

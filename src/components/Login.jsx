@@ -74,7 +74,7 @@ const Login = () => {
         />
       </Form.Item>
       <p className="text-center">
-        Don't Have an Account? <a href="/">Sign Up Here</a>
+        Don't Have an Account? <a href="/signup">Register</a>
       </p>
 
       <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
