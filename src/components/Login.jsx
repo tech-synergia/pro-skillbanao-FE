@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
-import logo from "../images/logo.png";
+import logo from "../images/logo.jpeg";
 import Password from "antd/es/input/Password";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -23,11 +23,9 @@ const Login = () => {
         "https://skillbanaobe.onrender.com/user/login",
         userData
       );
-
-      console.log(response);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.msg);
     }
   };
 

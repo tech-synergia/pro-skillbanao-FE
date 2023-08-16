@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "../scss/Navbar.scss";
-import logo from "../images/logo.png";
+import logo from "../images/logo.jpeg";
 import { FaAlignJustify } from "react-icons/fa6";
 import { useState } from "react";
 

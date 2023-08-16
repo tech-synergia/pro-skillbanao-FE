@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Form, Input, Select, Radio, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import logo from "../../images/logo.png";
+import logo from "../../images/logo.jpeg";
 import "./Form.scss";
 import axios from "axios";
-
 
 const { Option } = Select;
 
@@ -74,15 +73,14 @@ const App = () => {
   };
 
   const handleReload = () => {
-    navigate(0); 
+    navigate(0);
   };
 
   return (
     <div className="form-container">
-     
       <Form>
         <img id="logo" src={logo} alt="" />
-        <h2>Start As Professional</h2>
+        <h2>Register as Professional</h2>
         <Form.Item label="Name" htmlFor="name">
           <Input
             type="text"
