@@ -18,7 +18,7 @@ const SuccessMessage = () => {
         You have successfully registered with us. We will soon verify your application and let you on board.
       </p>
       <Button className="navigate-button" type="primary" onClick={handleNavigate}>
-        Go to Home
+       Go to Home
       </Button>
     </div>
   );
