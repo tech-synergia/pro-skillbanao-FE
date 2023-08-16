@@ -1,5 +1,5 @@
 :root {
-  --themeblue1: #0000ff;
+  --themeblue1: #f0df20;
 }
 
 .Home {
@@ -18,7 +18,7 @@
       align-items: center;
       width: 80%;
       height: 350px;
-      background: linear-gradient(137deg, #0000ff, #fff 25%, #fff, #0000ff);
+      background: linear-gradient(137deg, #f0df20, #fff 25%, #fff, #f0df20);
       border-radius: 10px;
       box-sizing: border-box;
       overflow: hidden;
@@ -45,7 +45,9 @@
       }
     }
     .boxes {
-      padding: 12px;
+      cursor: pointer;
+      padding: 5px;
+      font-weight: 500;
       display: inline-flex;
       flex-direction: row;
       align-items: center;
@@ -97,7 +99,7 @@
 
     .carousel-item {
       width: 90%;
-      background: linear-gradient(137deg, #0000ff, #fff 25%, #fff, #0000ff);
+      background: linear-gradient(137deg, #f0df20, #fff 25%, #fff, #f0df20);
       margin-left: 20px;
       display: flex;
       flex-direction: column;

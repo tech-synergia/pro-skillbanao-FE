@@ -56,6 +56,9 @@
 
 @media only screen and (max-width: 1140px) {
   #section-1 .content .pros-grid {
-    @include grid.gridbox(1, 15px);
+    display: inline-flex;
+    gap: 12px;
+    overflow-x: scroll;
+    width: 100%;
   }
 }

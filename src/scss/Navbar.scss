@@ -2,10 +2,9 @@
 @use "./modules/vrs";
 
 #navbar {
+  padding-block: 10px;
   @include flex.flexbox(row);
   box-shadow: vrs.$prim-shadow;
-  border-radius: 10px;
-
   .logo-title {
     @include flex.flexbox;
     cursor: pointer;
@@ -32,21 +31,26 @@
     list-style: none;
     padding: 0;
 
-    li:last-child a {
+    li:nth-child(3) a {
       color: black;
       background-color: vrs.$prim-color;
       border-radius: 20px;
-      padding: 5px 8px;
+      padding: 5px 16px;
 
       &:hover {
         box-shadow: vrs.$btn-shadow;
       }
+    }
+    li:nth-child(4) a {
+      color: black;
+      background-color: vrs.$prim-color;
+      border-radius: 20px;
+      padding: 5px 16px;
 
-      i {
-        margin-right: 5px;
+      &:hover {
+        box-shadow: vrs.$btn-shadow;
       }
     }
-
     a {
       text-decoration: none;
       margin: 15px;
@@ -74,7 +78,7 @@
       display: block;
     }
     .links.open {
-      max-height: 300px; /* Set max-height to the desired height when the menu is open */
+      width: 400px;
       opacity: 1;
     }
     .links {
@@ -82,18 +86,21 @@
       flex-direction: column;
       position: absolute;
       background-color: white;
-
+      margin-left: -8%;
       top: 100%;
       right: 0;
       left: 0;
-      max-height: 0; /* Start with the menu hidden (height set to 0) */
+      width: 0;
+      height: 800px;
+      justify-content: start;
+      gap: 10px;
       overflow: hidden; /* Hide any content that overflows the menu */
-      transition: max-height 0.3s ease, opacity 0.3s ease; /* Add transitions for max-height and opacity */
+      transition: width 0.3s ease, opacity 0.3s ease; /* Add transitions for max-height and opacity */
       opacity: 0; /* Start with the menu transparent */
       li {
         width: 100%;
         display: flex;
-        justify-content: right;
+        justify-content: left;
         align-items: flex-end;
         a {
           text-align: right;
