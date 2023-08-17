@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, Alert } from "antd";
 import logo from "../images/logo.jpeg";
 import Password from "antd/es/input/Password";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,9 @@ import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
   const [userData, setUserData] = useState({
     phone: "",
     password: "",
@@ -23,11 +26,15 @@ const Login = () => {
         "https://skillbanaobe.onrender.com/user/login",
         userData
       );
-      navigate("/");
+      setSuccessMessage("Login successful! Redirecting...");
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
     } catch (error) {
-      alert(error.response.data.msg);
+      setErrorMessage(error.response.data.msg);
     }
   };
+  
 
   return (
     <Form
@@ -44,6 +51,26 @@ const Login = () => {
     >
       <img id="logo" src={logo} alt="" />
       <h2 className="text-center mb-3">Login</h2>
+      {successMessage && (
+        <Alert
+          message={successMessage}
+          type="success"
+          showIcon
+          closable
+          style={{ marginBottom: "16px" }}
+          onClose={() => setSuccessMessage(null)}
+        />
+      )}
+      {errorMessage && (
+        <Alert
+          message={errorMessage}
+          type="error"
+          showIcon
+          closable
+          style={{ marginBottom: "16px" }}
+          onClose={() => setErrorMessage(null)}
+        />
+      )}
       <Form.Item
         label="Mobile Number"
         rules={[

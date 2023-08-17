@@ -34,7 +34,7 @@ function Pros() {
             {professionals.map((professional) => (
               <div className="professional" key={professional._id}>
                 <img src={Profile} alt="image" />
-                <h3>{professional.name}</h3>
+                <h3 className="text-center">{professional.name}</h3>
                 <p>{professional.role}</p>
               </div>
             ))}

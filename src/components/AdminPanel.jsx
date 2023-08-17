@@ -2,16 +2,17 @@ import React from 'react';
 import { Layout } from 'antd';
 import LeftPanel from './LeftPanel';
 import RegistrationTable from './RegistrationTable';
+import '../scss/AdminPanel.scss'
 
 const { Content } = Layout;
 
 function AdminPanel() {
   return (
   
-    <Layout>
+    <Layout className="admin-panel-layout">
       <LeftPanel />
       <Layout>
-        <Content>
+        <Content className="admin-content">
           <RegistrationTable />
         </Content>
       </Layout>
