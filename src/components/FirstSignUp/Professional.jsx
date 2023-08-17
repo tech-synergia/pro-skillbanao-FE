@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Form, Input, Select, Radio, Upload, Button } from "antd";
+import { Form, Input, Select, Radio, Upload, Button, Steps } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo.jpeg";
 import "./Form.scss";
 import axios from "axios";
 
+const { Step } = Steps;
 const { Option } = Select;
 
 const App = () => {
+  const [currentStep, setCurrentStep] = useState(0);
   const [userData, setUserData] = useState({
     name: "",
     role: "",
@@ -72,220 +74,245 @@ const App = () => {
     }
   };
 
-  const handleReload = () => {
-    navigate(0);
+  const handlePrev = () => {
+    setCurrentStep(currentStep - 1);
   };
+
+  const handleNext = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const steps = [
+    {
+      title: "Personal Details",
+      content: (
+        <Form>
+          <Form.Item label="Name" htmlFor="name">
+            <Input
+              type="text"
+              name="name"
+              id="name"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Date of Birth" htmlFor="dob">
+            <Input
+              type="date"
+              name="dob"
+              id="dob"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Gender" htmlFor="gender">
+            <Radio.Group name="gender" id="gender" onChange={handleInputChange}>
+              <Radio value="male">Male</Radio>
+              <Radio value="female">Female</Radio>
+              <Radio value="other">Other</Radio>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item label="Email" htmlFor="email">
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Phone Number" htmlFor="phone">
+            <Input
+              type="text"
+              name="phone"
+              id="phone"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Password" htmlFor="password">
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Button type="primary" onClick={handleNext}>
+            Next
+          </Button>
+        </Form>
+      ),
+    },
+    {
+      title: "Professional Details",
+      content: (
+        <Form>
+          <Form.Item label="Role" htmlFor="role">
+            <Select
+              name="role"
+              id="role"
+              onChange={(value) =>
+                handleInputChange({ target: { name: "role", value } })
+              }
+              defaultValue="Select Role"
+            >
+              <Option value="">Select Role</Option>
+              <Option value="CA">CA</Option>
+              <Option value="CS">CS</Option>
+              <Option value="MBA">MBA</Option>
+              <Option value="Lawyer">Lawyer</Option>
+              <Option value="Makeup Artist">Makeup Artist</Option>
+              <Option value="Hair Stylist">Hair Stylist</Option>
+              <Option value="Astrologer">Astrologer</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="Upload Profile Pic">
+            <Upload onChange={handleImageUpload} showUploadList={false}>
+              <Button
+                className="custom-button"
+                icon={<UploadOutlined style={{ fontSize: "20px" }} />}
+              >
+                Upload
+              </Button>
+            </Upload>
+          </Form.Item>
+
+          <h6>Permanent Address Details*</h6>
+          <Form.Item label="House No." htmlFor="hno">
+            <Input name="hno" id="hno" onChange={handleInputChange} required />
+          </Form.Item>
+          <Form.Item label="Locality" htmlFor="locality">
+            <Input
+              name="locality"
+              id="locality"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="State" htmlFor="state">
+            <Input
+              name="state"
+              id="state"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Pin Code" htmlFor="pincode">
+            <Input
+              name="pincode"
+              id="pincode"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+
+          <Form.Item label="Primary Skills" htmlFor="pSkills">
+            <Select>
+              <Option value="">Select primary skills</Option>
+              <Option value="Financial Coach">Financial Coach</Option>
+              <Option value="Love & Relationship Coach">
+                Love & Relationship Coach
+              </Option>
+              <Option value="Mental Health & Stress Management Coach">
+                Mental Health & Stress Management Coach
+              </Option>
+              <Option value="Fashion Coach">Fashion Coach</Option>
+              <Option value=" Makeup & Hairstyle Coach">
+                Makeup & Hairstyle Coach
+              </Option>
+              <Option value="Fitness & Nutrition Coach">
+                Fitness & Nutrition Coach
+              </Option>
+              <Option value="Parenting Coach">Parenting Coach</Option>
+              <Option value="Home Management Coach">
+                Home Management Coach
+              </Option>
+              <Option value="Astrology Coach">Astrology Coach</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="All Skills" htmlFor="allSkills">
+            <Input
+              name="allSkills"
+              id="allSkills"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Language" htmlFor="language">
+            <Input
+              name="language"
+              id="language"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Experience" htmlFor="experience">
+            <Input
+              name="experience"
+              id="experience"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item
+            label="How many hours you can contribute daily?"
+            htmlFor="hours"
+          >
+            <Input
+              name="hours"
+              id="hours"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item
+            label="Where did you hear about Skillbanao?"
+            htmlFor="reference"
+          >
+            <Input
+              name="reference"
+              id="reference"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item
+            label="Are you working on any other online platform?"
+            htmlFor="working"
+          >
+            <Input
+              name="working"
+              id="working"
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Button type="primary" onClick={handleSubmit}>
+            Register
+          </Button>
+          <Button style={{ margin: "0 8px" }} onClick={handlePrev}>
+            Previous
+          </Button>
+        </Form>
+      ),
+    },
+  ];
 
   return (
     <div className="form-container">
-      <Form>
-        <img id="logo" src={logo} alt="" />
-        <h2>Register as Professional</h2>
-        <Form.Item label="Name" htmlFor="name">
-          <Input
-            type="text"
-            name="name"
-            id="name"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item label="Phone Number" htmlFor="phone">
-          <Input
-            type="text"
-            name="phone"
-            id="phone"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item label="Email" htmlFor="email">
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item label="Password" htmlFor="password">
-          <Input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item label="Role" htmlFor="role">
-          <Select
-            name="role"
-            id="role"
-            onChange={(value) =>
-              handleInputChange({ target: { name: "role", value } })
-            }
-            defaultValue="Select Role"
-          >
-            <Option value="">Select Role</Option>
-            <Option value="CA">CA</Option>
-            <Option value="CS">CS</Option>
-            <Option value="MBA">MBA</Option>
-            <Option value="Lawyer">Lawyer</Option>
-            <Option value="Makeup Artist">Makeup Artist</Option>
-            <Option value="Hair Stylist">Hair Stylist</Option>
-            <Option value="Astrologer">Astrologer</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label="Gender" htmlFor="gender">
-          <Radio.Group name="gender" id="gender" onChange={handleInputChange}>
-            <Radio value="male">Male</Radio>
-            <Radio value="female">Female</Radio>
-            <Radio value="other">Other</Radio>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="Upload Profile Pic">
-          <Upload onChange={handleImageUpload} showUploadList={false}>
-            <Button
-              className="custom-button"
-              icon={<UploadOutlined style={{ fontSize: "20px" }} />}
-            >
-              Upload
-            </Button>
-          </Upload>
-        </Form.Item>
-        <Form.Item label="Date of Birth" htmlFor="dob">
-          <Input
-            type="date"
-            name="dob"
-            id="dob"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <h6>Permanent Address Details*</h6>
-        <Form.Item label="House No." htmlFor="hno">
-          <Input name="hno" id="hno" onChange={handleInputChange} required />
-        </Form.Item>
-        <Form.Item label="Locality" htmlFor="locality">
-          <Input
-            name="locality"
-            id="locality"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item label="State" htmlFor="state">
-          <Input
-            name="state"
-            id="state"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item label="Pin Code" htmlFor="pincode">
-          <Input
-            name="pincode"
-            id="pincode"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-
-        <Form.Item label="Primary Skills" htmlFor="pSkills">
-          {/* <Input
-            name="pSkills"
-            id="pSkills"
-            onChange={handleInputChange}
-            required
-          /> */}
-          <Select>
-            <Option value="">Select primary skills</Option>
-            <Option value="Financial Coach">Financial Coach</Option>
-            <Option value="Love & Relationship Coach">
-              Love & Relationship Coach
-            </Option>
-            <Option value="Mental Health & Stress Management Coach">
-              Mental Health & Stress Management Coach
-            </Option>
-            <Option value="Fashion Coach">Fashion Coach</Option>
-            <Option value=" Makeup & Hairstyle Coach">
-              Makeup & Hairstyle Coach
-            </Option>
-            <Option value="Fitness & Nutrition Coach">
-              Fitness & Nutrition Coach
-            </Option>
-            <Option value="Parenting Coach">Parenting Coach</Option>
-            <Option value="Home Management Coach">Home Management Coach</Option>
-            <Option value="Astrology Coach">Astrology Coach</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label="All Skills" htmlFor="allSkills">
-          <Input
-            name="allSkills"
-            id="allSkills"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item label="Language" htmlFor="language">
-          <Input
-            name="language"
-            id="language"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item label="Experience" htmlFor="experience">
-          <Input
-            name="experience"
-            id="experience"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item
-          label="How many hours you can contribute daily?"
-          htmlFor="hours"
-        >
-          <Input
-            name="hours"
-            id="hours"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item
-          label="Where did you hear about Skillbanao?"
-          htmlFor="reference"
-        >
-          <Input
-            name="reference"
-            id="reference"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <Form.Item
-          label="Are you working on any other online platform?"
-          htmlFor="working"
-        >
-          <Input
-            name="working"
-            id="working"
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Item>
-        <div className="button-group">
-          <Button type="primary" htmlType="submit" onClick={handleSubmit}>
-            Send
-          </Button>
-          <Button onClick={handleReload}>Back</Button>
-        </div>
-        <p>
-          Already have an account? <a href="/login">Sign In Here</a>
-        </p>
-      </Form>
+      <img id="logo" src={logo} alt="skillbanao_logo" />
+      <h2>Register as Professional</h2>
+      <Steps size="small" current={currentStep}>
+        {steps.map((step) => (
+          <Step key={step.title} title={step.title} />
+        ))}
+      </Steps>
+      <div className="steps-content">{steps[currentStep].content}</div>
+      <p>
+        Already have an account? <a href="/login">Sign In Here</a>
+      </p>
     </div>
   );
 };
