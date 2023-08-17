@@ -23,7 +23,7 @@ function Navbar() {
             </div>
           </NavLink>
           {/* Add a class based on the state to show/hide the menu */}
-          <ul className={`links ${isMenuOpen ? "open" : ""}`}>
+          <ul className={`links ${isMenuOpen ? "open" : ""}`} style={{zIndex: "3"}}>
             <li>
               <NavLink to={"/all-pro"} onClick={toggleMenu}>
                 Chat with Professionals

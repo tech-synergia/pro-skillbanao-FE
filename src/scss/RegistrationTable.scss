@@ -1,0 +1,16 @@
+.registration-table{
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+      .registration-table {
+        width: 5%;
+        margin:0px 20px;
+      
+      }
+      .ant-pagination {
+        width: 350px;
+  
+      }
+    }
+    

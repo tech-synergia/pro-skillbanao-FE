@@ -1,0 +1,32 @@
+
+.sidePanel{
+    .logo {
+      display: flex;
+      justify-content: flex-start;
+      img{
+          width: 200px;
+          height: 100px;
+          object-fit: contain;
+      }
+      &.center {
+        justify-content: center;
+      }
+    }
+  }
+  
+  
+    
+  
+    @media (max-width: 768px) {
+      .sidePanel{
+        width: 100%;
+        
+        .logo {
+          margin: 16px;
+         img{
+           object-fit: contain;
+         }
+        }
+      }
+    }
+    

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Button } from "antd";
+import '../scss/RegistrationTable.scss'
 
 const RegistrationTable = () => {
   const [professionalsData, setProfessionalsData] = useState([]);
+
 
   useEffect(() => {
     fetchProfessionals();
@@ -21,13 +23,14 @@ const RegistrationTable = () => {
   };
 
   const columns = [
-    { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Email", dataIndex: "email", key: "email" },
-    { title: "Role", dataIndex: "role", key: "role" },
-    { title: "Phone", dataIndex: "phone", key: "phone" },
+    { title: "Name", dataIndex: "name", key: "name", className:"registration-table-column"  },
+    { title: "Email", dataIndex: "email", key: "email", className:"registration-table-column"  },
+    { title: "Role", dataIndex: "role", key: "role", className:"registration-table-column"  },
+    { title: "Phone", dataIndex: "phone", key: "phone", className:"registration-table-column"  },
     {
       title: "Actions",
       key: "actions",
+      className:"registration-table-column",
       render: (text, record) => (
         <span>
           {record.isVerified ? (
@@ -85,7 +88,7 @@ const RegistrationTable = () => {
     }
   };
 
-  return <Table dataSource={professionalsData} columns={columns} />;
+  return <Table className="registration-table" dataSource={professionalsData} columns={columns} rowClassName={() => 'no-background'}/>
 };
 
 export default RegistrationTable;
