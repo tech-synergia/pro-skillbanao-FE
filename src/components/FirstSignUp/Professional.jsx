@@ -149,6 +149,17 @@ const App = () => {
       title: "Professional Details",
       content: (
         <Form>
+          <Form.Item label="Upload Profile Pic">
+            <Upload onChange={handleImageUpload} showUploadList={false}>
+              <Button
+                className="custom-button"
+                icon={<UploadOutlined style={{ fontSize: "20px" }} />}
+              >
+                Upload
+              </Button>
+            </Upload>
+          </Form.Item>
+
           <Form.Item label="Role" htmlFor="role">
             <Select
               name="role"
@@ -167,16 +178,6 @@ const App = () => {
               <Option value="Hair Stylist">Hair Stylist</Option>
               <Option value="Astrologer">Astrologer</Option>
             </Select>
-          </Form.Item>
-          <Form.Item label="Upload Profile Pic">
-            <Upload onChange={handleImageUpload} showUploadList={false}>
-              <Button
-                className="custom-button"
-                icon={<UploadOutlined style={{ fontSize: "20px" }} />}
-              >
-                Upload
-              </Button>
-            </Upload>
           </Form.Item>
 
           <h6>Permanent Address Details*</h6>

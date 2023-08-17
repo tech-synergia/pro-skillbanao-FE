@@ -14,7 +14,10 @@ const RegistrationTable = () => {
       const response = await axios.get(
         "https://skillbanaobe.onrender.com/professional/getAllPros"
       );
-      setProfessionalsData(response.data.pros); // Use response.data.pros directly
+      const unverifiedProfessionals = response.data.pros.filter(
+        (professional) => !professional.isVerified
+      );
+      setProfessionalsData(unverifiedProfessionals); // Use response.data.pros directly
     } catch (error) {
       console.error("Error fetching professionals:", error);
     }
