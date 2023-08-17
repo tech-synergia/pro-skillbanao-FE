@@ -14,10 +14,7 @@ const RegistrationTable = () => {
       const response = await axios.get(
         "https://skillbanaobe.onrender.com/professional/getAllPros"
       );
-      const unverifiedProfessionals = response.data.pros.filter(
-        (professional) => !professional.isVerified
-      );
-      setProfessionalsData(unverifiedProfessionals); // Use response.data.pros directly
+      setProfessionalsData(response.data.pros); // Use response.data.pros directly
     } catch (error) {
       console.error("Error fetching professionals:", error);
     }
@@ -33,10 +30,16 @@ const RegistrationTable = () => {
       key: "actions",
       render: (text, record) => (
         <span>
-          <Button type="primary" onClick={() => handleAccept(record)}>
-            Accept
-          </Button>
-          <Button onClick={() => handleReject(record)}>Reject</Button>
+          {record.isVerified ? (
+            <Button onClick={() => handleReject(record)}>Delete</Button>
+          ) : (
+            <>
+              <Button type="primary" onClick={() => handleAccept(record)}>
+                Accept
+              </Button>
+              <Button onClick={() => handleReject(record)}>Reject</Button>
+            </>
+          )}
         </span>
       ),
     },
@@ -52,8 +55,8 @@ const RegistrationTable = () => {
       );
       if (response.status === 200) {
         console.log("Professional verified successfully:", record);
-        const updatedData = professionalsData.filter(
-          (prof) => prof._id !== record._id
+        const updatedData = professionalsData.map((prof) =>
+          prof._id === record._id ? { ...prof, isVerified: true } : prof
         );
         setProfessionalsData(updatedData);
       }
