@@ -209,7 +209,14 @@ const App = () => {
           </Form.Item>
 
           <Form.Item label="Primary Skills" htmlFor="pSkills">
-            <Select>
+            <Select
+              name="pSkills"
+              id="pSkills"
+              onChange={(value) =>
+                handleInputChange({ target: { name: "pSkills", value } })
+              }
+              defaultValue="Select primary skills"
+            >
               <Option value="">Select primary skills</Option>
               <Option value="Financial Coach">Financial Coach</Option>
               <Option value="Love & Relationship Coach">
