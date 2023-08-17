@@ -39,9 +39,24 @@ const RegistrationTable = () => {
     },
   ];
 
-  const handleAccept = (record) => {
-    // Implement the logic for accepting the professional
-    console.log("Accepted:", record);
+  const handleAccept = async (record) => {
+    try {
+      const response = await axios.patch(
+        "https://skillbanaobe.onrender.com/professional/verifyPro",
+        {
+          proId: record._id,
+        }
+      );
+      if (response.status === 200) {
+        console.log("Professional verified successfully:", record);
+        const updatedData = professionalsData.filter(
+          (prof) => prof._id !== record._id
+        );
+        setProfessionalsData(updatedData);
+      }
+    } catch (error) {
+      console.error("Error verifying professional:", error);
+    }
   };
 
   const handleReject = async (record) => {
@@ -49,7 +64,7 @@ const RegistrationTable = () => {
       const response = await axios.delete(
         "https://skillbanaobe.onrender.com/professional/declinePro",
         {
-          data: { id: record._id },
+          data: { proId: record._id },
         }
       );
       if (response.status === 200) {
