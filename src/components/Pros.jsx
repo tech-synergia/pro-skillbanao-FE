@@ -28,7 +28,7 @@ function Pros() {
     <section id="section-1">
       <div className="content-container">
         <div className="content">
-          <h2>Our Professionals</h2>
+          <h2 className="mt-5">Our Professionals</h2>
           <p>13000+ Professionals from India for Online Consultation</p>
           <div className="pros-grid">
             {professionals.map((professional) => (

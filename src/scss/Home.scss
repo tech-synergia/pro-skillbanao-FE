@@ -4,41 +4,37 @@
 
 .Home {
   #section_1 {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 0;
     background: linear-gradient(black 90%, gray);
-
+    text-align: center;
     .poster {
-      display: inline-flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 80%;
-      height: 350px;
-      background: linear-gradient(137deg, #f0df20, #fff 25%, #fff, #f0df20);
-      border-radius: 10px;
+      margin:20px 470px;
       box-sizing: border-box;
-      overflow: hidden;
       div {
         font-size: 24px;
-        width: 30%;
+        width: 500px;
+        text-align: center;
+        height: 100px;
+         background: linear-gradient(137deg, #fff, #f0df20 25%, #f0df20, #fff);
       }
       img {
         object-fit: cover;
-        width: 53%;
+        width: 500px;
+        height: 300px;
       }
     }
     @media (max-width: 400px) {
       .poster {
+        margin: 20px;
         flex-direction: column;
         justify-content: start;
         gap: 10%;
-        div,
+        div{
+          height: 50px;
+          width: 90%;
+        }
         img {
-          width: 100%;
+          width: 90%;
+     
           font-size: 18px;
           text-align: center;
         }
@@ -47,6 +43,7 @@
     .boxes {
       cursor: pointer;
       padding: 5px;
+      margin-top: 30px;
       font-weight: 500;
       display: inline-flex;
       flex-direction: row;
