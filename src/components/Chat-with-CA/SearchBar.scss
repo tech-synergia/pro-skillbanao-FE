@@ -11,10 +11,11 @@ $rechargeColor: rgb(4, 123, 4);
     .chatHeading{
         display: flex;
         flex-direction: row;
-        height: 30px;
+        height: 40px;
         gap: 5px;
+        border-radius: 5px;
         background-color: #f0df20;
-        padding: 2px 10px;
+        padding: 5px 10px;
         p{
             font-size: 18px;
         }
@@ -23,23 +24,26 @@ $rechargeColor: rgb(4, 123, 4);
         }
     }
     .filterAndSort{
-       .recharge{
-            padding: 7px 20px;
-            height: 40px;
-            border-radius: 5px;
-            margin-right: 10px;
-            font-size: 17px;
-            border:1px solid $rechargeColor;
-            color: $rechargeColor;
-            &:hover{
-                background-color: $rechargeColor;
-                color: #fff;
-                font-weight: 500;
-            }
-        }
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    //    .recharge{
+    //         padding: 7px 20px;
+    //         height: 40px;
+    //         border-radius: 5px;
+    //         margin-right: 10px;
+    //         font-size: 17px;
+    //         border:1px solid $rechargeColor;
+    //         color: $rechargeColor;
+    //         &:hover{
+    //             background-color: $rechargeColor;
+    //             color: #fff;
+    //             font-weight: 500;
+    //         }
+    //     }
         .filter,.sort{
             text-align: center;
-            width: 18%;
+            width: 25%;
             height: 40px;
             margin-right: 10px;
             .filterIcon, .sortIcon{
@@ -57,7 +61,7 @@ $rechargeColor: rgb(4, 123, 4);
         span{
             position: relative;
             input{
-                width: 30%;
+                width: 100%;
                 padding: 7px 10px;
                 border-radius: 5px;
                
@@ -70,7 +74,7 @@ $rechargeColor: rgb(4, 123, 4);
                 }
                
             }
-            .searchIcon{
+            .bi-search{
                 position: absolute;
                 left: 88%;
                 top: 20%;
@@ -86,14 +90,22 @@ $rechargeColor: rgb(4, 123, 4);
     .searchContent{
         display: flex;
         width: 100%;
-        padding: 10px;
+        padding: 10px 5px;
         margin: 0;
         flex-direction: row;
-        justify-content: space-between;
-        gap: 25px;
+        justify-content: space-around;
+        gap: 5px;
         box-sizing: border-box;
         .chatHeading{
-            height: 50px;
+            display: flex;
+            flex-direction: row;
+            height: 60px;
+            width: 130px;
+            
+            margin-left: -20px;
+            gap: 5px;
+            background-color: #f0df20;
+            padding: 8px 10px;
             p{
                 font-size: 14px;
             }
@@ -101,17 +113,34 @@ $rechargeColor: rgb(4, 123, 4);
                 margin: 5px;
             }
         }
+        .balance{
+            width: 30px;
+            text-align: center;
+           font-size: 14px;
+           margin-left: -30px;
+        }
         .filterAndSort{
+            display: flex;
+            flex-direction: row;
+            gap: 2px;
+            
              .filter,.sort{
                 
-                 width: 30%;
+                 width: 40%;
                  height: 40px;
                  margin-right: 10px;
-                 padding: 0px;
+                 padding: 5px;
+                 text-align: center;
+                 
              }
              span{
-                 .searchIcon{
-                     font-size: 20px;
+                 .bi-search{
+                     font-size: 18px;
+
+                     position: absolute;
+                     left: 88%;
+                     top: 10%;
+
                 }
              }
            

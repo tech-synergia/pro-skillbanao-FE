@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Select, Radio, Upload, Button, Steps } from "antd";
+import { Form, Input, Select, Radio, Upload, Button, Steps, Alert } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo.jpeg";
@@ -10,6 +10,13 @@ const { Step } = Steps;
 const { Option } = Select;
 
 const App = () => {
+
+  const [alertData, setAlertData] = useState({
+    type: "",
+    message: "",
+    show: false,
+  });
+
   const [currentStep, setCurrentStep] = useState(0);
   const [userData, setUserData] = useState({
     name: "",
@@ -66,11 +73,18 @@ const App = () => {
         "https://skillbanaobe.onrender.com/professional/register",
         userData
       );
-
-      // console.log(response);
+      setAlertData({
+        type: "success",
+        message: "Registration successful!",
+        show: true,
+      });
       navigate("/success");
     } catch (error) {
-      console.log(error);
+      setAlertData({
+        type: "error",
+        message: error.response.data.msg,
+        show: true,
+      });
     }
   };
 
@@ -87,7 +101,7 @@ const App = () => {
       title: "Personal Details",
       content: (
         <Form>
-          <Form.Item label="Name" htmlFor="name">
+          <Form.Item label="Name" htmlFor="name" >
             <Input
               type="text"
               name="name"
@@ -312,6 +326,16 @@ const App = () => {
     <div className="form-container">
       <img id="logo" src={logo} alt="skillbanao_logo" />
       <h2>Register as Professional</h2>
+      {alertData.show && (
+        <Alert
+          message={alertData.message}
+          type={alertData.type}
+          showIcon
+          closable
+          onClose={() => setAlertData({ ...alertData, show: false })}
+          style={{ marginTop: "20px" }}
+        />
+      )}
       <Steps size="small" current={currentStep}>
         {steps.map((step) => (
           <Step key={step.title} title={step.title} />

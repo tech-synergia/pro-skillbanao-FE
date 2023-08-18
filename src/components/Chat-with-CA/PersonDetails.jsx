@@ -54,7 +54,7 @@ const ProfileCard = () => {
             </div>
           </div>
           <div className="chatBtn">
-            <NavLink to="/chat">
+            <NavLink to="/chat" className="text-decoration-none">
               <button>
                 <CheckCircleFilled className="chat" /> Chat
               </button>

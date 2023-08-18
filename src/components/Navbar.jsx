@@ -34,6 +34,7 @@ function Navbar() {
                 Blogs
               </NavLink>
             </li>
+           
             <li>
               <NavLink to={"/signup"} onClick={toggleMenu}>
                 Register as Professional
@@ -42,6 +43,11 @@ function Navbar() {
             <li>
               <NavLink to={"/login"} onClick={toggleMenu}>
                 Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/signup"} onClick={toggleMenu}>
+                Recharge
               </NavLink>
             </li>
           </ul>
