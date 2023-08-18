@@ -9,9 +9,9 @@ import UserList from "./components/Userlist";
 import SuccessMessage from "./components/FirstSignUp/Success";
 import UerSuccess from "./components/FirstSignUp/userSuccess";
 import AdminPanel from "./components/AdminPanel";
+import ProPanel from "./components/ProPanel";
 
 import Blogs from "./components/Blogs";
-
 
 function App() {
   return (
@@ -23,9 +23,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<FirstSignUp />} />
         <Route path="/success" element={<SuccessMessage />} />
+        <Route path="/propanel" element={<ProPanel />} />
         <Route path="/userSuccess" element={<UerSuccess />} />
         <Route path="/users" element={<UserList />} />
-        <Route path='/adminPanel' element={<AdminPanel/>} />
+        <Route path="/adminPanel" element={<AdminPanel />} />
         <Route path="/blogs" element={<Blogs />} />
       </Routes>
     </BrowserRouter>
