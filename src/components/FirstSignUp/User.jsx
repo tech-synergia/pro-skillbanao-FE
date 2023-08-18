@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Radio, Upload, Button } from "antd";
+import { Form, Input, Radio, Upload, Button, Alert } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import logo from "../../images/logo.jpeg";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
@@ -7,6 +7,12 @@ import "./Form.scss";
 import axios from "axios";
 
 const User = () => {
+  const [alertData, setAlertData] = useState({
+    type: "",
+    message: "",
+    show: false,
+  });
+
   const [userData, setUserData] = useState({
     name: "",
     gender: "",
@@ -16,7 +22,7 @@ const User = () => {
     password: "",
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,9 +55,18 @@ const User = () => {
         "https://skillbanaobe.onrender.com/user/register",
         userData
       );
+      setAlertData({
+        type: "success",
+        message: "Registration successful!",
+        show: true,
+      });
       navigate("/userSuccess");
     } catch (error) {
-      alert(error.response.data.msg);
+      setAlertData({
+        type: "error",
+        message: error.response.data.msg,
+        show: true,
+      });
     }
   };
 
@@ -62,8 +77,19 @@ const User = () => {
   return (
     <div className="form-container">
       <img id="logo" src={logo} alt="" />
+      {alertData.show && (
+        <Alert
+          message={alertData.message}
+          type={alertData.type}
+          showIcon
+          closable
+          onClose={() => setAlertData({ ...alertData, show: false })}
+          style={{ marginTop: "20px" }}
+        />
+      )}
       <Form>
         <h2>Register</h2>
+
         <Form.Item
           label="Name"
           rules={[{ required: true, message: "Please enter your name" }]}
@@ -138,8 +164,10 @@ const User = () => {
           Already have an account? <a href="/login">Login</a>
         </p>
       </Form>
+      
     </div>
   );
 };
 
 export default User;
+

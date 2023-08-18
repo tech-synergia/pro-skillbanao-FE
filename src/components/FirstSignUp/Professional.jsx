@@ -149,6 +149,17 @@ const App = () => {
       title: "Professional Details",
       content: (
         <Form>
+          <Form.Item label="Upload Profile Pic">
+            <Upload onChange={handleImageUpload} showUploadList={false}>
+              <Button
+                className="custom-button"
+                icon={<UploadOutlined style={{ fontSize: "20px" }} />}
+              >
+                Upload
+              </Button>
+            </Upload>
+          </Form.Item>
+
           <Form.Item label="Role" htmlFor="role">
             <Select
               name="role"
@@ -167,16 +178,6 @@ const App = () => {
               <Option value="Hair Stylist">Hair Stylist</Option>
               <Option value="Astrologer">Astrologer</Option>
             </Select>
-          </Form.Item>
-          <Form.Item label="Upload Profile Pic">
-            <Upload onChange={handleImageUpload} showUploadList={false}>
-              <Button
-                className="custom-button"
-                icon={<UploadOutlined style={{ fontSize: "20px" }} />}
-              >
-                Upload
-              </Button>
-            </Upload>
           </Form.Item>
 
           <h6>Permanent Address Details*</h6>
@@ -209,7 +210,14 @@ const App = () => {
           </Form.Item>
 
           <Form.Item label="Primary Skills" htmlFor="pSkills">
-            <Select>
+            <Select
+              name="pSkills"
+              id="pSkills"
+              onChange={(value) =>
+                handleInputChange({ target: { name: "pSkills", value } })
+              }
+              defaultValue="Select primary skills"
+            >
               <Option value="">Select primary skills</Option>
               <Option value="Financial Coach">Financial Coach</Option>
               <Option value="Love & Relationship Coach">
@@ -318,3 +326,4 @@ const App = () => {
 };
 
 export default App;
+

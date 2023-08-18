@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form,Radio, Input, Alert } from "antd";
 import logo from "../images/logo.jpeg";
-import Password from "antd/es/input/Password";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
   const [userData, setUserData] = useState({
     phone: "",
     password: "",
+    role: "user",
   });
 
   const handleInputChange = (e) => {
@@ -19,15 +22,28 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     try {
+      const endpoint =
+        userData.role === "professional"
+          ? "/professional/login"
+          : "/user/login";
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/user/login",
+        `https://skillbanaobe.onrender.com${endpoint}`,
         userData
       );
-      navigate("/");
+      setSuccessMessage("Login successful! Redirecting...");
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+      if (userData.role === "professional") {
+        navigate("/users");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
-      alert(error.response.data.msg);
+      setErrorMessage(error.response.data.msg);
     }
   };
+  
 
   return (
     <Form
@@ -42,8 +58,33 @@ const Login = () => {
       }}
       initialValues={{ remember: false }}
     >
-      <img id="logo" src={logo} alt="" />
+      <img
+        id="logo"
+        src={logo}
+        alt=""
+        style={{ display: "flex", justifyContent: "center" }}
+      />
       <h2 className="text-center mb-3">Login</h2>
+      {successMessage && (
+        <Alert
+          message={successMessage}
+          type="success"
+          showIcon
+          closable
+          style={{ marginBottom: "16px" }}
+          onClose={() => setSuccessMessage(null)}
+        />
+      )}
+      {errorMessage && (
+        <Alert
+          message={errorMessage}
+          type="error"
+          showIcon
+          closable
+          style={{ marginBottom: "16px" }}
+          onClose={() => setErrorMessage(null)}
+        />
+      )}
       <Form.Item
         label="Mobile Number"
         rules={[
@@ -70,6 +111,23 @@ const Login = () => {
           id="password"
           onChange={handleInputChange}
         />
+      </Form.Item>
+
+      <Form.Item
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Radio.Group
+          name="role"
+          onChange={handleInputChange}
+          value={userData.role}
+        >
+          <Radio value="user">User</Radio>
+          <Radio value="professional">Professional</Radio>
+        </Radio.Group>
       </Form.Item>
       <p className="text-center">
         Don't Have an Account? <a href="/signup">Register</a>

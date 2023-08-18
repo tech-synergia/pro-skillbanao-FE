@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Button } from "antd";
+import '../scss/RegistrationTable.scss'
 
 const RegistrationTable = () => {
   const [professionalsData, setProfessionalsData] = useState([]);
+
 
   useEffect(() => {
     fetchProfessionals();
@@ -21,19 +23,26 @@ const RegistrationTable = () => {
   };
 
   const columns = [
-    { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Email", dataIndex: "email", key: "email" },
-    { title: "Role", dataIndex: "role", key: "role" },
-    { title: "Phone", dataIndex: "phone", key: "phone" },
+    { title: "Name", dataIndex: "name", key: "name", className:"registration-table-column"  },
+    { title: "Email", dataIndex: "email", key: "email", className:"registration-table-column"  },
+    { title: "Role", dataIndex: "role", key: "role", className:"registration-table-column"  },
+    { title: "Phone", dataIndex: "phone", key: "phone", className:"registration-table-column"  },
     {
       title: "Actions",
       key: "actions",
+      className:"registration-table-column",
       render: (text, record) => (
         <span>
-          <Button type="primary" onClick={() => handleAccept(record)}>
-            Accept
-          </Button>
-          <Button onClick={() => handleReject(record)}>Reject</Button>
+          {record.isVerified ? (
+            <Button onClick={() => handleReject(record)}>Delete</Button>
+          ) : (
+            <>
+              <Button type="primary" onClick={() => handleAccept(record)}>
+                Accept
+              </Button>
+              <Button onClick={() => handleReject(record)}>Reject</Button>
+            </>
+          )}
         </span>
       ),
     },
@@ -49,8 +58,8 @@ const RegistrationTable = () => {
       );
       if (response.status === 200) {
         console.log("Professional verified successfully:", record);
-        const updatedData = professionalsData.filter(
-          (prof) => prof._id !== record._id
+        const updatedData = professionalsData.map((prof) =>
+          prof._id === record._id ? { ...prof, isVerified: true } : prof
         );
         setProfessionalsData(updatedData);
       }
@@ -79,7 +88,7 @@ const RegistrationTable = () => {
     }
   };
 
-  return <Table dataSource={professionalsData} columns={columns} />;
+  return <Table className="registration-table" dataSource={professionalsData} columns={columns} rowClassName={() => 'no-background'}/>
 };
 
 export default RegistrationTable;
