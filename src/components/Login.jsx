@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form,Radio, Input, Alert } from "antd";
+import { Button, Checkbox, Form, Radio, Input, Alert } from "antd";
 import logo from "../images/logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -30,20 +30,30 @@ const Login = () => {
         `https://skillbanaobe.onrender.com${endpoint}`,
         userData
       );
-      setSuccessMessage("Login successful! Redirecting...");
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
-      if (userData.role === "professional") {
-        navigate("/users");
-      } else {
-        navigate("/");
+
+      if (userData.role === "professional" && response.data.user.isVerified) {
+        setSuccessMessage("Login successful! Redirecting...");
+        setTimeout(() => {
+          navigate("/propanel");
+        }, 1500);
+      } else if (
+        userData.role === "professional" &&
+        !response.data.user.isVerified
+      ) {
+        setErrorMessage(
+          "You are not verified yet! Please wait until we accept your request!"
+        );
+      }
+      if (userData.role === "user") {
+        setSuccessMessage("Login successful! Redirecting...");
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       }
     } catch (error) {
       setErrorMessage(error.response.data.msg);
     }
   };
-  
 
   return (
     <Form

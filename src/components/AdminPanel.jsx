@@ -1,5 +1,5 @@
 import React from "react";
-// import { Layout } from "antd";
+import { Layout } from "antd";
 import RegistrationTable from "./RegistrationTable";
 
 // const { Content } = Layout;

@@ -1,17 +1,36 @@
-import React from 'react';
-import { Card } from 'antd';
-import { StarFilled, CheckCircleFilled } from '@ant-design/icons';
-import profile from '../../assets/profile.webp';
-import './PersonDetails.scss';
-import { NavLink } from 'react-router-dom';
-
-const { Meta } = Card;
+import React, { useState, useEffect } from "react";
+import { Card } from "antd";
+import { StarFilled, CheckCircleFilled } from "@ant-design/icons";
+import profile from "../../assets/profile.webp";
+import "./PersonDetails.scss";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const ProfileCard = () => {
+  const [professionals, setProfessionals] = useState([]);
+
+  const fetchProfessionals = async () => {
+    try {
+      const response = await axios.get(
+        "https://skillbanaobe.onrender.com/professional/getAllPros"
+      );
+      const verifiedProfessionals = response.data.pros.filter(
+        (professional) => professional.isVerified
+      );
+      setProfessionals(verifiedProfessionals);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfessionals();
+  }, []);
+
   return (
     <div className="details">
-      {Array(20).fill(null).map((_, index) => (  // Use map instead of fill
-        <Card className="card" key={index}>
+      {professionals.map((professional) => (
+        <Card className="card" key={professional._id}>
           <div className="leftContent">
             <div className="imageContent">
               <img src={profile} alt="" />
@@ -25,17 +44,19 @@ const ProfileCard = () => {
               <p>1315 orders</p>
             </div>
             <div className="info">
-              <a href="#">Deepikash</a>
-              <span>Vedic, KP</span>
-              <span>English, Hindi, Telugu</span>
-              <span>Exp: 6 Years</span>
-              <span className="free">FREE <strike>20/min</strike></span>
+              <a href="#">{professional.name}</a>
+              <span>{professional.role}</span>
+              <span>{professional.language}</span>
+              <span>Exp: {professional.experience} yr(s)</span>
+              <span className="free">
+                FREE <strike>20/min</strike>
+              </span>
             </div>
           </div>
           <div className="chatBtn">
             <NavLink to="/chat">
               <button>
-                <CheckCircleFilled className='chat'/> Chat
+                <CheckCircleFilled className="chat" /> Chat
               </button>
             </NavLink>
           </div>
@@ -50,4 +71,3 @@ function PersonDetails() {
 }
 
 export default PersonDetails;
-

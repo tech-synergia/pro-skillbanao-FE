@@ -67,7 +67,7 @@ const App = () => {
         userData
       );
 
-      console.log(response);
+      // console.log(response);
       navigate("/success");
     } catch (error) {
       console.log(error);
@@ -326,4 +326,3 @@ const App = () => {
 };
 
 export default App;
-
