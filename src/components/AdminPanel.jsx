@@ -1,21 +1,17 @@
-import React from 'react';
-import { Layout } from 'antd';
-import LeftPanel from './LeftPanel';
-import RegistrationTable from './RegistrationTable';
-import '../scss/AdminPanel.scss'
+import React from "react";
+// import { Layout } from "antd";
+import RegistrationTable from "./RegistrationTable";
 
-const { Content } = Layout;
+// const { Content } = Layout;
 
 function AdminPanel() {
   return (
-  
-    <Layout className="admin-panel-layout">
-      <LeftPanel />
-      <Layout>
-        <Content className="admin-content">
-          <RegistrationTable />
-        </Content>
-      </Layout>
+    <Layout>
+      {/* <Layout> */}
+      {/* <Content> */}
+      <RegistrationTable />
+      {/* </Content> */}
+      {/* </Layout> */}
     </Layout>
   );
 }
