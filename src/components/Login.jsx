@@ -33,6 +33,7 @@ const Login = () => {
 
       if (userData.role === "professional" && response.data.user.isVerified) {
         setSuccessMessage("Login successful! Redirecting...");
+        localStorage.setItem("professionalId", response.data.user.proId);
         setTimeout(() => {
           navigate("/propanel");
         }, 1500);
@@ -46,6 +47,7 @@ const Login = () => {
       }
       if (userData.role === "user") {
         setSuccessMessage("Login successful! Redirecting...");
+        localStorage.setItem("professionalId", response.data.user.userId);
         setTimeout(() => {
           navigate("/");
         }, 1500);

@@ -27,6 +27,22 @@ const ProfileCard = () => {
     fetchProfessionals();
   }, []);
 
+  const handleChat = async (id) => {
+    const userId = localStorage.getItem("userId");
+    try {
+      const response = await axios.post(
+        "https://skillbanaobe.onrender.com/chat/add-chat",
+        {
+          userId,
+          professionalId: id,
+        }
+      );
+      alert(response.data.message);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+
   return (
     <div className="details">
       {professionals.map((professional) => (
@@ -53,8 +69,11 @@ const ProfileCard = () => {
               </span>
             </div>
           </div>
-          <div className="chatBtn">
-            <NavLink to="/chat" className="text-decoration-none">
+          <div
+            className="chatBtn"
+            onClick={(e) => handleChat(professional._id)}
+          >
+            <NavLink className="text-decoration-none">
               <button>
                 <CheckCircleFilled className="chat" /> Chat
               </button>
