@@ -32,7 +32,7 @@ const RegistrationTable = () => {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      className: "registration-table-column",
+      className: "registration-table-column hide-mobile",
     },
     {
       title: "Role",
