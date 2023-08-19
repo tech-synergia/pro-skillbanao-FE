@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Avatar, Typography} from "antd";
+import { Button, Card, Avatar, Typography } from "antd";
 import { StarFilled, CheckCircleFilled } from "@ant-design/icons";
 import "./PersonDetails.scss";
-import maleAvatar from '../../assets/male_avatar.jpg'
-import femaleAvatar from '../../assets/female_avatar.jpg'
+import maleAvatar from "../../assets/male_avatar.jpg";
+import femaleAvatar from "../../assets/female_avatar.jpg";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import io from "socket.io-client";
 const { Text } = Typography;
 
 const ProfileCard = () => {
   const [professionals, setProfessionals] = useState([]);
+  const [selectedProfessional, setSelectedProfessional] = useState(null);
+  const navigate = useNavigate();
+  const socket = io.connect("https://skillbanaobe.onrender.com");
 
   const fetchProfessionals = async () => {
     try {
@@ -28,9 +32,24 @@ const ProfileCard = () => {
 
   useEffect(() => {
     fetchProfessionals();
+    // Listen for requestAccepted notification
+    // socket.on("requestAccepted", (professionalId) => {
+    //   const acceptedProfessional = professionals.find(
+    //     (professional) => professional._id === professionalId
+    //   );
+    //   setSelectedProfessional(acceptedProfessional);
+    //   console.log(professionalId);
+    // });
+
+    // return () => {
+    //   socket.disconnect(); // Disconnect when the component unmounts
+    // };
   }, []);
 
   const handleChat = async (id) => {
+    // localStorage.setItem("professionalId", id);
+    // navigate("/chat");
+
     const userId = localStorage.getItem("userId");
     try {
       const response = await axios.post(
@@ -46,18 +65,21 @@ const ProfileCard = () => {
     }
   };
 
+  const handleAccept = async (id) => {
+    localStorage.setItem("professionalId", id);
+    navigate("/chat");
+  };
+
   return (
     <div className="details">
       {professionals.map((professional) => (
         <Card className="card" key={professional._id}>
           <div className="leftContent">
             <div className="imageContent">
-                 <Avatar
-                  src={
-                    professional.gender === "male" ? maleAvatar : femaleAvatar
-                  }
-                  size={70}
-                />
+              <Avatar
+                src={professional.gender === "male" ? maleAvatar : femaleAvatar}
+                size={70}
+              />
               <div className="stars">
                 <StarFilled />
                 <StarFilled />
@@ -82,11 +104,17 @@ const ProfileCard = () => {
             onClick={(e) => handleChat(professional._id)}
           >
             <NavLink className="text-decoration-none">
-              <Button>
+              <Button onClick={() => handleAccept(professional._id)}>
                 <CheckCircleFilled className="chat" /> Chat
               </Button>
             </NavLink>
           </div>
+          {selectedProfessional?._id === professional._id && (
+            <div className="notification">
+              <p>Your request has been accepted.</p>
+              <button onClick={() => setSelectedProfessional(null)}>OK</button>
+            </div>
+          )}
         </Card>
       ))}
     </div>

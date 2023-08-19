@@ -47,7 +47,7 @@ const Login = () => {
       }
       if (userData.role === "user") {
         setSuccessMessage("Login successful! Redirecting...");
-        localStorage.setItem("professionalId", response.data.user.userId);
+        localStorage.setItem("userId", response.data.user.userId);
         setTimeout(() => {
           navigate("/");
         }, 1500);
