@@ -1,5 +1,6 @@
 import React from "react";
 import "../scss/Footer.scss";
+import Title from "antd/es/typography/Title";
 
 function Footer() {
   return (

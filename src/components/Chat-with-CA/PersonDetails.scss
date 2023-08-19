@@ -10,14 +10,15 @@ $buttonColor: rgb(4, 123, 4);
   grid-auto-rows: 180px;
 
   .card {
-    padding: 20px;
+    padding: 10px;
     box-shadow: 0px 1px 10px #bcbaba;
     border: none;
     display: flex;
-    border-radius: 10px;
     flex-direction: row;
-   
+    background: linear-gradient(to bottom, #f0df20, #fff 25%, #fff, #f0df20);
+    border-radius: 10px;
     justify-content: space-between;
+    
 
     .leftContent {
       display: flex;
@@ -26,24 +27,13 @@ $buttonColor: rgb(4, 123, 4);
       width: 100%;
 
       .imageContent {
-        img {
-          width: 70px;
-          object-fit: cover;
-          height: 70px;
-          border-radius: 50%;
-          margin-bottom: 5px;
-        }
 
         .stars {
           display: flex;
           flex-direction: row;
           justify-content: center;
           gap: 2px;
-
-          i {
-            color: grey;
-            font-size: 10px;
-          }
+          margin-top: 10px;
         }
 
         p {
@@ -53,47 +43,47 @@ $buttonColor: rgb(4, 123, 4);
         }
       }
 
-      .info {
-        display: flex;
-        flex-direction: column;
-        gap: 0px;
+      
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+     
 
-        a {
-          color: black;
-          text-decoration: none;
-          font-size: 17px;
+      a {
+        color: black;
+        text-decoration: none;
+        font-size: 17px;
 
-          &:hover {
-            color: rgb(55, 222, 55);
-          }
-        }
-
-        span {
-          color: gray;
-          font-size: 15px;
-        }
-
-        .free {
-          color: rgb(184, 16, 16);
-          font-size: 15px;
-          font-weight: bold;
-        }
-
-        strike {
-          color: gray;
-          font-size: 12px;
-          font-weight: 400;
+        &:hover {
+          color: rgb(55, 222, 55);
         }
       }
+
+      span {
+        color: gray;
+        font-size: 15px;
+      }
+
+      .free {
+        color: rgb(184, 16, 16);
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+    
     }
+  
 
     .chatBtn {
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-end;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
       box-sizing: border-box;
       padding: 10px;
+      
         position: absolute;
         left: 65%;
         bottom: 5%;
@@ -101,16 +91,18 @@ $buttonColor: rgb(4, 123, 4);
       button {
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        flex-direction: row;
+        justify-content:center;
         align-items: center;
         color: $buttonColor;
         border: 1px solid $buttonColor;
-        padding: 3px 25px;
+        padding: 5px 25px;
         border-radius: 10px;
         font-size: 14px;
 
         .chat {
           color: rgb(76, 186, 76);
+          margin: 0px 5px;
         }
 
         &:hover {
@@ -120,5 +112,66 @@ $buttonColor: rgb(4, 123, 4);
       }
     }
   }
+}
+@media screen and (max-width: 768px) {
+
+
+  .details {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-content: space-evenly;
+  gap: 10px;
+  grid-auto-rows: 310px;
+
+  .card {
+    padding: 2px;
+    box-shadow: 0px 1px 10px #bcbaba;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .leftContent {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .imageContent {
+       
+          margin: 0px 20px;
+      
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        text-align: center;
+        margin-top: -20px;
+        margin-bottom: 20px;
+
+        a {
+          font-size: 15px;
+        }
+
+        span {
+          font-size: 14px;
+        }
+
+        .free {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .chatBtn {
+        position: absolute;
+        left: 15%;
+        bottom: 0%;
+    }
+  }
+}
+
+
 }
 

@@ -24,7 +24,7 @@ const RegistrationTable = () => {
 
   const columns = [
     { title: "Name", dataIndex: "name", key: "name", className:"registration-table-column"  },
-    { title: "Email", dataIndex: "email", key: "email", className:"registration-table-column"  },
+    { title: "Email", dataIndex: "email", key: "email", className:"registration-table-column hide-mobile" },
     { title: "Role", dataIndex: "role", key: "role", className:"registration-table-column"  },
     { title: "Phone", dataIndex: "phone", key: "phone", className:"registration-table-column"  },
     {
@@ -34,13 +34,13 @@ const RegistrationTable = () => {
       render: (text, record) => (
         <span>
           {record.isVerified ? (
-            <Button onClick={() => handleReject(record)}>Delete</Button>
+            <Button className="btn3" onClick={() => handleReject(record)}>Delete</Button>
           ) : (
             <>
-              <Button type="primary" onClick={() => handleAccept(record)}>
+              <Button className="btn3" type="primary" onClick={() => handleAccept(record)}>
                 Accept
               </Button>
-              <Button onClick={() => handleReject(record)}>Reject</Button>
+              <Button className="btn3" onClick={() => handleReject(record)}>Reject</Button>
             </>
           )}
         </span>

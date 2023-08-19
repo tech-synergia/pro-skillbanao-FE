@@ -1,16 +1,29 @@
 .registration-table{
     width: 100%;
   }
+  .registration-table-column{
+    font-size: 16px;
+  }
   
   @media (max-width: 768px) {
       .registration-table {
         width: 5%;
-        margin:0px 20px;
+        margin:0px;
+        .registration-table-column{
+          font-size: 13px;
+        }
       
       }
       .ant-pagination {
-        width: 350px;
+        width: 240px;
   
+      }
+      .hide-mobile{
+        display: none;
+      }
+      .btn3{
+        font-size: 13px;
+        padding: 0px 4px;
       }
     }
     
