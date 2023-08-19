@@ -40,6 +40,38 @@ const App = () => {
     reference: "",
   });
 
+  const allIndiaStates = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal"
+  ];
+  
+
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -137,7 +169,7 @@ const App = () => {
           </Form.Item>
           <Form.Item label="Phone Number" htmlFor="phone">
             <Input
-              type="text"
+              type="number"
               name="phone"
               id="phone"
               onChange={handleInputChange}
@@ -196,26 +228,49 @@ const App = () => {
 
           <h6>Permanent Address Details*</h6>
           <Form.Item label="House No." htmlFor="hno">
-            <Input name="hno" id="hno" onChange={handleInputChange} required />
+            <Input type="number" name="hno" id="hno" onChange={handleInputChange} required />
           </Form.Item>
           <Form.Item label="Locality" htmlFor="locality">
             <Input
+              type="text"
               name="locality"
               id="locality"
               onChange={handleInputChange}
               required
             />
           </Form.Item>
-          <Form.Item label="State" htmlFor="state">
+          {/* <Form.Item label="State" htmlFor="state">
             <Input
+            type="text"
               name="state"
               id="state"
               onChange={handleInputChange}
               required
             />
+          </Form.Item> */}
+          <Form.Item label="State" htmlFor="state">
+            <Select
+              showSearch
+              name="state"
+              id="state"
+              onChange={handleInputChange}
+              required
+              placeholder="Select Your State"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {allIndiaStates.map((state) => (
+                <Select.Option key={state} value={state}>
+                  {state}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item label="Pin Code" htmlFor="pincode">
             <Input
+              type="number"
               name="pincode"
               id="pincode"
               onChange={handleInputChange}
@@ -256,6 +311,7 @@ const App = () => {
           </Form.Item>
           <Form.Item label="All Skills" htmlFor="allSkills">
             <Input
+              type="text"
               name="allSkills"
               id="allSkills"
               onChange={handleInputChange}
@@ -264,6 +320,7 @@ const App = () => {
           </Form.Item>
           <Form.Item label="Language" htmlFor="language">
             <Input
+              type="text"
               name="language"
               id="language"
               onChange={handleInputChange}
@@ -272,6 +329,7 @@ const App = () => {
           </Form.Item>
           <Form.Item label="Experience" htmlFor="experience">
             <Input
+              type="number"
               name="experience"
               id="experience"
               onChange={handleInputChange}
@@ -279,10 +337,12 @@ const App = () => {
             />
           </Form.Item>
           <Form.Item
+            
             label="How many hours you can contribute daily?"
             htmlFor="hours"
           >
             <Input
+              type="number"
               name="hours"
               id="hours"
               onChange={handleInputChange}
@@ -294,6 +354,7 @@ const App = () => {
             htmlFor="reference"
           >
             <Input
+              type="text"
               name="reference"
               id="reference"
               onChange={handleInputChange}
@@ -305,6 +366,7 @@ const App = () => {
             htmlFor="working"
           >
             <Input
+              type="text"
               name="working"
               id="working"
               onChange={handleInputChange}

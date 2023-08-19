@@ -2,13 +2,6 @@
 import React from 'react';
 import { Button, Input } from 'antd';
 import { NavLink } from 'react-router-dom';
-import {
-  HomeFilled,
-  DollarCircleFilled,
-  FilterOutlined,
-  DownOutlined,
-  SearchOutlined
-} from '@ant-design/icons';
 import './SearchBar.scss';
 
 function SearchBar() {

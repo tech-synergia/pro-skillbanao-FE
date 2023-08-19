@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Card } from "antd";
+import { Button, Card, Avatar, Typography} from "antd";
 import { StarFilled, CheckCircleFilled } from "@ant-design/icons";
-import profile from "../../assets/profile.webp";
 import "./PersonDetails.scss";
+import maleAvatar from '../../assets/male_avatar.jpg'
+import femaleAvatar from '../../assets/female_avatar.jpg'
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+
+const { Text } = Typography;
 
 const ProfileCard = () => {
   const [professionals, setProfessionals] = useState([]);
@@ -49,7 +52,12 @@ const ProfileCard = () => {
         <Card className="card" key={professional._id}>
           <div className="leftContent">
             <div className="imageContent">
-              <img src={profile} alt="" />
+                 <Avatar
+                  src={
+                    professional.gender === "male" ? maleAvatar : femaleAvatar
+                  }
+                  size={70}
+                />
               <div className="stars">
                 <StarFilled />
                 <StarFilled />
@@ -60,13 +68,13 @@ const ProfileCard = () => {
               <p>1315 orders</p>
             </div>
             <div className="info">
-              <a href="#">{professional.name}</a>
-              <span>{professional.role}</span>
-              <span>{professional.language}</span>
-              <span>Exp: {professional.experience} yr(s)</span>
-              <span className="free">
-                FREE <strike>20/min</strike>
-              </span>
+              <NavLink to={"#"}>{professional.name}</NavLink>
+              <Text>{professional.role}</Text>
+              <Text>{professional.language}</Text>
+              <Text>Exp: {professional.experience} yr(s)</Text>
+              <Text className="free">
+                FREE <Text delete>20/min</Text>
+              </Text>
             </div>
           </div>
           <div
@@ -74,9 +82,9 @@ const ProfileCard = () => {
             onClick={(e) => handleChat(professional._id)}
           >
             <NavLink className="text-decoration-none">
-              <button>
+              <Button>
                 <CheckCircleFilled className="chat" /> Chat
-              </button>
+              </Button>
             </NavLink>
           </div>
         </Card>
