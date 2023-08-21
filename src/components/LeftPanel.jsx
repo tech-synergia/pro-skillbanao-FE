@@ -14,7 +14,7 @@ const LeftPanel = () => {
         <img src={logo} alt="" />
       </div>
       <Menu mode="inline" defaultSelectedKeys={["1"]}>
-        <Menu.Item key="1" icon={<DashboardOutlined style={{fontSize: "18px"}}/>} style={{fontSize: "18px"}}>
+        <Menu.Item key="1" icon={<DashboardOutlined style={{fontSize: "20px"}}/>} style={{fontSize: "18px"}}>
           Dashboard
         </Menu.Item>
       </Menu>
