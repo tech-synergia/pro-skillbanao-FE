@@ -2,7 +2,7 @@ import React from "react";
 
 export default function HomeS2() {
   return (
-    <div style={{ padding: "8px", textAlign: "justify" }}>
+    <div id="about" style={{ padding: "8px", textAlign: "justify" }}>
       <h2 style={{ textAlign: "center" }}>About SkillBanao</h2>
       <p style={{ padding: "8px" }}>
         Welcome to SkillBanao – Your Path to Personal Growth and Mastery At
