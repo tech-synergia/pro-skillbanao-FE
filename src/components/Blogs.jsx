@@ -1,33 +1,48 @@
-import React, { memo } from "react";
-import { Button } from "antd";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import React, { useState } from "react";
+import { Button, Input, Form } from "antd";
+import axios from "axios";
 
-const Blogs = memo(() => {
-  const navigate = useNavigate(); // Initialize useNavigate
-  const hadelClick = () => {
-    navigate("/");
+const { TextArea } = Input;
+
+function App() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post("/api/blogs", {
+        title,
+        content,
+      });
+
+      console.log("Blog saved:", response.data);
+    } catch (error) {
+      console.error("Error saving blog:", error);
+    }
   };
+
   return (
-    <div style={{ textAlign: "justify", padding: "20px" }}>
-      We are soon relising our blogs content to you. Thankyou for showing
-      interest
-      <Button
-        style={{
-          position: "absolute",
-          top: "0",
-          left: "0",
-          bottom: "0",
-          right: "0",
-          margin: "auto",
-          width: "200px",
-        }}
-        type="primary"
-        onClick={hadelClick}
-      >
-        Take me to Home
-      </Button>
+    <div style={{ padding: "20px" }}>
+      <h1>Add a New Blog</h1>
+      <Form layout="vertical">
+        <Form.Item label="Title">
+          <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+        </Form.Item>
+        <Form.Item label="Content">
+          <TextArea
+            rows={4}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" onClick={handleSubmit}>
+            Save Blog
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
-});
+}
 
-export default Blogs;
+export default App;
