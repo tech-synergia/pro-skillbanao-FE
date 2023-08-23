@@ -8,6 +8,7 @@ import Pros from "./Pros";
 import Footer from "./Footer";
 import "../scss/Home.scss";
 import Navbar from "./Navbar";
+import LatestBlogs from "./home/LatestBlogs";
 
 function Home() {
   return (
@@ -16,6 +17,7 @@ function Home() {
       <HomeS1 />
       {/* <HomeCarousel /> */}
       <Pros />
+      <LatestBlogs />
       <Testimonials />
       <HomeS3 />
       <HomeS2 />
