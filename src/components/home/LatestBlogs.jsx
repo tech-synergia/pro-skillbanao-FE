@@ -10,8 +10,10 @@ export default function LatestBlogs() {
   useEffect(() => {
     async function fetchLatestBlogs() {
       try {
-        const response = await axios.get("/api/latest-blogs");
-        setLatestBlogs(response.data);
+        const response = await axios.get(
+          "https://skillbanaobe.onrender.com/blog/showBlogs"
+        );
+        setLatestBlogs(response.data.blogs);
       } catch (error) {
         console.error("Error fetching latest blogs:", error);
       }
@@ -26,7 +28,7 @@ export default function LatestBlogs() {
         {latestBlogs.map((blog) => (
           <Card
             key={blog._id}
-            cover={<img alt="blog cover" src={blog.coverImageURL} />}
+            cover={<img alt="blog cover" src={blog.image} />}
           >
             <Meta title={blog.title} description={blog.content} />
           </Card>

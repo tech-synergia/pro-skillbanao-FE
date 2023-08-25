@@ -8,21 +8,18 @@ const { TextArea } = Input;
 function App() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageFile, setImageFile] = useState(null); // New state for image file
+  const [image, setImage] = useState("");
 
   const handleSubmit = async () => {
     try {
-      // Create a FormData object to send image and other data
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("content", content);
-      formData.append("image", imageFile);
-
-      const response = await axios.post("/api/blogs", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Important for file uploads
-        },
-      });
+      const response = await axios.post(
+        "https://skillbanaobe.onrender.com/blog/addBlog",
+        {
+          title,
+          content,
+          image,
+        }
+      );
 
       console.log("Blog saved:", response.data);
       message.success("Blog saved successfully");
@@ -32,8 +29,26 @@ function App() {
     }
   };
 
-  const handleImageUpload = (file) => {
-    setImageFile(file);
+  const handleImageUpload = async (file) => {
+    // setImageFile(file);
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const response = await axios.post(
+        "https://skillbanaobe.onrender.com/professional/uploadImage",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setImage(response.data.image.src);
+    } catch (error) {
+      console.error("Image upload error:", error);
+    }
   };
 
   return (
