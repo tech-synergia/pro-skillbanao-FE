@@ -21,7 +21,8 @@ function Footer() {
           <h5>Our Social Media</h5>
           <div className="linkContents">
             <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
+            <a href="https://www.instagram.com/skill.banao/">Instagram</a>
+            <a href="https://www.youtube.com/@Skillbanao_">Youtube</a>
             <a href="#">Twitter</a>
           </div>
         </div>

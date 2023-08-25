@@ -4,21 +4,25 @@
 
 .Home {
   #section_1 {
-    background: linear-gradient(black 90%, gray);
+    background: linear-gradient(to bottom,rgb(61, 61, 61),rgb(61, 61, 61), gray);
     text-align: center;
     .poster {
-      margin:20px 470px;
+      margin:20px 480px;
       box-sizing: border-box;
       div {
         font-size: 24px;
         width: 500px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
         text-align: center;
         height: 100px;
-         background: linear-gradient(137deg, #fff, #f0df20 25%, #f0df20, #fff);
+        background: linear-gradient(137deg, #fff, #f0df20 25%, #f0df20, #fff);
       }
       img {
         object-fit: cover;
         width: 500px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
         height: 300px;
       }
     }

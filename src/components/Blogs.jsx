@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Form, Upload, message } from "antd";
+import { Button, Input, Form, Upload, message as antdMessage, Spin } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 
@@ -9,6 +9,8 @@ function App() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const [isImageUploaded, setIsImageUploaded] = useState(false); 
+  const [uploading, setUploading] = useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -31,7 +33,8 @@ function App() {
 
   const handleImageUpload = async (file) => {
     // setImageFile(file);
-
+    setIsImageUploaded(false);
+    setUploading(true);
     try {
       const formData = new FormData();
       formData.append("image", file);
@@ -46,8 +49,12 @@ function App() {
         }
       );
       setImage(response.data.image.src);
+      setIsImageUploaded(true);
+      antdMessage.success("Image uploaded successfully"); 
     } catch (error) {
       console.error("Image upload error:", error);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -66,12 +73,31 @@ function App() {
           />
         </Form.Item>
         <Form.Item label="Cover Photo">
+          {/* <Upload beforeUpload={handleImageUpload} showUploadList={false}>
+
+            <Button icon={<UploadOutlined />}>{image ? "Image Uploaded" : "Upload Cover Photo"}</Button>
+          </Upload> */}
           <Upload beforeUpload={handleImageUpload} showUploadList={false}>
-            <Button icon={<UploadOutlined />}>Upload Cover Photo</Button>
+            {uploading ? (
+              <Spin spinning={uploading}>
+                <Button icon={<UploadOutlined />}>
+                  {isImageUploaded ? "Image Uploaded" : "Uploading..."}
+                </Button>
+              </Spin>
+            ) : (
+              <Button icon={<UploadOutlined />}>
+                {isImageUploaded ? "Image Uploaded" : "Upload Cover Photo"}
+              </Button>
+            )}
           </Upload>
+         
         </Form.Item>
+        {isImageUploaded && (
+            <p style={{ color: "green" }}>Image uploaded successfully</p>
+        
+            )}
         <Form.Item>
-          <Button type="primary" onClick={handleSubmit}>
+          <Button type="primary" onClick={handleSubmit} disabled={!isImageUploaded}>
             Save Blog
           </Button>
         </Form.Item>

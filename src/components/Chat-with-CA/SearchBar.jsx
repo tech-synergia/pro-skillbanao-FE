@@ -17,7 +17,7 @@ function SearchBar() {
       </div>
 
       <div className="filterAndSort">
-        {/* <Button className="recharge"><span>Recharge</span></Button> */}
+        <Button className="recharge"><span>Recharge</span></Button>
         <Button className="filter"><i className="bi bi-funnel"></i><span className="mobileHidden">Filter</span></Button>
         <Button className="sort"><i class="bi bi-sort-down"></i> <span className="mobileHidden">Sort by</span></Button>
         <span>

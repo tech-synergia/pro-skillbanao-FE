@@ -43,8 +43,10 @@ const App = () => {
     "Andhra Pradesh",
     "Arunachal Pradesh",
     "Assam",
+    "Abroad",
     "Bihar",
     "Chattisgarh",
+    "Delhi",
     "Goa",
     "Gujarat",
     "Haryana",
@@ -72,9 +74,17 @@ const App = () => {
 
   const navigate = useNavigate();
 
+  const [pincode, setPincode] = useState('');
+
+ 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({ ...prevData, [name]: value }));
+    const inputPincode = e.target.value.replace(/\D/g, '');
+    if (inputPincode.length <= 6) {
+      setPincode(inputPincode);
+    }
   };
 
   const handleImageUpload = async (file) => {
@@ -165,7 +175,7 @@ const App = () => {
           </Form.Item>
           <Form.Item label="Phone Number" htmlFor="phone">
             <Input
-              type="number"
+              type="text"
               name="phone"
               id="phone"
               onChange={handleInputChange}
@@ -241,15 +251,6 @@ const App = () => {
               required
             />
           </Form.Item>
-          {/* <Form.Item label="State" htmlFor="state">
-            <Input
-            type="text"
-              name="state"
-              id="state"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Item> */}
           <Form.Item label="State" htmlFor="state">
             <Select
               showSearch
@@ -274,10 +275,12 @@ const App = () => {
           </Form.Item>
           <Form.Item label="Pin Code" htmlFor="pincode">
             <Input
-              type="number"
+              type="text"
               name="pincode"
               id="pincode"
+              value={pincode}
               onChange={handleInputChange}
+              maxLength={6}
               required
             />
           </Form.Item>
@@ -290,6 +293,7 @@ const App = () => {
                 handleInputChange({ target: { name: "pSkills", value } })
               }
               defaultValue="Select primary skills"
+              required
             >
               <Option value="">Select primary skills</Option>
               <Option value="Financial Coach">Financial Coach</Option>
@@ -356,25 +360,41 @@ const App = () => {
             label="Where did you hear about Skillbanao?"
             htmlFor="reference"
           >
-            <Input
-              type="text"
+            <Select
               name="reference"
               id="reference"
-              onChange={handleInputChange}
-              required
-            />
+              onChange={(value) =>
+                handleInputChange({ target: { name: "reference", value } })
+              }
+              placeholder="Select an Option"
+            >
+              <Option value="youtube">YouTube</Option>
+              <Option value="facebook">Facebook</Option>
+              <Option value="linked">LinkedIn</Option>
+              <Option value="instagram">Instagram</Option>
+              <Option value="twitter">Twitter</Option>
+              <Option value="google">Search Engines(e.g., Google)</Option>
+              <Option value="anotherWeb">Referral from Another Website</Option>
+              <Option value="mouth">Word of Mouth</Option>
+              <Option value="communities">Online Communities/Forums</Option>
+              <Option value="otherPlatform">Other</Option>
+            </Select>
           </Form.Item>
           <Form.Item
             label="Are you working on any other online platform?"
             htmlFor="working"
           >
-            <Input
-              type="text"
+            <Select
               name="working"
               id="working"
-              onChange={handleInputChange}
-              required
-            />
+              onChange={(value) =>
+                handleInputChange({ target: { name: "working", value } })
+              }
+              placeholder="Select an Option"
+            >
+              <Option value="YES">Yes</Option>
+              <Option value="NO">No</Option>
+            </Select>
           </Form.Item>
           <Button type="primary" onClick={handleSubmit}>
             Register

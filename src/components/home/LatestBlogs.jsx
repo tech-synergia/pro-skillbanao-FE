@@ -22,7 +22,7 @@ export default function LatestBlogs() {
   }, []);
 
   return (
-    <div>
+    <div id="latestBlog">
       <h2>LATEST FROM BLOG</h2>
       <div className="latest-blogs-container">
         {latestBlogs.map((blog) => (

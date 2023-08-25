@@ -27,20 +27,20 @@ $rechargeColor: rgb(4, 123, 4);
         display: flex;
         flex-direction: row;
         gap: 10px;
-    //    .recharge{
-    //         padding: 7px 20px;
-    //         height: 40px;
-    //         border-radius: 5px;
-    //         margin-right: 10px;
-    //         font-size: 17px;
-    //         border:1px solid $rechargeColor;
-    //         color: $rechargeColor;
-    //         &:hover{
-    //             background-color: $rechargeColor;
-    //             color: #fff;
-    //             font-weight: 500;
-    //         }
-    //     }
+       .recharge{
+            padding: 7px 20px;
+            height: 40px;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 17px;
+            border:1px solid $rechargeColor;
+            color: $rechargeColor;
+            &:hover{
+                background-color: $rechargeColor;
+                color: #fff;
+                font-weight: 500;
+            }
+        }
         .filter,.sort{
             text-align: center;
             width: 25%;
