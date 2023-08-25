@@ -1,33 +1,83 @@
-import React, { memo } from "react";
-import { Button } from "antd";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import React, { useState } from "react";
+import { Button, Input, Form, Upload, message } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import axios from "axios";
 
-const Blogs = memo(() => {
-  const navigate = useNavigate(); // Initialize useNavigate
-  const hadelClick = () => {
-    navigate("/");
+const { TextArea } = Input;
+
+function App() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState("");
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        "https://skillbanaobe.onrender.com/blog/addBlog",
+        {
+          title,
+          content,
+          image,
+        }
+      );
+
+      console.log("Blog saved:", response.data);
+      message.success("Blog saved successfully");
+    } catch (error) {
+      console.error("Error saving blog:", error);
+      message.error("Error saving blog");
+    }
   };
+
+  const handleImageUpload = async (file) => {
+    // setImageFile(file);
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const response = await axios.post(
+        "https://skillbanaobe.onrender.com/professional/uploadImage",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setImage(response.data.image.src);
+    } catch (error) {
+      console.error("Image upload error:", error);
+    }
+  };
+
   return (
-    <div style={{ textAlign: "justify", padding: "20px" }}>
-      We are soon relising our blogs content to you. Thankyou for showing
-      interest
-      <Button
-        style={{
-          position: "absolute",
-          top: "0",
-          left: "0",
-          bottom: "0",
-          right: "0",
-          margin: "auto",
-          width: "200px",
-        }}
-        type="primary"
-        onClick={hadelClick}
-      >
-        Take me to Home
-      </Button>
+    <div style={{ padding: "20px" }}>
+      <h1>Add a New Blog</h1>
+      <Form layout="vertical">
+        <Form.Item label="Title">
+          <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+        </Form.Item>
+        <Form.Item label="Content">
+          <TextArea
+            rows={4}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item label="Cover Photo">
+          <Upload beforeUpload={handleImageUpload} showUploadList={false}>
+            <Button icon={<UploadOutlined />}>Upload Cover Photo</Button>
+          </Upload>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" onClick={handleSubmit}>
+            Save Blog
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
-});
+}
 
-export default Blogs;
+export default App;

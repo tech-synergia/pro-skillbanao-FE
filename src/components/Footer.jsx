@@ -12,7 +12,7 @@ function Footer() {
         <div className="links">
           <h5>Important Links</h5>
           <div className="linkContents">
-            <a href="#">About Us</a>
+            <a href="#about">About Us</a>
             <a href="#">Contact us</a>
             Copyright @ skillbanao
           </div>
@@ -26,6 +26,16 @@ function Footer() {
           </div>
         </div>
       </div>
+      <a
+        style={{
+          color: "lightblue",
+          textDecoration: "none",
+        }}
+        href="https://techsynergia.com"
+        target="_blank"
+      >
+        Powered by Tech Synergia
+      </a>
     </footer>
   );
 }

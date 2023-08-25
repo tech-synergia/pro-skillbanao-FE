@@ -10,7 +10,6 @@ const { Step } = Steps;
 const { Option } = Select;
 
 const App = () => {
-
   const [alertData, setAlertData] = useState({
     type: "",
     message: "",
@@ -68,9 +67,8 @@ const App = () => {
     "Tripura",
     "Uttar Pradesh",
     "Uttarakhand",
-    "West Bengal"
+    "West Bengal",
   ];
-  
 
   const navigate = useNavigate();
 
@@ -79,11 +77,9 @@ const App = () => {
     setUserData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleImageUpload = async (e) => {
-    const imageFile = e.target.files[0];
-
+  const handleImageUpload = async (file) => {
     const formData = new FormData();
-    formData.append("image", imageFile);
+    formData.append("image", file);
 
     try {
       const response = await axios.post(
@@ -133,7 +129,7 @@ const App = () => {
       title: "Personal Details",
       content: (
         <Form>
-          <Form.Item label="Name" htmlFor="name" >
+          <Form.Item label="Name" htmlFor="name">
             <Input
               type="text"
               name="name"
@@ -196,7 +192,7 @@ const App = () => {
       content: (
         <Form>
           <Form.Item label="Upload Profile Pic">
-            <Upload onChange={handleImageUpload} showUploadList={false}>
+            <Upload beforeUpload={handleImageUpload} showUploadList={false}>
               <Button
                 className="custom-button"
                 icon={<UploadOutlined style={{ fontSize: "20px" }} />}
@@ -228,7 +224,13 @@ const App = () => {
 
           <h6>Permanent Address Details*</h6>
           <Form.Item label="House No." htmlFor="hno">
-            <Input type="number" name="hno" id="hno" onChange={handleInputChange} required />
+            <Input
+              type="text"
+              name="hno"
+              id="hno"
+              onChange={handleInputChange}
+              required
+            />
           </Form.Item>
           <Form.Item label="Locality" htmlFor="locality">
             <Input
@@ -253,7 +255,9 @@ const App = () => {
               showSearch
               name="state"
               id="state"
-              onChange={handleInputChange}
+              onChange={(value) =>
+                handleInputChange({ target: { name: "state", value } })
+              }
               required
               placeholder="Select Your State"
               optionFilterProp="children"
@@ -337,7 +341,6 @@ const App = () => {
             />
           </Form.Item>
           <Form.Item
-            
             label="How many hours you can contribute daily?"
             htmlFor="hours"
           >
