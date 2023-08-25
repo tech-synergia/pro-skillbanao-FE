@@ -31,37 +31,18 @@
     list-style: none;
     padding: 0;
 
-    li:nth-child(3) a {
+    li a {
       color: black;
       background-color: vrs.$prim-color;
       border-radius: 20px;
-      padding: 5px 16px;
-
-      &:hover {
-        box-shadow: vrs.$btn-shadow;
-      }
-    }
-    li:nth-child(4) a {
-      color: black;
-      background-color: vrs.$prim-color;
-      border-radius: 20px;
-      padding: 5px 16px;
-
-      &:hover {
-        box-shadow: vrs.$btn-shadow;
-      }
-    }
-    a {
-      text-decoration: none;
       margin: 15px;
-      color: black;
-      transition: all 0.3s ease-out;
+      text-decoration: none;
+      padding: 5px 16px;
 
       &:hover {
-        color: vrs.$prim-color;
+        box-shadow: vrs.$btn-shadow;
       }
     }
-  }
 
   // adding mobile view
   @media (max-width: 799px) {
@@ -111,3 +92,7 @@
     }
   }
 }
+}
+
+
+

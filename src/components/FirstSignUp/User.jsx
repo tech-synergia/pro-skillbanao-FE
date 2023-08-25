@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Radio, Upload, Button, Alert } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import logo from "../../images/logo.jpeg";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import { useNavigate } from "react-router-dom";
 import "./Form.scss";
 import axios from "axios";
 

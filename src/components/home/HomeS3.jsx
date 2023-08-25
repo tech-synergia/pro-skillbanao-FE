@@ -7,7 +7,7 @@ function HomeS3() {
       </div>
       <div className="boxes">
         <h1>5500+</h1>
-        <span>chats</span>
+        <span>Chats</span>
       </div>
       <div className="boxes">
         <h1>9000+</h1>

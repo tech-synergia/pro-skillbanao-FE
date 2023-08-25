@@ -1,17 +1,52 @@
-import { NavLink } from "react-router-dom";
-import "../scss/Navbar.scss";
-import logo from "../images/logo.jpeg";
-import { FaAlignJustify } from "react-icons/fa6";
-import { useState } from "react";
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { FaAlignJustify } from 'react-icons/fa6';
+import { Menu, Dropdown } from 'antd';
+
+import logo from '../images/logo.jpeg';
+import '../scss/Navbar.scss';
+
+const menuStyle = {
+  textDecoration: "none",
+  fontSize: "17px"
+}
 
 function Navbar() {
-  // Initialize state for the dropdown menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Function to toggle the dropdown menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const professionalMenu = (
+    <Menu>
+      <Menu.Item key="register">
+        <NavLink to={"/registerProf"} onClick={toggleMenu} style={menuStyle}>
+          Register
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="login">
+        <NavLink to={"/login"} onClick={toggleMenu} style={menuStyle}>
+          Login
+        </NavLink>
+      </Menu.Item>
+    </Menu>
+  );
+
+  const userMenu = (
+    <Menu >
+      <Menu.Item key="register">
+        <NavLink to={"/registerUser"} onClick={toggleMenu} style={menuStyle}>
+          Register
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="login">
+        <NavLink to={"/login"} onClick={toggleMenu} style={menuStyle} >
+          Login
+        </NavLink>
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <nav id="navbar">
@@ -22,33 +57,30 @@ function Navbar() {
               <img src={logo} alt="logo" />
             </div>
           </NavLink>
-          {/* Add a class based on the state to show/hide the menu */}
-          <ul className={`links ${isMenuOpen ? "open" : ""}`} style={{zIndex: "3"}}>
+          <ul className={`links ${isMenuOpen ? 'open' : ''}`} style={{ zIndex: '3' }}>
             <li>
               <NavLink to={"/all-pro"} onClick={toggleMenu}>
                 Chat with Professionals
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/blogs"} onClick={toggleMenu}>
-                Blogs
-              </NavLink>
-            </li>
-           
-            <li>
-              <NavLink to={"/signup"} onClick={toggleMenu}>
-                Register as Professional
+              <NavLink to={"#"} onClick={toggleMenu}>
+                <Dropdown overlay={professionalMenu} placement="bottomLeft" trigger={['hover']}>
+                  <span>Professional <i class="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
+                </Dropdown>
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/login"} onClick={toggleMenu}>
-                Login
-              </NavLink>
+            <NavLink to={"#"} onClick={toggleMenu}>
+              <Dropdown overlay={userMenu} placement="bottomLeft" trigger={['hover']}>
+                <span>User <i class="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
+              </Dropdown>
+            </NavLink>
             </li>
             <li>
-              <NavLink to={"/signup"} onClick={toggleMenu}>
-                Recharge
-              </NavLink>
+              <a href="#latestBlog" onClick={toggleMenu}>
+                Blog
+              </a>
             </li>
           </ul>
           <div className="nav-btn" onClick={toggleMenu}>
