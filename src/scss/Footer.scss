@@ -24,11 +24,37 @@ footer {
           text-decoration: none;
         }
       }
+      .iconContents{
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        margin-top: 20px;
+        i{
+          color: #b3afaf;
+          font-size: 20px;
+        }
+      }
     }
   }
-  @media (max-width: 799px) {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+}
+
+@media screen and (max-width: 768px){
+  footer {
+    margin-top: 30px;
+    padding: 20px;
+    .impLinks {
+      margin-block: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 30px;
+      .links {
+        h5 {
+          width: 50%;
+        }
+        
+     
+      }
+    }
   }
 }

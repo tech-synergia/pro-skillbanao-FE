@@ -1,0 +1,10 @@
+.eBooks{
+    padding: 30px 200px;
+    background-color: khaki;
+    @media screen and (max-width: 768px){
+        padding: 20px;
+    }
+    h2{
+        text-align: center;
+    }
+}

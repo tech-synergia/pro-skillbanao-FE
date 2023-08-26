@@ -15,16 +15,20 @@ function SearchBar() {
       <div className="balance">
         <p>Available Balance: <i class="bi bi-currency-rupee"></i><span>0</span></p>
       </div>
-
-      <div className="filterAndSort">
-        <Button className="recharge"><span>Recharge</span></Button>
-        <Button className="filter"><i className="bi bi-funnel"></i><span className="mobileHidden">Filter</span></Button>
-        <Button className="sort"><i class="bi bi-sort-down"></i> <span className="mobileHidden">Sort by</span></Button>
-        <span>
-          <Input type="search" name="search" id="search" placeholder='Search name..' className="mobileHidden"/>
-          {/* <SearchOutlined className="searchIcon" /> */}
-          <i className="bi bi-search"></i>
-        </span>
+      <div className="searchOptions">
+        <div>
+          <Button className='recharge'><span>Recharge</span></Button>
+        </div>
+        <div className="filterAndSort">
+          
+          <Button className="filter"><i className="bi bi-funnel"></i><span className="mobileHidden">Filter</span></Button>
+          <Button className="sort"><i class="bi bi-sort-down"></i> <span className="mobileHidden">Sort by</span></Button>
+          <span>
+            <Input type="search" name="search" id="search" placeholder='Search name..' className="mobileHidden"/>
+            {/* <SearchOutlined className="searchIcon" /> */}
+            <i className="bi bi-search"></i>
+          </span>
+        </div>
       </div>
     </div>
   );
