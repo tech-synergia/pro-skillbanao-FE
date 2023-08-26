@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Button } from "antd";
 import "../scss/RegistrationTable.scss";
+import { useSelector } from "react-redux";
 
 const RegistrationTable = () => {
   const [professionalsData, setProfessionalsData] = useState([]);
+
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     fetchProfessionals();
@@ -85,7 +88,8 @@ const RegistrationTable = () => {
         "https://skillbanaobe.onrender.com/professional/verifyPro",
         {
           proId: record._id,
-        }
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
         console.log("Professional verified successfully:", record);
@@ -105,6 +109,7 @@ const RegistrationTable = () => {
         "https://skillbanaobe.onrender.com/professional/declinePro",
         {
           data: { proId: record._id },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       if (response.status === 200) {

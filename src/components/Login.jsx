@@ -51,11 +51,20 @@ const Login = () => {
           "You are not verified yet! Please wait until we accept your request!"
         );
       }
-      if (userData.role === "user") {
+      if (userData.role === "user" && response.data.user.mainRole === "user") {
         setSuccessMessage("Login successful! Redirecting...");
         localStorage.setItem("userId", response.data.user.userId);
         setTimeout(() => {
           navigate("/");
+        }, 1500);
+      } else if (
+        userData.role === "user" &&
+        response.data.user.mainRole === "admin"
+      ) {
+        setSuccessMessage("Login successful! Redirecting...");
+        // localStorage.setItem("userId", response.data.user.userId);
+        setTimeout(() => {
+          navigate("/adminpanel");
         }, 1500);
       }
     } catch (error) {
