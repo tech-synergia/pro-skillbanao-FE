@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Radio, Input, Alert } from "antd";
+import { Button, Form, Radio, Input, Alert } from "antd";
 import logo from "../images/logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setToken } from "../store";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -31,9 +34,12 @@ const Login = () => {
         userData
       );
 
+      dispatch(setToken(response.data.user.token));
+
       if (userData.role === "professional" && response.data.user.isVerified) {
         setSuccessMessage("Login successful! Redirecting...");
         localStorage.setItem("professionalId", response.data.user.proId);
+
         setTimeout(() => {
           navigate("/propanel");
         }, 1500);

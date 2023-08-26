@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { Button, Input, Form, Upload, message as antdMessage, Spin } from "antd";
+import {
+  Button,
+  Input,
+  Form,
+  Upload,
+  message as antdMessage,
+  Spin,
+} from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const { TextArea } = Input;
 
@@ -9,8 +17,10 @@ function App() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
-  const [isImageUploaded, setIsImageUploaded] = useState(false); 
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [uploading, setUploading] = useState(false);
+
+  const token = useSelector((state) => state.auth.token);
 
   const handleSubmit = async () => {
     try {
@@ -20,19 +30,19 @@ function App() {
           title,
           content,
           image,
-        }
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       console.log("Blog saved:", response.data);
-      message.success("Blog saved successfully");
+      antdMessage.success("Blog saved successfully");
     } catch (error) {
       console.error("Error saving blog:", error);
-      message.error("Error saving blog");
+      antdMessage.error("Error saving blog");
     }
   };
 
   const handleImageUpload = async (file) => {
-    // setImageFile(file);
     setIsImageUploaded(false);
     setUploading(true);
     try {
@@ -40,17 +50,18 @@ function App() {
       formData.append("image", file);
 
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/professional/uploadImage",
+        "https://skillbanaobe.onrender.com/user/uploadImage",
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       setImage(response.data.image.src);
       setIsImageUploaded(true);
-      antdMessage.success("Image uploaded successfully"); 
+      // antdMessage.success("Image uploaded successfully");
     } catch (error) {
       console.error("Image upload error:", error);
     } finally {
@@ -90,14 +101,16 @@ function App() {
               </Button>
             )}
           </Upload>
-         
         </Form.Item>
         {isImageUploaded && (
-            <p style={{ color: "green" }}>Image uploaded successfully</p>
-        
-            )}
+          <p style={{ color: "green" }}>Image uploaded successfully</p>
+        )}
         <Form.Item>
-          <Button type="primary" onClick={handleSubmit} disabled={!isImageUploaded}>
+          <Button
+            type="primary"
+            onClick={handleSubmit}
+            disabled={!isImageUploaded}
+          >
             Save Blog
           </Button>
         </Form.Item>

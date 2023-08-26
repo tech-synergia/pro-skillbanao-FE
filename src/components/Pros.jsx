@@ -1,9 +1,9 @@
 import "../scss/Pros.scss";
-import Profile from "../assets/profile.webp";
+// import Profile from "../assets/profile.webp";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import male_avatar from '../assets/male_avatar.jpg'
-import female_avatar from '../assets/female_avatar.jpg'
+import male_avatar from "../assets/male_avatar.jpg";
+import female_avatar from "../assets/female_avatar.jpg";
 
 function Pros() {
   const [professionals, setProfessionals] = useState([]);
@@ -35,12 +35,12 @@ function Pros() {
           <div className="pros-grid">
             {professionals.map((professional) => (
               <div className="professional" key={professional._id}>
-                 <img
-                src={
-                  professional.gender === "male" ? male_avatar : female_avatar
-                }
-                alt=""
-              />
+                <img
+                  src={
+                    professional.gender === "male" ? male_avatar : female_avatar
+                  }
+                  alt=""
+                />
                 <h3 className="text-center">{professional.name}</h3>
                 <p>{professional.role}</p>
               </div>
