@@ -1,8 +1,8 @@
 import React from 'react'
-import TermsAndConditions from './TermsAndConditions'
-import Navbar from './Navbar'
-import Title from './Title'
-import Footer from './Footer'
+import TermsAndConditions from '../components/TermsAndConditions'
+import Navbar from '../components/Navbar'
+import Title from '../components/Title'
+import Footer from '../components/Footer'
 
 function TermsPage() {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Button } from "antd";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import RegistrationTable from "./RegistrationTable";
+import RegistrationTable from "../components/RegistrationTable";
 
 const { Content } = Layout;
 

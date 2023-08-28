@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel } from "antd";
-import Chat from "../../assets/chatcoin-chat-logo.png";
-import prof from '../../assets/proffesional.jpeg'
+import Chat from "../assets/chatcoin-chat-logo.png";
+import prof from '../assets/proffesional.jpeg'
 import { useNavigate } from "react-router-dom";
 
 function HomeS1() {

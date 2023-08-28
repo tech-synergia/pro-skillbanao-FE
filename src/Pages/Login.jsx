@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Radio, Input, Alert } from "antd";
-import logo from "../images/logo.jpeg";
+import logo from "../assets/logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";

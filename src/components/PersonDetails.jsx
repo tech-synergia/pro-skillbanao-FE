@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Avatar, Typography } from "antd";
 import { StarFilled, CheckCircleFilled } from "@ant-design/icons";
-import "./PersonDetails.scss";
-import maleAvatar from "../../assets/male_avatar.jpg";
-import femaleAvatar from "../../assets/female_avatar.jpg";
+import "../scss/PersonDetails.scss";
+import maleAvatar from "../assets/male_avatar.jpg";
+import femaleAvatar from "../assets/female_avatar.jpg";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

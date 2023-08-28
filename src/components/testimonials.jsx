@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "antd";
-import "../../scss/Pros.scss";
+import "../scss/Pros.scss";
 
 const { Meta } = Card;
 

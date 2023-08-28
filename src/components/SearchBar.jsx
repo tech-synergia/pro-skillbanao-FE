@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button, Input } from 'antd';
 import { NavLink } from 'react-router-dom';
-import './SearchBar.scss';
+import '../scss/SearchBar.scss';
 
 function SearchBar() {
   return (
