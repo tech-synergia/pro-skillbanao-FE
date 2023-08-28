@@ -5,6 +5,7 @@ import logo from "../../images/logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import "./Form.scss";
 import axios from "axios";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const User = () => {
   const [alertData, setAlertData] = useState({
@@ -37,7 +38,7 @@ const User = () => {
 
     try {
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/user/uploadImage",
+        `${baseUrl}/user/uploadImage`,
         formData
       );
       setUserData((prevData) => ({
@@ -52,7 +53,7 @@ const User = () => {
   const handleSubmit = async (e) => {
     try {
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/user/register",
+        `${baseUrl}/user/register`,
         userData
       );
       setAlertData({

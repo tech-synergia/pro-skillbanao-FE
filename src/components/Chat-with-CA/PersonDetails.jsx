@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button, Card, Avatar, Typography } from "antd";
 import { StarFilled, CheckCircleFilled } from "@ant-design/icons";
 import "./PersonDetails.scss";
@@ -9,17 +9,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import io from "socket.io-client";
 const { Text } = Typography;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const ProfileCard = () => {
   const [professionals, setProfessionals] = useState([]);
   const [selectedProfessional, setSelectedProfessional] = useState(null);
   const navigate = useNavigate();
-  const socket = io.connect("https://skillbanaobe.onrender.com");
+  const socket = io.connect(`${baseUrl}`);
+  
 
   const fetchProfessionals = async () => {
     try {
       const response = await axios.get(
-        "https://skillbanaobe.onrender.com/professional/getAllPros"
+        `${baseUrl}/professional/getAllPros`
       );
       const verifiedProfessionals = response.data.pros.filter(
         (professional) => professional.isVerified
@@ -53,7 +55,7 @@ const ProfileCard = () => {
     const userId = localStorage.getItem("userId");
     try {
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/chat/add-chat",
+        `${baseUrl}/chat/add-chat`,
         {
           userId,
           professionalId: id,

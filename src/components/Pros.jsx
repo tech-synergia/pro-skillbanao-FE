@@ -1,9 +1,10 @@
 import "../scss/Pros.scss";
 // import Profile from "../assets/profile.webp";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import male_avatar from "../assets/male_avatar.jpg";
 import female_avatar from "../assets/female_avatar.jpg";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function Pros() {
   const [professionals, setProfessionals] = useState([]);
@@ -11,7 +12,7 @@ function Pros() {
   const fetchProfessionals = async () => {
     try {
       const response = await axios.get(
-        "https://skillbanaobe.onrender.com/professional/getAllPros"
+        `${baseUrl}/professional/getAllPros`
       );
       const verifiedProfessionals = response.data.pros.filter(
         (professional) => professional.isVerified

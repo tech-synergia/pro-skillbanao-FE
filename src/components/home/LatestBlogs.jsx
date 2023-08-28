@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "antd";
 import axios from "axios";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const { Meta } = Card;
 
@@ -11,7 +12,7 @@ export default function LatestBlogs() {
     async function fetchLatestBlogs() {
       try {
         const response = await axios.get(
-          "https://skillbanaobe.onrender.com/blog/showBlogs"
+          `${baseUrl}/blog/showBlogs`
         );
         setLatestBlogs(response.data.blogs);
       } catch (error) {

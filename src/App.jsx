@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ChatWithCA from "./components/Chat-with-CA/ChatWithCA";
 import Login from "./components/Login";

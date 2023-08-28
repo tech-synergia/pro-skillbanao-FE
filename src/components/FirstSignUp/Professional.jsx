@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form, Input, Select, Radio, Upload, Button, Steps, Alert } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo.jpeg";
 import "./Form.scss";
 import axios from "axios";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const { Step } = Steps;
 const { Option } = Select;
@@ -93,7 +94,7 @@ const App = () => {
 
     try {
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/professional/uploadImage",
+        `${baseUrl}/professional/uploadImage`,
         formData
       );
       setUserData((prevData) => ({
@@ -108,7 +109,7 @@ const App = () => {
   const handleSubmit = async (e) => {
     try {
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/professional/register",
+        `${baseUrl}/professional/register`,
         userData
       );
       setAlertData({

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Input,
@@ -10,6 +10,7 @@ import {
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useSelector } from "react-redux";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const { TextArea } = Input;
 
@@ -19,13 +20,14 @@ function App() {
   const [image, setImage] = useState("");
   const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [uploading, setUploading] = useState(false);
+  
 
   const token = useSelector((state) => state.auth.token);
 
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/blog/addBlog",
+        `${baseUrl}/blog/addBlog`,
         {
           title,
           content,
@@ -50,7 +52,7 @@ function App() {
       formData.append("image", file);
 
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/user/uploadImage",
+        `${baseUrl}/user/uploadImage`,
         formData,
         {
           headers: {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaAlignJustify } from 'react-icons/fa6';
 import { Menu, Dropdown } from 'antd';
@@ -66,14 +66,14 @@ function Navbar() {
             <li>
               <NavLink to={"#"} onClick={toggleMenu}>
                 <Dropdown overlay={professionalMenu} placement="bottomLeft" trigger={['hover']}>
-                  <span>Professional <i class="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
+                  <span>Professional <i className="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
                 </Dropdown>
               </NavLink>
             </li>
             <li>
             <NavLink to={"#"} onClick={toggleMenu}>
               <Dropdown overlay={userMenu} placement="bottomLeft" trigger={['hover']}>
-                <span>User <i class="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
+                <span>User <i className="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
               </Dropdown>
             </NavLink>
             </li>
