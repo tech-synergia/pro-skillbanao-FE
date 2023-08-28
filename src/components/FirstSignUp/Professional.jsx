@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Input, Select, Radio, Upload, Button, Steps, Alert } from "antd";
+import { Form, Input, Select, Radio, Upload, Button, Steps, Alert, Spin } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo.jpeg";
@@ -11,6 +11,8 @@ const { Step } = Steps;
 const { Option } = Select;
 
 const App = () => {
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [alertData, setAlertData] = useState({
     type: "",
     message: "",
@@ -89,6 +91,8 @@ const App = () => {
   };
 
   const handleImageUpload = async (file) => {
+    setIsImageUploaded(false);
+    setUploading(true);
     const formData = new FormData();
     formData.append("image", file);
 
@@ -101,8 +105,12 @@ const App = () => {
         ...prevData,
         image: response.data.image.src,
       }));
+      
+      setIsImageUploaded(true);
     } catch (error) {
       console.error("Image upload error:", error);
+    }finally {
+      setUploading(false);
     }
   };
 
@@ -203,15 +211,33 @@ const App = () => {
       content: (
         <Form>
           <Form.Item label="Upload Profile Pic">
-            <Upload beforeUpload={handleImageUpload} showUploadList={false}>
+
+            {/* <Upload beforeUpload={handleImageUpload} showUploadList={false}>
               <Button
                 className="custom-button"
                 icon={<UploadOutlined style={{ fontSize: "20px" }} />}
               >
                 Upload
               </Button>
-            </Upload>
+            </Upload> */}
+               <Upload beforeUpload={handleImageUpload} showUploadList={false}>
+                {uploading ? (
+                  <Spin spinning={uploading}>
+                    <Button icon={<UploadOutlined />}>
+                      {isImageUploaded ? "Image Uploaded" : "Uploading..."}
+                    </Button>
+                  </Spin>
+                ) : (
+                  <Button icon={<UploadOutlined />}>
+                    {isImageUploaded ? "Image Uploaded" : "Upload"}
+                  </Button>
+                )}
+              </Upload>
+
           </Form.Item>
+            {isImageUploaded && (
+              <p style={{ color: "green" }}>Image uploaded successfully</p>
+            )}
 
           <Form.Item label="Role" htmlFor="role">
             <Select

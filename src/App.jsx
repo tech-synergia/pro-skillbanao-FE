@@ -13,6 +13,10 @@ import Professional from './components/FirstSignUp/Professional'
 
 import Blogs from "./components/Blogs";
 import User from "./components/FirstSignUp/User";
+import TermsPage from "./components/TermsPage";
+import PrivacyPage from "./components/PrivacyPage";
+import RefundPage from "./components/RefundPage";
+import Career from "./components/Career";
 
 function App() {
   return (
@@ -28,9 +32,13 @@ function App() {
         <Route path="/userSuccess" element={<UerSuccess />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/adminPanel" element={<AdminPanel />} />
+        <Route path="/career" element={<Career/>} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/registerProf" element={<Professional/>} />
         <Route path="/registerUser" element={<User/>} />
+        <Route path="/terms_conditions" element={<TermsPage/>} />
+        <Route path="/privacy_policy" element={<PrivacyPage/>} />
+        <Route path="/refund_cancellation" element={<RefundPage/>} />
       </Routes> 
     </BrowserRouter>
   );

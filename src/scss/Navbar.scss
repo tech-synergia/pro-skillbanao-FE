@@ -5,6 +5,7 @@
   padding-block: 10px;
   @include flex.flexbox(row);
   box-shadow: vrs.$prim-shadow;
+  .content-container{
   .logo-title {
     @include flex.flexbox;
     cursor: pointer;
@@ -43,10 +44,12 @@
         box-shadow: vrs.$btn-shadow;
       }
     }
-
+  }
+}
   // adding mobile view
   @media (max-width: 799px) {
     padding: 10px 20px;
+    .content-container{
     .content {
       justify-content: space-between;
       align-items: center;
@@ -75,9 +78,9 @@
       height: 800px;
       justify-content: start;
       gap: 10px;
-      overflow: hidden; /* Hide any content that overflows the menu */
-      transition: width 0.3s ease, opacity 0.3s ease; /* Add transitions for max-height and opacity */
-      opacity: 0; /* Start with the menu transparent */
+      overflow: hidden; 
+      transition: width 0.3s ease, opacity 0.3s ease;
+      opacity: 0; 
       li {
         width: 100%;
         display: flex;
@@ -91,8 +94,10 @@
       }
     }
   }
-}
-}
+  }
+
+  }
+
 
 
 

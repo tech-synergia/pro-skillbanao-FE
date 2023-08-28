@@ -1,0 +1,38 @@
+.titleContent{
+    display: flex;
+    width: 76%;
+    padding: 10px;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    
+   
+    .chatHeading{
+        display: flex;
+        flex-direction: row;
+        height: 40px;
+        gap: 5px;
+        border-radius: 5px;
+        background-color: #f0df20;
+        padding: 5px 10px;
+        p{
+            font-size: 18px;
+        }
+        .chatIcon{
+            margin: 5px;
+        }
+    }
+}
+@media screen and (max-width: 768px){
+    .titleContent{
+        justify-content: space-between;
+        margin: 0;
+        .chatHeading{
+            p{
+                font-size: 17px;
+            }
+        }
+    }
+}
+

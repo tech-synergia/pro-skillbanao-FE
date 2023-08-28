@@ -1,0 +1,32 @@
+.terms{
+    margin: 40px 200px;
+    .title{
+        font-weight: bold;
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+    }
+    h5{
+        font-weight: bold;
+    }
+    p{
+        font-size: 17px;
+        text-align: justify;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .terms{
+        margin: 20px;
+        .title{
+            font-size: 20px;
+            margin-bottom: 30px;
+           
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+}
+
