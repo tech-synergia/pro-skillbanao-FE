@@ -4,7 +4,7 @@ import logo from "../assets/logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setToken } from "../store"
+import { setToken, userDetail } from "../store";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Login = () => {
@@ -30,18 +30,22 @@ const Login = () => {
         userData.role === "professional"
           ? "/professional/login"
           : "/user/login";
-      const response = await axios.post(
-        `${baseUrl}${endpoint}`,
-        userData
-      );
+      const response = await axios.post(`${baseUrl}${endpoint}`, userData);
 
-      console.log("response.data.user.token",response.data.user.token)
+      console.log("response.data.user.token", response.data.user.token);
 
       dispatch(setToken(response.data.user.token));
 
       if (userData.role === "professional" && response.data.user.isVerified) {
         setSuccessMessage("Login successful! Redirecting...");
-        localStorage.setItem("professionalId", response.data.user.proId);
+        // localStorage.setItem("professionalId", response.data.user.proId);
+        dispatch(
+          userDetail({
+            professionalId: response.data.user.proId,
+            username: response.data.user.name,
+          })
+        );
+        // localStorage.setItem("username", response.data.user.name);
 
         setTimeout(() => {
           navigate("/propanel");
@@ -56,7 +60,14 @@ const Login = () => {
       }
       if (userData.role === "user" && response.data.user.mainRole === "user") {
         setSuccessMessage("Login successful! Redirecting...");
-        localStorage.setItem("userId", response.data.user.userId);
+        // localStorage.setItem("userId", response.data.user.userId);
+        dispatch(
+          userDetail({
+            userId: response.data.user.userId,
+            username: response.data.user.name,
+          })
+        );
+        // localStorage.setItem("username", response.data.user.name);
         setTimeout(() => {
           navigate("/");
         }, 1500);

@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { DesktopOutlined, PieChartOutlined } from "@ant-design/icons";
 import { List, Layout, Menu, theme, Button } from "antd";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { updateKey } from "../store";
 const baseUrl = import.meta.env.VITE_BASE_URL;
-// import io from "socket.io-client";
 
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
@@ -22,17 +23,19 @@ const items = [
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [userList, setUserList] = useState([]);
-  const professionalId = localStorage.getItem("professionalId");
-  // const navigate = useNavigate();
-  // const socket = io("http://localhost:5173");
+  const token = useSelector((state) => state.auth.token);
+  const professionalId = useSelector((state) => state.auth.professionalId);
+  const headers = { Authorization: `Bearer ${token}` };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     showRequestedUsers();
-    // const interval = setInterval(() => {
-    //   showRequestedUsers();
-    // }, 5000);
+    const interval = setInterval(() => {
+      showRequestedUsers();
+    }, 5000);
 
-    // return () => clearInterval(interval);
+    return () => clearInterval(interval);
   }, []);
 
   const showRequestedUsers = async () => {
@@ -41,18 +44,14 @@ const App = () => {
         `${baseUrl}/chat/showUserList`,
         {
           professionalId,
-        }
+        },
+        { headers }
       );
       setUserList(response.data.result);
     } catch (error) {
-      alert(error.response.data);
+      alert(error.response.data.msg);
     }
   };
-
-  // const startChat = async (userId) => {
-  //   localStorage.setItem("userId", userId);
-  //   navigate("/chat");
-  // };
 
   const declineChat = async (userId) => {
     try {
@@ -61,7 +60,8 @@ const App = () => {
         {
           professionalId,
           userId,
-        }
+        },
+        { headers }
       );
       // Handle success
       setUserList((prevUserList) =>
@@ -75,17 +75,21 @@ const App = () => {
   };
 
   const handleAccept = async (userId) => {
+    dispatch(updateKey({ key: "userId", value: userId }));
     try {
-      localStorage.setItem("userId", userId);
-      const professionalId = localStorage.getItem("professionalId");
-
       // Call the /chat/acceptReq API
-      await axios.post(`${baseUrl}/chat/checkReq`, {
-        userId, // User's ID who sent the request
-        professionalId,
-      });
+      await axios.post(
+        `${baseUrl}/chat/checkReq`,
+        {
+          userId, // User's ID who sent the request
+          professionalId,
+        },
+        { headers }
+      );
 
-      // ... (rest of your logic)
+      setTimeout(() => {
+        navigate("/chat");
+      }, 1500);
     } catch (error) {
       alert(error.response.data.message);
     }
