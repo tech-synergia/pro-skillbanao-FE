@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { DesktopOutlined, PieChartOutlined } from "@ant-design/icons";
 import { List, Layout, Menu, theme, Button } from "antd";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 // import io from "socket.io-client";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -22,7 +23,7 @@ const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [userList, setUserList] = useState([]);
   const professionalId = localStorage.getItem("professionalId");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const socket = io("http://localhost:5173");
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const App = () => {
   const showRequestedUsers = async () => {
     try {
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/chat/showUserList",
+        `${baseUrl}/chat/showUserList`,
         {
           professionalId,
         }
@@ -48,15 +49,15 @@ const App = () => {
     }
   };
 
-  const startChat = async (userId) => {
-    localStorage.setItem("userId", userId);
-    navigate("/chat");
-  };
+  // const startChat = async (userId) => {
+  //   localStorage.setItem("userId", userId);
+  //   navigate("/chat");
+  // };
 
   const declineChat = async (userId) => {
     try {
       const response = await axios.post(
-        "https://skillbanaobe.onrender.com/chat/decline-chat",
+        `${baseUrl}/chat/decline-chat`,
         {
           professionalId,
           userId,
@@ -79,7 +80,7 @@ const App = () => {
       const professionalId = localStorage.getItem("professionalId");
 
       // Call the /chat/acceptReq API
-      await axios.post("https://skillbanaobe.onrender.com/chat/checkReq", {
+      await axios.post(`${baseUrl}/chat/checkReq`, {
         userId, // User's ID who sent the request
         professionalId,
       });

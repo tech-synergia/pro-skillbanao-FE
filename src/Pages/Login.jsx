@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Form, Radio, Input, Alert } from "antd";
 import logo from "../assets/logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setToken } from "../store";
+import { setToken } from "../store"
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -30,9 +31,11 @@ const Login = () => {
           ? "/professional/login"
           : "/user/login";
       const response = await axios.post(
-        `https://skillbanaobe.onrender.com${endpoint}`,
+        `${baseUrl}${endpoint}`,
         userData
       );
+
+      console.log("response.data.user.token",response.data.user.token)
 
       dispatch(setToken(response.data.user.token));
 

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Button } from "antd";
 import "../scss/RegistrationTable.scss";
 import { useSelector } from "react-redux";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const RegistrationTable = () => {
   const [professionalsData, setProfessionalsData] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
+  console.log("🚀 ~ file: RegistrationTable.jsx:12 ~ RegistrationTable ~ token:", token)
 
   useEffect(() => {
     fetchProfessionals();
@@ -16,7 +18,7 @@ const RegistrationTable = () => {
   const fetchProfessionals = async () => {
     try {
       const response = await axios.get(
-        "https://skillbanaobe.onrender.com/professional/getAllPros"
+        `${baseUrl}/professional/getAllPros`
       );
       setProfessionalsData(response.data.pros); // Use response.data.pros directly
     } catch (error) {
@@ -85,11 +87,11 @@ const RegistrationTable = () => {
   const handleAccept = async (record) => {
     try {
       const response = await axios.patch(
-        "https://skillbanaobe.onrender.com/professional/verifyPro",
+        `${baseUrl}/professional/verifyPro`,
         {
           proId: record._id,
         },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGU5ZmFmNGI4MjRhZjA0M2MzODY1YTEiLCJuYW1lIjoiVXNzc2VlcnJyIiwibWFpblJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkzMDU2NDE1LCJleHAiOjE2OTMxNDI4MTV9.URyh-hQzE5_CRnYUslMtloVZyIMO5eYPfoLG1hn43CU"}` } }
       );
       if (response.status === 200) {
         console.log("Professional verified successfully:", record);
@@ -106,7 +108,7 @@ const RegistrationTable = () => {
   const handleReject = async (record) => {
     try {
       const response = await axios.delete(
-        "https://skillbanaobe.onrender.com/professional/declinePro",
+        `${baseUrl}/professional/declinePro`,
         {
           data: { proId: record._id },
           headers: { Authorization: `Bearer ${token}` },
