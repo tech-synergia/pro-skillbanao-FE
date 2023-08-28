@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from './Navbar'
-import Footer from './Footer'
-import Title from './Title'
-import RefundContent from './RefundContent'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import Title from '../components/Title'
+import RefundContent from '../components/RefundContent'
 
 function RefundPage() {
   return (

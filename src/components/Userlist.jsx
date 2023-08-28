@@ -1,5 +1,5 @@
 import React from "react";
-import "./Userlist.scss";
+import "../scss/Userlist.scss";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 

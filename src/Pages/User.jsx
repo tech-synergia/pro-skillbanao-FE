@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Form, Input, Radio, Upload, Button, Alert } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import logo from "../../images/logo.jpeg";
+import logo from "../assets/logo.jpeg";
 import { useNavigate } from "react-router-dom";
-import "./Form.scss";
+import "../scss/Form.scss";
 import axios from "axios";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FaAlignJustify } from 'react-icons/fa6';
 import { Menu, Dropdown } from 'antd';
 
-import logo from '../images/logo.jpeg';
+import logo from '../assets/logo.jpeg';
 import '../scss/Navbar.scss';
 
 const menuStyle = {
@@ -78,7 +78,7 @@ function Navbar() {
             </NavLink>
             </li>
             <li>
-              <a href="#latestBlog" onClick={toggleMenu}>
+              <a href="/#latestBlog" onClick={toggleMenu}>
                 Blog
               </a>
             </li>

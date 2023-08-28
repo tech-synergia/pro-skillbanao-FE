@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from './Navbar'
-import Title from './Title'
-import Privacy from './Privacy'
-import Footer from './Footer'
+import Navbar from '../components/Navbar'
+import Title from '../components/Title'
+import Privacy from '../components/Privacy'
+import Footer from '../components/Footer'
 
 function PrivacyPage() {
   return (

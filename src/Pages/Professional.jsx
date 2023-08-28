@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Form, Input, Select, Radio, Upload, Button, Steps, Alert, Spin } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import logo from "../../images/logo.jpeg";
-import "./Form.scss";
+import logo from "../assets/logo.jpeg";
+import "../scss/Form.scss";
 import axios from "axios";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -13,6 +13,10 @@ const { Option } = Select;
 const App = () => {
   const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [firstStepFieldsFilled, setFirstStepFieldsFilled] = useState(false);
+  const [secondStepFieldsFilled, setSecondStepFieldsFilled] = useState(false);
+  const [thirdStepFieldsFilled, setThirdStepFieldsFilled] = useState(false);
+
   const [alertData, setAlertData] = useState({
     type: "",
     message: "",
@@ -83,10 +87,20 @@ const App = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prevData) => ({ ...prevData, [name]: value }));
-    const inputPincode = e.target.value.replace(/\D/g, '');
-    if (inputPincode.length <= 6) {
-      setPincode(inputPincode);
+    if (name === "pincode") {
+      const inputPincode = value.replace(/\D/g, '');
+      if (inputPincode.length <= 6) {
+        setPincode(inputPincode);
+      }
+    } else {
+      setUserData((prevData) => ({ ...prevData, [name]: value }));
+      if (currentStep === 0) {
+        setFirstStepFieldsFilled(areAllFirstStepFieldsFilled());
+      } else if (currentStep === 1) {
+        setSecondStepFieldsFilled(areAllSecondStepFieldsFilled());
+      } else if (currentStep === 2) {
+        setThirdStepFieldsFilled(areAllThirdStepFieldsFilled());
+      }
     }
   };
 
@@ -135,6 +149,17 @@ const App = () => {
     }
   };
 
+  const areAllFirstStepFieldsFilled = () => {
+    const { name, gender, dob } = userData;
+    return name.trim() !== '' && gender !== '' && dob !== '';
+  };
+  
+  const areAllSecondStepFieldsFilled = () => {
+    const secondStepFields = ["role", "pSkills", "allSkills", "language", "experience", "hours", "reference", "working"];
+    return secondStepFields.every((field) => userData[field].trim() !== '');
+  };
+
+
   const handlePrev = () => {
     setCurrentStep(currentStep - 1);
   };
@@ -153,73 +178,32 @@ const App = () => {
               type="text"
               name="name"
               id="name"
+              value={userData.name}
               onChange={handleInputChange}
               required
             />
           </Form.Item>
+         
+          
+         
           <Form.Item label="Date of Birth" htmlFor="dob">
             <Input
               type="date"
               name="dob"
               id="dob"
+              value={userData.dob}
               onChange={handleInputChange}
               required
             />
           </Form.Item>
           <Form.Item label="Gender" htmlFor="gender">
-            <Radio.Group name="gender" id="gender" onChange={handleInputChange}>
+            <Radio.Group name="gender" id="gender" value={userData.gender} onChange={handleInputChange}>
               <Radio value="male">Male</Radio>
               <Radio value="female">Female</Radio>
               <Radio value="other">Other</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="Email" htmlFor="email">
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Item>
-          <Form.Item label="Phone Number" htmlFor="phone">
-            <Input
-              type="text"
-              name="phone"
-              id="phone"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Item>
-          <Form.Item label="Password" htmlFor="password">
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Item>
-          <Button type="primary" onClick={handleNext}>
-            Next
-          </Button>
-        </Form>
-      ),
-    },
-    {
-      title: "Professional Details",
-      content: (
-        <Form>
           <Form.Item label="Upload Profile Pic">
-
-            {/* <Upload beforeUpload={handleImageUpload} showUploadList={false}>
-              <Button
-                className="custom-button"
-                icon={<UploadOutlined style={{ fontSize: "20px" }} />}
-              >
-                Upload
-              </Button>
-            </Upload> */}
                <Upload beforeUpload={handleImageUpload} showUploadList={false}>
                 {uploading ? (
                   <Spin spinning={uploading}>
@@ -238,11 +222,23 @@ const App = () => {
             {isImageUploaded && (
               <p style={{ color: "green" }}>Image uploaded successfully</p>
             )}
+      
+          <Button type="primary" onClick={handleNext} disabled={!areAllFirstStepFieldsFilled()}>
+            Next
+          </Button>
+        </Form>
+      ),
+    },
+    {
+      title: "Professional Details",
+      content: (
+        <Form>
 
           <Form.Item label="Role" htmlFor="role">
             <Select
               name="role"
               id="role"
+              value={userData.role}
               onChange={(value) =>
                 handleInputChange({ target: { name: "role", value } })
               }
@@ -258,64 +254,13 @@ const App = () => {
               <Option value="Astrologer">Astrologer</Option>
             </Select>
           </Form.Item>
-
-          <h6>Permanent Address Details*</h6>
-          <Form.Item label="House No." htmlFor="hno">
-            <Input
-              type="text"
-              name="hno"
-              id="hno"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Item>
-          <Form.Item label="Locality" htmlFor="locality">
-            <Input
-              type="text"
-              name="locality"
-              id="locality"
-              onChange={handleInputChange}
-              required
-            />
-          </Form.Item>
-          <Form.Item label="State" htmlFor="state">
-            <Select
-              showSearch
-              name="state"
-              id="state"
-              onChange={(value) =>
-                handleInputChange({ target: { name: "state", value } })
-              }
-              required
-              placeholder="Select Your State"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              {allIndiaStates.map((state) => (
-                <Select.Option key={state} value={state}>
-                  {state}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item label="Pin Code" htmlFor="pincode">
-            <Input
-              type="text"
-              name="pincode"
-              id="pincode"
-              value={pincode}
-              onChange={handleInputChange}
-              maxLength={6}
-              required
-            />
-          </Form.Item>
+     
 
           <Form.Item label="Primary Skills" htmlFor="pSkills">
             <Select
               name="pSkills"
               id="pSkills"
+              value={userData.pSkills}
               onChange={(value) =>
                 handleInputChange({ target: { name: "pSkills", value } })
               }
@@ -349,6 +294,7 @@ const App = () => {
               type="text"
               name="allSkills"
               id="allSkills"
+              value={userData.allSkills}
               onChange={handleInputChange}
               required
             />
@@ -358,15 +304,17 @@ const App = () => {
               type="text"
               name="language"
               id="language"
+              value={userData.language}
               onChange={handleInputChange}
               required
             />
           </Form.Item>
           <Form.Item label="Experience" htmlFor="experience">
             <Input
-              type="number"
+              type="text"
               name="experience"
               id="experience"
+              value={userData.experience}
               onChange={handleInputChange}
               required
             />
@@ -376,9 +324,10 @@ const App = () => {
             htmlFor="hours"
           >
             <Input
-              type="number"
+              type="text"
               name="hours"
               id="hours"
+              value={userData.hours}
               onChange={handleInputChange}
               required
             />
@@ -390,6 +339,7 @@ const App = () => {
             <Select
               name="reference"
               id="reference"
+              value={userData.reference}
               onChange={(value) =>
                 handleInputChange({ target: { name: "reference", value } })
               }
@@ -414,6 +364,7 @@ const App = () => {
             <Select
               name="working"
               id="working"
+              value={userData.working}
               onChange={(value) =>
                 handleInputChange({ target: { name: "working", value } })
               }
@@ -423,8 +374,8 @@ const App = () => {
               <Option value="NO">No</Option>
             </Select>
           </Form.Item>
-          <Button type="primary" onClick={handleSubmit}>
-            Register
+          <Button type="primary" onClick={handleNext} disabled={!areAllSecondStepFieldsFilled()}>
+            Next
           </Button>
           <Button style={{ margin: "0 8px" }} onClick={handlePrev}>
             Previous
@@ -432,6 +383,105 @@ const App = () => {
         </Form>
       ),
     },
+    {
+      title: "Contact Details",
+      content: (
+        <Form>
+          <Form.Item label="Email" htmlFor="email">
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              value={userData.email}
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Phone Number" htmlFor="phone">
+            <Input
+              type="text"
+              name="phone"
+              id="phone"
+              value={userData.phone}
+              onChange={handleInputChange}
+              required
+              autocomplete="new-phone-number"
+            />
+          </Form.Item>
+          <Form.Item label="Password" htmlFor="password">
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              value={userData.password}
+              onChange={handleInputChange}
+              required
+              autocomplete="new-password"
+            />
+          </Form.Item>
+          <Form.Item label="House No." htmlFor="hno">
+            <Input
+              type="text"
+              name="hno"
+              id="hno"
+              value={userData.hno}
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="Locality" htmlFor="locality">
+            <Input
+              type="text"
+              name="locality"
+              id="locality"
+              value={userData.locality} 
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Item>
+          <Form.Item label="State" htmlFor="state">
+            <Select
+              showSearch
+              name="state"
+              id="state"
+              value={userData.state}
+              onChange={(value) =>
+                handleInputChange({ target: { name: "state", value } })
+              }
+              required
+              placeholder="Select Your State"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {allIndiaStates.map((state) => (
+                <Select.Option key={state} value={state}>
+                  {state}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item label="Pin Code" htmlFor="pincode">
+            <Input
+              type="text"
+              name="pincode"
+              id="pincode"
+              value={pincode}
+              onChange={handleInputChange}
+              maxLength={6}
+              required
+            />
+          </Form.Item>
+          <Button type="primary" onClick={handleSubmit}>
+            Register
+          </Button>
+          <Button style={{ margin: "0 8px" }} onClick={handlePrev}>
+            Previous
+          </Button>
+        </Form>
+      )
+    }
   ];
 
   return (
@@ -462,3 +512,6 @@ const App = () => {
 };
 
 export default App;
+
+
+

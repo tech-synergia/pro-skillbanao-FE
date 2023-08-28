@@ -2,7 +2,7 @@ import React from "react";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import "./Success.scss"; // Create this CSS file for styling
+import "../scss/Success.scss"; // Create this CSS file for styling
 
 export default function userSuccess() {
   const navigate = useNavigate();

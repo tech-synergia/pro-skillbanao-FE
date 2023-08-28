@@ -1,5 +1,5 @@
 import React from 'react'
-import './BestConsultancy.scss'
+import '../scss/BestConsultancy.scss'
 
 function BestConsultancy() {
   return (

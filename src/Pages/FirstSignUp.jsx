@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import User from "./FirstSignUp/User";
-import Professional from "./FirstSignUp/Professional";
-import "./FirstSignUp/Form.scss";
-import logo from "../images/logo.jpeg";
+import User from "./User";
+import Professional from "./Professional";
+import "../scss/Form.scss";
+import logo from "../assets/logo.jpeg";
 
 const FirstSignUp = () => {
   const [showform, setShowform] = useState(false);
