@@ -17,11 +17,11 @@ import TermsPage from "./Pages/TermsPage";
 import PrivacyPage from "./Pages/PrivacyPage";
 import RefundPage from "./Pages/RefundPage";
 import Career from "./Pages/Career";
+import ChatWindow from "./Pages/ChatWindow";
 
 function App() {
   return (
     <BrowserRouter>
-   
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/all-pro" element={<ChatWithCA />} />
@@ -40,6 +40,7 @@ function App() {
         <Route path="/terms_conditions" element={<TermsPage/>} />
         <Route path="/privacy_policy" element={<PrivacyPage/>} />
         <Route path="/refund_cancellation" element={<RefundPage/>} />
+        <Route path="/chatPage" element={<ChatWindow/>} />
       </Routes> 
     </BrowserRouter>
   );

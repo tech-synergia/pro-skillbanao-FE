@@ -81,18 +81,8 @@ const App = () => {
 
   const navigate = useNavigate();
 
-  const [pincode, setPincode] = useState('');
-
- 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "pincode") {
-      const inputPincode = value.replace(/\D/g, '');
-      if (inputPincode.length <= 6) {
-        setPincode(inputPincode);
-      }
-    } else {
       setUserData((prevData) => ({ ...prevData, [name]: value }));
       if (currentStep === 0) {
         setFirstStepFieldsFilled(areAllFirstStepFieldsFilled());
@@ -101,7 +91,6 @@ const App = () => {
       } else if (currentStep === 2) {
         setThirdStepFieldsFilled(areAllThirdStepFieldsFilled());
       }
-    }
   };
 
   const handleImageUpload = async (file) => {
@@ -159,6 +148,27 @@ const App = () => {
     return secondStepFields.every((field) => userData[field].trim() !== '');
   };
 
+  const areAllThirdStepFieldsFilled = () => {
+    const {
+      email,
+      phone,
+      password,
+      hno,
+      locality,
+      state,
+      pincode
+    } = userData;
+    return (
+      email.trim() !== "" &&
+      phone.trim() !== "" &&
+      password.trim() !== "" &&
+      hno.trim() !== "" &&
+      locality.trim() !== "" &&
+      state.trim() !== "" &&
+      pincode.trim() !== ""
+    );
+  };
+  
 
   const handlePrev = () => {
     setCurrentStep(currentStep - 1);
@@ -467,13 +477,13 @@ const App = () => {
               type="text"
               name="pincode"
               id="pincode"
-              value={pincode}
+              value={userData.pincode}
               onChange={handleInputChange}
-              maxLength={6}
+              // maxLength={6}
               required
             />
           </Form.Item>
-          <Button type="primary" onClick={handleSubmit}>
+          <Button type="primary" onClick={handleSubmit} disabled={!thirdStepFieldsFilled}>
             Register
           </Button>
           <Button style={{ margin: "0 8px" }} onClick={handlePrev}>

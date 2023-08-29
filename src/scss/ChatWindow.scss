@@ -1,0 +1,64 @@
+@use './modules/vrs';
+
+.chatPage{
+    margin: auto;
+    border: 1px solid lightgrey;
+    width: 50%;
+    border-radius: 10px;
+    margin-top: 30px;
+    .chatHead{
+        background-color: vrs.$prim-color;
+        padding: 5px 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .profileContent{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            img{
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+            .profileInfo{
+                h6{
+                    font-size: 14px;
+                    margin-bottom: 0px;
+
+                }
+                span{
+                    color: rgb(4, 172, 4);
+                    font-size: 10px;
+                    font-weight: 500;
+                    margin: 0px;
+                }
+                p{
+                    font-size: 10px;
+                    margin-bottom: 0px;
+                    font-weight: 500;
+                }
+            }
+        }
+        .endBtn{
+           .btn{
+            border: 1px solid red;
+            padding: 0px 10px;
+            background-color: #fff;
+            color: red;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+           }
+        }
+
+    }
+    .typeField{
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}
