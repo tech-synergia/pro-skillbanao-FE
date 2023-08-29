@@ -9,7 +9,7 @@ const RegistrationTable = () => {
   const [professionalsData, setProfessionalsData] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
-  console.log("🚀 ~ file: RegistrationTable.jsx:12 ~ RegistrationTable ~ token:", token)
+  // console.log("🚀 ~ file: RegistrationTable.jsx:12 ~ RegistrationTable ~ token:", token)
 
   useEffect(() => {
     fetchProfessionals();
@@ -17,9 +17,7 @@ const RegistrationTable = () => {
 
   const fetchProfessionals = async () => {
     try {
-      const response = await axios.get(
-        `${baseUrl}/professional/getAllPros`
-      );
+      const response = await axios.get(`${baseUrl}/professional/getAllPros`);
       setProfessionalsData(response.data.pros); // Use response.data.pros directly
     } catch (error) {
       console.error("Error fetching professionals:", error);
@@ -91,7 +89,7 @@ const RegistrationTable = () => {
         {
           proId: record._id,
         },
-        { headers: { Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGU5ZmFmNGI4MjRhZjA0M2MzODY1YTEiLCJuYW1lIjoiVXNzc2VlcnJyIiwibWFpblJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkzMDU2NDE1LCJleHAiOjE2OTMxNDI4MTV9.URyh-hQzE5_CRnYUslMtloVZyIMO5eYPfoLG1hn43CU"}` } }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
         console.log("Professional verified successfully:", record);

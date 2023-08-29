@@ -32,20 +32,19 @@ const Login = () => {
           : "/user/login";
       const response = await axios.post(`${baseUrl}${endpoint}`, userData);
 
-      console.log("response.data.user.token", response.data.user.token);
+      // console.log("response.data.user.token", response.data.user.token);
 
       dispatch(setToken(response.data.user.token));
 
       if (userData.role === "professional" && response.data.user.isVerified) {
         setSuccessMessage("Login successful! Redirecting...");
-        // localStorage.setItem("professionalId", response.data.user.proId);
+
         dispatch(
           userDetail({
             professionalId: response.data.user.proId,
             username: response.data.user.name,
           })
         );
-        // localStorage.setItem("username", response.data.user.name);
 
         setTimeout(() => {
           navigate("/propanel");
@@ -60,14 +59,13 @@ const Login = () => {
       }
       if (userData.role === "user" && response.data.user.mainRole === "user") {
         setSuccessMessage("Login successful! Redirecting...");
-        // localStorage.setItem("userId", response.data.user.userId);
         dispatch(
           userDetail({
             userId: response.data.user.userId,
             username: response.data.user.name,
           })
         );
-        // localStorage.setItem("username", response.data.user.name);
+
         setTimeout(() => {
           navigate("/");
         }, 1500);
@@ -76,7 +74,7 @@ const Login = () => {
         response.data.user.mainRole === "admin"
       ) {
         setSuccessMessage("Login successful! Redirecting...");
-        // localStorage.setItem("userId", response.data.user.userId);
+
         setTimeout(() => {
           navigate("/adminpanel");
         }, 1500);
