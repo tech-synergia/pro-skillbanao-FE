@@ -1,8 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
-import { Input, Form } from "antd";
+import { List, Input, Button, Form } from 'antd';
+import { SendOutlined } from '@ant-design/icons';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import male_avatar from '../assets/male_avatar.jpg'
 import { useSelector } from "react-redux";
+import '../scss/Chat.scss'
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const socket = io.connect(baseUrl);
 
@@ -63,6 +68,59 @@ const Chat = () => {
   });
 
   return (
+  //   <>
+  //    <Navbar/>
+  //     <div className='chatPage'>
+  //       <div className="chatHead">
+  //           <div className="profileContent">
+  //               <img src={male_avatar} alt="no image" />
+  //               <div className="profileInfo">
+  //                   <h6>Subrahmanyam</h6>
+  //                   <span>Balance: (04:35 mins)</span>
+  //                   <p>Chat in progress</p>
+  //               </div>
+  //           </div>
+  //           <div className="endBtn">
+  //               <Button className='btn'>END</Button>
+  //           </div>
+  //       </div>
+  //       <div className="rechargeInfo">
+  //           <div className="tipInfo">
+  //               <a href='#'>Balance &lt; 5min Quick Recharge?</a>
+  //               <p><i class="bi bi-lightbulb-fill"></i> Tip: 90% users recharge for 10min or more</p>
+  //           </div>
+  //           <div className="planCost">
+  //               <Button className='btn1'><i class="bi bi-currency-rupee"></i> 200</Button>
+  //               <Button className='btn1'><i class="bi bi-currency-rupee"></i> 500</Button>
+  //               <Button className='btn1'><i class="bi bi-currency-rupee"></i> 1000</Button>
+  //           </div>
+  //       </div>
+  //         <div>
+  //           {/* {console.log("JSX messgae", uniqueArray)} */}
+  //           <List>
+  //             {uniqueArray.map((msg, index) => (
+  //               <div key={index} className="message">
+  //                 <strong className="msg">{msg.name}</strong>: {msg.message}
+  //               </div>
+  //             ))}
+  //           </List>
+  //         </div>
+  //       <div className='typeField'>
+  //           <Form form={formRef}>
+  //             <Form.Item name="message">
+  //               <Input.Search
+  //               enterButton={<SendOutlined onClick={() => {handleSendMessage()}} style={{display: "flex", alignItems: "center", justifyContent: "center"}}/>}
+  //               placeholder="Type a message..."
+  //               />
+  //             </Form.Item>
+  //           </Form>
+
+  //       </div>
+  //     </div>
+  //   <Footer/>
+  //  </>
+
+
     <div>
       <div>
         <h1>Chat Application</h1>
