@@ -124,3 +124,139 @@
 
 }
 
+// @use './modules/vrs';
+// @use './modules//flex';
+
+// .chatPage{
+//     background-image: url("https://c4.wallpaperflare.com/wallpaper/792/639/808/pattern-monochrome-telegram-logo-cats-hd-wallpaper-preview.jpg");
+//     margin: auto;
+//     border: 1px solid lightgrey;
+//     width: 50%;
+//     border-radius: 10px;
+//     position: relative;
+//     height: 70vh;
+//     margin-top: 30px;
+//     @media screen and (max-width: 768px){
+//         width: 90%;
+//     }
+//     .chatHead{
+//         background-color: vrs.$prim-color;
+//         padding: 5px 20px;
+//         border-top-left-radius: 10px;
+//         border-top-right-radius: 10px;
+//         display: flex;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         align-items: center;
+//         .profileContent{
+//             display: flex;
+//             flex-direction: row;
+//             gap: 10px;
+//             img{
+//                 width: 50px;
+//                 height: 50px;
+//                 object-fit: cover;
+//                 border-radius: 50%;
+//             }
+//             .profileInfo{
+//                 h6{
+//                     font-size: 14px;
+//                     margin-bottom: 0px;
+
+//                 }
+//                 span{
+//                     color: rgb(4, 172, 4);
+//                     font-size: 10px;
+//                     font-weight: 500;
+//                     margin: 0px;
+//                 }
+//                 p{
+//                     font-size: 10px;
+//                     margin-bottom: 0px;
+//                     font-weight: 500;
+//                 }
+//             }
+//         }
+//         .endBtn{
+//            .btn{
+//             border:1px solid vrs.$btn-color;
+//             padding: 0px 10px;
+//             background-color: #fff;
+//             color: vrs.$btn-color;
+//             border-radius: 5px;
+//             font-size: 14px;
+//             margin: 0px 10px;
+//             font-weight: 600;
+//            }
+//         }
+
+//     }
+//     .rechargeInfo{
+//         background-color: #fff;
+//         padding: 3px 100px;
+//         display: flex;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         @media screen and (max-width: 768px){
+//             padding: 10px;
+//             flex-direction: column;
+//            text-align: center;
+//         }
+//         .tipInfo{
+//             padding-bottom: 0px;
+//             a{
+//                 color: vrs.$btn-color;
+//                 text-decoration: none;
+//                 font-size: 14px;
+//                 font-weight: 500;
+//                 i{
+//                     font-size: 12px;
+//                 }
+//             }
+//             p{
+//                 font-size: 12px;
+//                 color: grey;
+//                 i{
+//                     color: vrs.$prim-color;
+//                 }
+//             }
+//         }
+//         .planCost{
+//             display: flex;
+//             flex-direction: row;
+//             gap: 10px;
+//             align-items: center;
+//             .btn1{
+//                 color: vrs.$btn-color;
+//                 border: 2px solid vrs.$btn-color;
+//                 border-radius: 10px;
+//                 font-weight: 600;
+//             }
+//             @media screen and (max-width: 768px) {
+//                 text-align: center;
+//                 margin: auto;
+//             }
+//         }
+//     }
+//     .typeField{
+//         border-radius: 30px;
+//         margin: 0px 20px;
+//         width: 95%;
+//         position: absolute;
+//         bottom: 0;
+
+//     }
+//     .message{
+//         margin: 10px;
+       
+//         .msg {
+//             background-color: #fff;
+//             border-radius: 8px;
+//             padding: 10px;
+//             width: 50%;
+//             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+//            margin-bottom: 10px;
+//           }
+//     }
+// }
+

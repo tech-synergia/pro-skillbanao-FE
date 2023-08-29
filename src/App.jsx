@@ -17,11 +17,9 @@ import TermsPage from "./Pages/TermsPage";
 import PrivacyPage from "./Pages/PrivacyPage";
 import RefundPage from "./Pages/RefundPage";
 import Career from "./Pages/Career";
-
 function App() {
   return (
     <BrowserRouter>
-   
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/all-pro" element={<ChatWithCA />} />
