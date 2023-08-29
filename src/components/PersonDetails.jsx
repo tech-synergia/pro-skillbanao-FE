@@ -21,6 +21,7 @@ const ProfileCard = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.userId);
+  const professionalId = useSelector((state) => state.auth.professionalId);
 
   const headers = { Authorization: `Bearer ${token}` };
 
@@ -114,7 +115,13 @@ const ProfileCard = () => {
           <div className="leftContent">
             <div className="imageContent">
               <Avatar
-                src={professional.gender === "male" ? maleAvatar : femaleAvatar}
+                src={
+                  professional.image === ""
+                    ? professional.gender === "male"
+                      ? maleAvatar
+                      : femaleAvatar
+                    : professional.image
+                }
                 size={70}
               />
               <div className="stars">

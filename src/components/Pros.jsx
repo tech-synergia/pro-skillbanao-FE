@@ -11,9 +11,7 @@ function Pros() {
 
   const fetchProfessionals = async () => {
     try {
-      const response = await axios.get(
-        `${baseUrl}/professional/getAllPros`
-      );
+      const response = await axios.get(`${baseUrl}/professional/getAllPros`);
       const verifiedProfessionals = response.data.pros.filter(
         (professional) => professional.isVerified
       );
@@ -38,7 +36,11 @@ function Pros() {
               <div className="professional" key={professional._id}>
                 <img
                   src={
-                    professional.gender === "male" ? male_avatar : female_avatar
+                    professional.image === ""
+                      ? professional.gender === "male"
+                        ? male_avatar
+                        : female_avatar
+                      : professional.image
                   }
                   alt=""
                 />
