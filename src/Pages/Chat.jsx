@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 import { List, Input, Button, Form } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import Navbar from "../components/Navbar";
