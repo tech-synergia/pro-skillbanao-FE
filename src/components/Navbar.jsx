@@ -5,7 +5,6 @@ import { Menu, Dropdown } from 'antd';
 
 import logo from '../assets/logo.jpeg';
 import '../scss/Navbar.scss';
-
 const menuStyle = {
   textDecoration: "none",
   fontSize: "17px"
