@@ -4,17 +4,16 @@ import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const { Meta } = Card;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function LatestBlogs() {
   const [latestBlogs, setLatestBlogs] = useState([]);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     async function fetchLatestBlogs() {
       try {
-        const response = await axios.get(
-          "https://skillbanaobe.onrender.com/blog/showBlogs"
-        );
+        const response = await axios.get(`${baseUrl}/blog/showBlogs`);
         setLatestBlogs(response.data.blogs);
       } catch (error) {
         console.error("Error fetching latest blogs:", error);
@@ -22,9 +21,8 @@ export default function LatestBlogs() {
     }
     fetchLatestBlogs();
 
-   
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); 
+      setIsMobile(window.innerWidth <= 768);
     };
     window.addEventListener("resize", handleResize);
     return () => {
@@ -32,8 +30,16 @@ export default function LatestBlogs() {
     };
   }, []);
 
-  const prevArrow = <Button><LeftCircleOutlined /></Button>;
-  const nextArrow = <Button><RightCircleOutlined /></Button>;
+  const prevArrow = (
+    <Button>
+      <LeftCircleOutlined />
+    </Button>
+  );
+  const nextArrow = (
+    <Button>
+      <RightCircleOutlined />
+    </Button>
+  );
 
   return (
     <div id="latestBlog">
@@ -43,17 +49,39 @@ export default function LatestBlogs() {
           <Carousel dots={true}>
             {latestBlogs.map((blog) => (
               <div key={blog._id}>
-                <Card cover={<img alt="blog cover" src={blog.image} className="cardImage" />} className="cardStyle">
+                <Card
+                  cover={
+                    <img
+                      alt="blog cover"
+                      src={blog.image}
+                      className="cardImage"
+                    />
+                  }
+                  className="cardStyle"
+                >
                   <Meta title={blog.title} description={blog.content} />
                 </Card>
               </div>
             ))}
           </Carousel>
         ) : (
-          <Carousel slidesToShow={3} prevArrow={prevArrow} nextArrow={nextArrow}>
+          <Carousel
+            slidesToShow={3}
+            prevArrow={prevArrow}
+            nextArrow={nextArrow}
+          >
             {latestBlogs.map((blog) => (
               <div key={blog._id}>
-                <Card cover={<img alt="blog cover" src={blog.image} className="cardImage" />} className="cardStyle">
+                <Card
+                  cover={
+                    <img
+                      alt="blog cover"
+                      src={blog.image}
+                      className="cardImage"
+                    />
+                  }
+                  className="cardStyle"
+                >
                   <Meta title={blog.title} description={blog.content} />
                 </Card>
               </div>
