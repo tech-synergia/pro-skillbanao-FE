@@ -1,15 +1,15 @@
 import React from "react";
 import { Carousel } from "antd";
-import Chat from "../assets/chatcoin-chat-logo.png";
-import prof from '../assets/proffesional.jpeg'
-import { useNavigate } from "react-router-dom";
+// import Chat from "../assets/chatcoin-chat-logo.png";
+import prof from "../assets/proffesional.jpeg";
+// import { useNavigate } from "react-router-dom";
 
 function HomeS1() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handelClick = async (e) => {
-    navigate("/all-pro");
-  };
+  // const handelClick = async (e) => {
+  //   navigate("/all-pro");
+  // };
 
   const onChange = (currentSlide) => {
     console.log(currentSlide);
@@ -42,10 +42,10 @@ function HomeS1() {
           <div>Professionals at your Service</div>
         </div>
       </Carousel>
- 
-      <div className="boxes" onClick={handelClick}>
+
+      {/* <div className="boxes" onClick={handelClick}>
         Schedule your chat now <img src={Chat} alt="" />
-      </div>
+      </div> */}
     </div>
   );
 }
