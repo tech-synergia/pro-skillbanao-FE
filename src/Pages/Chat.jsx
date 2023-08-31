@@ -11,7 +11,7 @@ import male_avatar from "../assets/male_avatar.jpg";
 
 import { useSelector } from "react-redux";
 import "../scss/Chat.scss";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const socket = io(baseUrl, { withCredentials: true });
 
@@ -35,7 +35,7 @@ const Chat = () => {
   const [chatEndedMessageDisplayed, setChatEndedMessageDisplayed] =
     useState(false);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const chatContainerRef = useRef(null);
 
@@ -152,15 +152,9 @@ const Chat = () => {
     }
   };
 
-  // const handleExitButtonClicked = () => {
-  //   if (professionalId) {
-  //     navigate('/propanel');
-  //   } else if (userId) {
-  //     navigate('/all-pro');
-  //   } else {
-  //     navigate('/');
-  //   }
-  // };
+  const handleExitButtonClicked = () => {
+    navigate("/");
+  };
 
   return (
     <>
@@ -170,7 +164,7 @@ const Chat = () => {
           <div className="profileContent">
             <img src={male_avatar} alt="no image" />
             <div className="profileInfo">
-              <h6>Subrahmanyam</h6>
+              <h6>{username}</h6>
               {/* <span>Balance: (04:35 mins)</span> */}
               <span>
                 Balance: (
@@ -185,7 +179,9 @@ const Chat = () => {
           </div>
           <div className="endBtn">
             {exitClicked ? (
-              <Button className="btn">EXIT</Button>
+              <Button className="btn" onClick={handleExitButtonClicked}>
+                EXIT
+              </Button>
             ) : (
               <Button className="btn" onClick={handleEndButtonClicked}>
                 END
@@ -204,13 +200,13 @@ const Chat = () => {
           </div>
           <div className="planCost">
             <Button className="btn1">
-              <i class="bi bi-currency-rupee"></i> 200
+              <i className="bi bi-currency-rupee"></i> 200
             </Button>
             <Button className="btn1">
-              <i class="bi bi-currency-rupee"></i> 500
+              <i className="bi bi-currency-rupee"></i> 500
             </Button>
             <Button className="btn1">
-              <i class="bi bi-currency-rupee"></i> 1000
+              <i className="bi bi-currency-rupee"></i> 1000
             </Button>
           </div>
         </div>
