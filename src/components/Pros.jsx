@@ -4,10 +4,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import male_avatar from "../assets/male_avatar.jpg";
 import female_avatar from "../assets/female_avatar.jpg";
+import { useNavigate } from "react-router-dom";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function Pros() {
   const [professionals, setProfessionals] = useState([]);
+  const [displayCount, setDisplayCount] = useState(8); // Track the number of cards to display
+
+  const navigate = useNavigate()
 
   const fetchProfessionals = async () => {
     try {
@@ -25,6 +29,10 @@ function Pros() {
     fetchProfessionals();
   }, []);
 
+  const handleViewMore = () => {
+    navigate("/all-pro") // Increment the number of cards to display
+  };
+
   return (
     <section id="section-1">
       <div className="content-container">
@@ -32,8 +40,8 @@ function Pros() {
           <h2 className="mt-5">Our Professionals</h2>
           <p>13000+ Professionals from India for Online Consultation</p>
           <div className="pros-grid">
-            {professionals.map((professional) => (
-              <div className="professional" key={professional._id}>
+            {professionals.slice(0, displayCount).map((professional) => (
+              <div className="professional" key={professional._id} onClick={() => handleCardClick(professional._id)}> 
                 <img
                   src={
                     professional.image === ""
@@ -49,6 +57,11 @@ function Pros() {
               </div>
             ))}
           </div>
+          {displayCount < professionals.length && (
+            <button className="view-more-button" onClick={handleViewMore}>
+              View More
+            </button>
+          )}
         </div>
       </div>
     </section>

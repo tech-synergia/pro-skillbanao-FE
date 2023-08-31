@@ -52,6 +52,21 @@
         }
       }
     }
+    .view-more-button{
+      margin: 30px 0px;
+      color: black;
+      background-color: vrs.$prim-color;
+      border-radius: 20px;
+      border: none;
+      margin: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 5px 25px;
+
+      &:hover {
+        box-shadow: vrs.$btn-shadow;
+      }
+    }
   }
 }
 

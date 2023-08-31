@@ -25,6 +25,18 @@ const ProfileCard = () => {
 
   const headers = { Authorization: `Bearer ${token}` };
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     fetchProfessionals();
   }, []);
@@ -134,7 +146,7 @@ const ProfileCard = () => {
               <p>1315 orders</p>
             </div>
             <div className="info">
-              <NavLink to={"#"}>{professional.name}</NavLink>
+              <NavLink to={"#"} className={isMobile ? "ellipsis-name" : ""}>{professional.name}</NavLink>
               <Text>{professional.role}</Text>
               <Text>{professional.language}</Text>
               <Text>Exp: {professional.experience} yr(s)</Text>
