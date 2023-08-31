@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import { io } from "socket.io-client";
+import io from "socket.io-client";
 import { List, Input, Button, Form } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import Navbar from "../components/Navbar";
@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import "../scss/Chat.scss";
 import { useNavigate } from "react-router-dom";
 const baseUrl = import.meta.env.VITE_BASE_URL;
-const socket = io(baseUrl, { withCredentials: true });
+const socket = io.connect(baseUrl, { withCredentials: true });
 
 // Replace with your server URL
 

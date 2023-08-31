@@ -66,7 +66,7 @@ export default function LatestBlogs() {
           </Carousel>
         ) : (
           <Carousel
-            slidesToShow={3}
+            slidesToShow={latestBlogs.length === 3 ? latestBlogs.length : 3}
             prevArrow={prevArrow}
             nextArrow={nextArrow}
           >
