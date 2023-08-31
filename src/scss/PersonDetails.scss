@@ -113,7 +113,8 @@ $buttonColor: rgb(4, 123, 4);
     }
   }
 }
-@media screen and (max-width: 768px) {
+
+@media (min-width: 301px) and (max-width: 768px) {
 
 
   .details {
@@ -126,7 +127,7 @@ $buttonColor: rgb(4, 123, 4);
   .card {
     padding: 2px;
     box-shadow: 0px 1px 10px #bcbaba;
-    height: max-content;
+    // height: min-content;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -149,6 +150,14 @@ $buttonColor: rgb(4, 123, 4);
         text-align: center;
         margin-top: -20px;
         margin-bottom: 20px;
+        .ellipsis-name {
+          white-space: nowrap;
+          margin: auto;
+          text-align: center;
+          width: 80px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
 
         a {
           font-size: 14px;
@@ -165,8 +174,70 @@ $buttonColor: rgb(4, 123, 4);
     }
 
     .chatBtn {
+    
         position: absolute;
-        left: 15%;
+        left: 12%;
+        bottom: 0%;
+    }
+  }
+}
+
+
+}
+
+
+@media screen and (max-width: 300px) {
+
+
+  .details {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-content: space-evenly;
+  gap: 10px;
+  margin:0px 25px;
+  grid-auto-rows: 310px;
+
+  .card {
+    padding: 2px;
+    box-shadow: 0px 1px 10px #bcbaba;
+    // height: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .leftContent {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .imageContent {
+       
+          margin: 0px 60px;
+      
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        text-align: center;
+        margin-top: -20px;
+        margin-bottom: 20px;
+        .ellipsis-name {
+          white-space: nowrap;
+          margin: auto;
+          text-align: center;
+          width: 80px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .chatBtn {
+    
+        position: absolute;
+        left: 25%;
         bottom: 0%;
     }
   }

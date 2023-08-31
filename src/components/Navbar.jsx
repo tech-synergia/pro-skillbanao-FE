@@ -12,10 +12,13 @@ const menuStyle = {
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfessionalMenuOpen, setIsProfessionalMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
 
   const professionalMenu = (
     <Menu>
@@ -63,15 +66,19 @@ function Navbar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to={"#"} onClick={toggleMenu}>
-                <Dropdown overlay={professionalMenu} placement="bottomLeft" trigger={['hover']}>
+              <NavLink to={"#"}                 
+                onMouseEnter={() => setIsProfessionalMenuOpen(true)}
+                onMouseLeave={() => setIsProfessionalMenuOpen(false)}>
+                <Dropdown overlay={professionalMenu} open={isProfessionalMenuOpen} placement="bottomLeft" >
                   <span>Professional <i className="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
                 </Dropdown>
               </NavLink>
             </li>
             <li>
-            <NavLink to={"#"} onClick={toggleMenu}>
-              <Dropdown overlay={userMenu} placement="bottomLeft" trigger={['hover']}>
+            <NavLink to={"#"} 
+                onMouseEnter={() => setIsUserMenuOpen(true)}
+                onMouseLeave={() => setIsUserMenuOpen(false)}>
+              <Dropdown overlay={userMenu} placement="bottomLeft" open={isUserMenuOpen} >
                 <span>User <i className="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
               </Dropdown>
             </NavLink>

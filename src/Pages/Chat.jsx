@@ -204,13 +204,13 @@ const Chat = () => {
           </div>
           <div className="planCost">
             <Button className="btn1">
-              <i class="bi bi-currency-rupee"></i> 200
+              <i className="bi bi-currency-rupee"></i> 200
             </Button>
             <Button className="btn1">
-              <i class="bi bi-currency-rupee"></i> 500
+              <i className="bi bi-currency-rupee"></i> 500
             </Button>
             <Button className="btn1">
-              <i class="bi bi-currency-rupee"></i> 1000
+              <i className="bi bi-currency-rupee"></i> 1000
             </Button>
           </div>
         </div>
