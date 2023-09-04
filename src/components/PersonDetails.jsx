@@ -65,6 +65,7 @@ const ProfileCard = () => {
           clearInterval(pollInterval); // Stop polling when request is accepted
           setTimeout(() => {
             navigate("/chat");
+            window.location.reload(true);
           }, 1500);
         }
       } catch (error) {
@@ -146,7 +147,9 @@ const ProfileCard = () => {
               <p>1315 orders</p>
             </div>
             <div className="info">
-              <NavLink to={"#"} className={isMobile ? "ellipsis-name" : ""}>{professional.name}</NavLink>
+              <NavLink to={"#"} className={isMobile ? "ellipsis-name" : ""}>
+                {professional.name}
+              </NavLink>
               <Text>{professional.role}</Text>
               <Text>{professional.language}</Text>
               <Text>Exp: {professional.experience} yr(s)</Text>

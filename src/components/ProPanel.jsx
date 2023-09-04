@@ -89,6 +89,7 @@ const App = () => {
 
       setTimeout(() => {
         navigate("/chat");
+        window.location.reload(true);
       }, 1500);
     } catch (error) {
       alert(error.response.data.message);

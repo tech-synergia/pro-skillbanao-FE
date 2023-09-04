@@ -19,7 +19,6 @@ function Navbar() {
   const [isProfessionalMenuOpen, setIsProfessionalMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userAuthDetails, setUserAuthDetails] = useState({});
 
   const accessToken = useSelector((state) => state.auth.token);
 
@@ -28,7 +27,6 @@ function Navbar() {
       const response = await axios.post(`${baseUrl}/auth/token`, {
         accessToken,
       });
-      setUserAuthDetails(response.data);
       setIsLoggedIn(true);
     } catch (error) {
       console.log(error);
@@ -72,7 +70,7 @@ function Navbar() {
       </Menu.Item>
     </Menu>
   );
-
+  console.log(isLoggedIn);
   return (
     <nav id="navbar">
       <div className="content-container">
