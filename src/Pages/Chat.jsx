@@ -160,6 +160,7 @@ const Chat = () => {
 
   const handleExitButtonClicked = () => {
     navigate("/");
+    window.location.reload();
   };
 
   return (
