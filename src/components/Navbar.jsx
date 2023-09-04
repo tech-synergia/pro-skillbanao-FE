@@ -19,6 +19,7 @@ function Navbar() {
   const [isProfessionalMenuOpen, setIsProfessionalMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userAuthDetails, setUserAuthDetails] = useState({});
 
   const accessToken = useSelector((state) => state.auth.token);
 
@@ -28,6 +29,7 @@ function Navbar() {
         accessToken,
       });
       setIsLoggedIn(true);
+      setUserAuthDetails(response.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +72,7 @@ function Navbar() {
       </Menu.Item>
     </Menu>
   );
-  console.log(isLoggedIn);
+  // console.log(userAuthDetails);
   return (
     <nav id="navbar">
       <div className="content-container">
@@ -84,26 +86,28 @@ function Navbar() {
             className={`links ${isMenuOpen ? "open" : ""}`}
             style={{ zIndex: "3" }}
           >
-            {/* {userAuthDetails.mainRole === "professional" && (
+            {userAuthDetails.mainRole === "professional" && (
               <li>
                 <NavLink to={"/propanel"} onClick={toggleMenu}>
                   Professional Panel
                 </NavLink>
               </li>
-            )} */}
+            )}
 
-            {/* {userAuthDetails.mainRole === "admin" && (
+            {userAuthDetails.mainRole === "admin" && (
               <li>
                 <NavLink to={"/adminPanel"} onClick={toggleMenu}>
                   Admin Panel
                 </NavLink>
               </li>
-            )} */}
-            <li>
-              <NavLink to={"/all-pro"} onClick={toggleMenu}>
-                Chat with Professionals
-              </NavLink>
-            </li>
+            )}
+            {userAuthDetails.mainRole !== "professional" && (
+              <li>
+                <NavLink to={"/all-pro"} onClick={toggleMenu}>
+                  Chat with Professionals
+                </NavLink>
+              </li>
+            )}
             {!isLoggedIn && (
               <li>
                 <NavLink
@@ -155,6 +159,13 @@ function Navbar() {
                 Blog
               </a>
             </li>
+            {isLoggedIn && (
+              <li>
+                <NavLink to={"/"} onClick={toggleMenu}>
+                  {userAuthDetails.name}
+                </NavLink>
+              </li>
+            )}
           </ul>
           <div className="nav-btn" onClick={toggleMenu}>
             <FaAlignJustify />

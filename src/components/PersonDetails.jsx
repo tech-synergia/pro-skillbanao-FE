@@ -121,6 +121,8 @@ const ProfileCard = () => {
     }
   };
 
+  const randomOrders = () => Math.floor(Math.random() * 500);
+
   return (
     <div className="details">
       {professionals.map((professional) => (
@@ -144,7 +146,7 @@ const ProfileCard = () => {
                 <StarFilled />
                 <StarFilled />
               </div>
-              <p>1315 orders</p>
+              <p>{randomOrders()}</p>
             </div>
             <div className="info">
               <NavLink to={"#"} className={isMobile ? "ellipsis-name" : ""}>

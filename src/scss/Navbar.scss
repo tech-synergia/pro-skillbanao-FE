@@ -5,99 +5,95 @@
   padding-block: 10px;
   @include flex.flexbox(row);
   box-shadow: vrs.$prim-shadow;
-  .content-container{
-  .logo-title {
-    @include flex.flexbox;
-    cursor: pointer;
-    width: 200px;
-    img {
-      width: 100%;
-    }
-  }
-
-  .nav-btn {
-    display: none;
-  }
-  .nav-btn-close {
-    display: none;
-  }
-
-  .content {
-    @include flex.flexbox(_, space-between);
-    align-items: flex-end;
-  }
-
-  .links {
-    @include flex.flexbox;
-    list-style: none;
-    padding: 0;
-
-    li a {
-      color: black;
-      background-color: vrs.$prim-color;
-      border-radius: 20px;
-      margin: 15px;
-      text-decoration: none;
-      padding: 5px 16px;
-
-      &:hover {
-        box-shadow: vrs.$btn-shadow;
+  .content-container {
+    .logo-title {
+      @include flex.flexbox;
+      cursor: pointer;
+      width: 200px;
+      img {
+        width: 100%;
       }
     }
-  }
-}
-  // adding mobile view
-  @media (max-width: 799px) {
-    padding: 10px 20px;
-    .content-container{
-    .content {
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-    }
+
     .nav-btn {
-      display: block;
+      display: none;
     }
-    .navbtnclose {
-      display: block;
+    .nav-btn-close {
+      display: none;
     }
-    .links.open {
-      width: 400px;
-      opacity: 1;
+
+    .content {
+      @include flex.flexbox(_, space-between);
+      align-items: flex-end;
     }
+
     .links {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      background-color: white;
-      margin-left: -8%;
-      top: 100%;
-      right: 0;
-      left: 0;
-      width: 0;
-      height: 800px;
-      justify-content: start;
-      gap: 10px;
-      overflow: hidden; 
-      transition: width 0.3s ease, opacity 0.3s ease;
-      opacity: 0; 
-      li {
-        width: 100%;
-        display: flex;
-        justify-content: left;
-        align-items: flex-end;
-        a {
-          text-align: right;
-          font-size: 18px;
-          color: black;
+      @include flex.flexbox;
+      list-style: none;
+      padding: 0;
+
+      li a {
+        color: black;
+        background-color: vrs.$prim-color;
+        border-radius: 20px;
+        margin: 15px;
+        text-decoration: none;
+        padding: 5px 16px;
+        text-transform: capitalize;
+
+        &:hover {
+          box-shadow: vrs.$btn-shadow;
         }
       }
     }
   }
+  // adding mobile view
+  @media (max-width: 799px) {
+    padding: 10px 20px;
+    .content-container {
+      .content {
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+      }
+      .nav-btn {
+        display: block;
+      }
+      .navbtnclose {
+        display: block;
+      }
+      .links.open {
+        width: 400px;
+        opacity: 1;
+      }
+      .links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background-color: white;
+        margin-left: -8%;
+        top: 100%;
+        right: 0;
+        left: 0;
+        width: 0;
+        height: 800px;
+        justify-content: start;
+        gap: 10px;
+        overflow: hidden;
+        transition: width 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+        li {
+          width: 100%;
+          display: flex;
+          justify-content: left;
+          align-items: flex-end;
+          a {
+            text-align: right;
+            font-size: 18px;
+            color: black;
+          }
+        }
+      }
+    }
   }
-
-  }
-
-
-
-
+}
