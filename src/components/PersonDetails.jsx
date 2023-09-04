@@ -17,6 +17,7 @@ const ProfileCard = () => {
   const [professionals, setProfessionals] = useState([]);
   const [selectedProfessional, setSelectedProfessional] = useState(null);
   const [visible, setVisible] = useState(false);
+  const [loginAlert, setLoginAlert] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -78,6 +79,10 @@ const ProfileCard = () => {
     setVisible(true);
   };
 
+  const handleLoginAlert = () => {
+    setLoginAlert(true);
+  };
+
   const handleCancel = async () => {
     try {
       const response = await axios.post(
@@ -113,7 +118,7 @@ const ProfileCard = () => {
     } catch (error) {
       // console.log(error.response.data);
       if (error.response.data.msg === "Invalid Authentication!") {
-        alert("Please Sign-in!");
+        handleLoginAlert();
       } else {
         console.log(error.response.data);
         handleShowAlert();
@@ -188,6 +193,19 @@ const ProfileCard = () => {
         ]}
       >
         Please wait while your request is accepted!
+      </Modal>
+      <Modal
+        title="Login Required!"
+        open={loginAlert}
+        onCancel={() => setLoginAlert(false)} // Prevent closing when clicking outside
+        closable={true}
+        footer={[
+          <Button key="Login" onClick={() => navigate("/login")}>
+            Login
+          </Button>,
+        ]}
+      >
+        Please login to continue with the chat!
       </Modal>
     </div>
   );
