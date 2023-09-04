@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaAlignJustify } from "react-icons/fa6";
 import { Menu, Dropdown } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { persistor } from "../store";
 
 import logo from "../assets/logo.jpeg";
 import "../scss/Navbar.scss";
@@ -41,6 +42,11 @@ function Navbar() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    persistor.purge();
+    window.location.reload();
   };
 
   const professionalMenu = (
@@ -164,6 +170,11 @@ function Navbar() {
                 <NavLink to={"/"} onClick={toggleMenu}>
                   {userAuthDetails.name}
                 </NavLink>
+              </li>
+            )}
+            {isLoggedIn && (
+              <li>
+                <NavLink onClick={handleLogout}>Logout</NavLink>
               </li>
             )}
           </ul>

@@ -11,7 +11,7 @@ function Pros() {
   const [professionals, setProfessionals] = useState([]);
   const [displayCount, setDisplayCount] = useState(8); // Track the number of cards to display
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fetchProfessionals = async () => {
     try {
@@ -30,7 +30,7 @@ function Pros() {
   }, []);
 
   const handleViewMore = () => {
-    navigate("/all-pro") // Increment the number of cards to display
+    navigate("/all-pro");
   };
 
   return (
@@ -41,7 +41,11 @@ function Pros() {
           <p>13000+ Professionals from India for Online Consultation</p>
           <div className="pros-grid">
             {professionals.slice(0, displayCount).map((professional) => (
-              <div className="professional" key={professional._id} onClick={() => handleCardClick(professional._id)}> 
+              <div
+                className="professional"
+                key={professional._id}
+                onClick={() => handleCardClick(professional._id)}
+              >
                 <img
                   src={
                     professional.image === ""
