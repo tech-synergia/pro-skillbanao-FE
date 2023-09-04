@@ -45,39 +45,42 @@ const Chat = () => {
 
   const [formRef] = Form.useForm();
 
-  useEffect(() => {
-    if (chatStarted && timer > 0 && !chatEnded) {
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000); // Decrease timer every second
-      setTimerInterval(intervalId);
-      return () => {
-        clearInterval(intervalId);
-        if (chatEndedLocally && !chatEndedMessageDisplayed) {
-          message.info("Chat has ended.");
-          setChatEndedMessageDisplayed(true);
-        }
-      };
-    } else if (timer === 0 && !chatEnded && timerInterval) {
-      // Call the decline API here
-      axios.post(
-        `${baseUrl}/chat/decline-chat`,
-        {
-          userId,
-          professionalId,
-        },
-        { headers }
-      );
-      clearInterval(timerInterval);
-      setChatEnded(true); // Chat has ended
-    }
-  }, [
-    chatStarted,
-    chatEnded,
-    timer,
-    chatEndedLocally,
-    chatEndedMessageDisplayed,
-  ]);
+  useEffect(
+    async () => {
+      if (chatStarted && timer > 0 && !chatEnded) {
+        const intervalId = setInterval(() => {
+          setTimer((prevTimer) => prevTimer - 1);
+        }, 1000); // Decrease timer every second
+        setTimerInterval(intervalId);
+        return () => {
+          clearInterval(intervalId);
+          if (chatEndedLocally && !chatEndedMessageDisplayed) {
+            message.info("Chat has ended.");
+            setChatEndedMessageDisplayed(true);
+          }
+        };
+      } else if (timer === 0 && !chatEnded && timerInterval) {
+        // Call the decline API here
+        await axios.post(
+          `${baseUrl}/chat/decline-chat`,
+          {
+            userId,
+            professionalId,
+          },
+          { headers }
+        );
+        clearInterval(timerInterval);
+        setChatEnded(true); // Chat has ended
+      }
+    },
+    [
+      // chatStarted,
+      // chatEnded,
+      // timer,
+      // chatEndedLocally,
+      // chatEndedMessageDisplayed,
+    ]
+  );
 
   useEffect(() => {
     (async () => {
@@ -100,7 +103,7 @@ const Chat = () => {
   }, []);
 
   socket.on(`${userId}-${professionalId}-chat`, (message) => {
-    console.log("received message", message);
+    // console.log("received message", message);
     const updatedMessage = { ...message, sent: false };
     setMessages((prevMessages) => [...prevMessages, updatedMessage]);
 
@@ -119,6 +122,8 @@ const Chat = () => {
       return;
     }
 
+    // console.log(message);
+
     if (message.trim() !== "") {
       socket.emit(`${userId}-${professionalId}-chat`, {
         name,
@@ -135,6 +140,7 @@ const Chat = () => {
     const key = JSON.stringify(item);
     return seen.hasOwnProperty(key) ? false : (seen[key] = true);
   });
+  console.log(seen);
 
   const handleEndButtonClicked = () => {
     if (!exitClicked) {
@@ -230,9 +236,7 @@ const Chat = () => {
               <Input.Search
                 enterButton={
                   <SendOutlined
-                    onClick={() => {
-                      handleSendMessage();
-                    }}
+                    onClick={handleSendMessage}
                     style={{
                       display: "flex",
                       alignItems: "center",

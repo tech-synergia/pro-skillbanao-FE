@@ -1,24 +1,47 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaAlignJustify } from 'react-icons/fa6';
-import { Menu, Dropdown } from 'antd';
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { FaAlignJustify } from "react-icons/fa6";
+import { Menu, Dropdown } from "antd";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
-import logo from '../assets/logo.jpeg';
-import '../scss/Navbar.scss';
+import logo from "../assets/logo.jpeg";
+import "../scss/Navbar.scss";
 const menuStyle = {
   textDecoration: "none",
-  fontSize: "17px"
-}
+  fontSize: "17px",
+};
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfessionalMenuOpen, setIsProfessionalMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userAuthDetails, setUserAuthDetails] = useState({});
+
+  const accessToken = useSelector((state) => state.auth.token);
+
+  const authUser = async () => {
+    try {
+      const response = await axios.post(`${baseUrl}/auth/token`, {
+        accessToken,
+      });
+      setUserAuthDetails(response.data);
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    authUser();
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
 
   const professionalMenu = (
     <Menu>
@@ -36,14 +59,14 @@ function Navbar() {
   );
 
   const userMenu = (
-    <Menu >
+    <Menu>
       <Menu.Item key="register">
         <NavLink to={"/registerUser"} onClick={toggleMenu} style={menuStyle}>
           Register
         </NavLink>
       </Menu.Item>
       <Menu.Item key="login">
-        <NavLink to={"/login"} onClick={toggleMenu} style={menuStyle} >
+        <NavLink to={"/login"} onClick={toggleMenu} style={menuStyle}>
           Login
         </NavLink>
       </Menu.Item>
@@ -59,30 +82,76 @@ function Navbar() {
               <img src={logo} alt="logo" />
             </div>
           </NavLink>
-          <ul className={`links ${isMenuOpen ? 'open' : ''}`} style={{ zIndex: '3' }}>
+          <ul
+            className={`links ${isMenuOpen ? "open" : ""}`}
+            style={{ zIndex: "3" }}
+          >
+            {/* {userAuthDetails.mainRole === "professional" && (
+              <li>
+                <NavLink to={"/propanel"} onClick={toggleMenu}>
+                  Professional Panel
+                </NavLink>
+              </li>
+            )} */}
+
+            {/* {userAuthDetails.mainRole === "admin" && (
+              <li>
+                <NavLink to={"/adminPanel"} onClick={toggleMenu}>
+                  Admin Panel
+                </NavLink>
+              </li>
+            )} */}
             <li>
               <NavLink to={"/all-pro"} onClick={toggleMenu}>
                 Chat with Professionals
               </NavLink>
             </li>
-            <li>
-              <NavLink to={"#"}                 
-                onMouseEnter={() => setIsProfessionalMenuOpen(true)}
-                onMouseLeave={() => setIsProfessionalMenuOpen(false)}>
-                <Dropdown overlay={professionalMenu} open={isProfessionalMenuOpen} placement="bottomLeft" >
-                  <span>Professional <i className="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
-                </Dropdown>
-              </NavLink>
-            </li>
-            <li>
-            <NavLink to={"#"} 
-                onMouseEnter={() => setIsUserMenuOpen(true)}
-                onMouseLeave={() => setIsUserMenuOpen(false)}>
-              <Dropdown overlay={userMenu} placement="bottomLeft" open={isUserMenuOpen} >
-                <span>User <i className="bi bi-caret-down-fill" style={{fontSize: "12px"}}></i></span>
-              </Dropdown>
-            </NavLink>
-            </li>
+            {!isLoggedIn && (
+              <li>
+                <NavLink
+                  to={"#"}
+                  onMouseEnter={() => setIsProfessionalMenuOpen(true)}
+                  onMouseLeave={() => setIsProfessionalMenuOpen(false)}
+                >
+                  <Dropdown
+                    overlay={professionalMenu}
+                    open={isProfessionalMenuOpen}
+                    placement="bottomLeft"
+                  >
+                    <span>
+                      Professional
+                      <i
+                        className="bi bi-caret-down-fill"
+                        style={{ fontSize: "12px" }}
+                      ></i>
+                    </span>
+                  </Dropdown>
+                </NavLink>
+              </li>
+            )}
+            {!isLoggedIn && (
+              <li>
+                <NavLink
+                  to={"#"}
+                  onMouseEnter={() => setIsUserMenuOpen(true)}
+                  onMouseLeave={() => setIsUserMenuOpen(false)}
+                >
+                  <Dropdown
+                    overlay={userMenu}
+                    placement="bottomLeft"
+                    open={isUserMenuOpen}
+                  >
+                    <span>
+                      User
+                      <i
+                        className="bi bi-caret-down-fill"
+                        style={{ fontSize: "12px" }}
+                      ></i>
+                    </span>
+                  </Dropdown>
+                </NavLink>
+              </li>
+            )}
             <li>
               <a href="/#latestBlog" onClick={toggleMenu}>
                 Blog
@@ -99,4 +168,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
