@@ -51,7 +51,7 @@ function Footer() {
           textDecoration: "none",
         }}
         href="https://techsynergia.com"
-        target="_blank"
+        target="_blank" rel="noreferrer"
       >
         Powered by Tech Synergia
       </a>
