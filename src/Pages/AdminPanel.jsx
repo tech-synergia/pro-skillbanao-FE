@@ -10,8 +10,32 @@ function AdminPanel() {
     <Layout>
       <Content style={{ padding: "20px" }}>
         <div>
-          <Button type="primary">
-            <Link to="/blogs">Add Blogs</Link>
+          <Button
+            type="primary"
+            style={{ marginLeft: "5px", marginBottom: "5px" }}
+          >
+            <Link to="/blogs" style={{ textDecoration: "none" }}>
+              Add Blogs
+            </Link>
+          </Button>
+          <Button
+            type="primary"
+            danger
+            style={{ marginLeft: "5px", marginBottom: "5px" }}
+          >
+            <Link to="/blogslist" style={{ textDecoration: "none" }}>
+              Delete Blogs
+            </Link>
+          </Button>
+          <Button type="primary" style={{ marginLeft: "5px" }}>
+            <Link to="/coupon" style={{ textDecoration: "none" }}>
+              Add Coupon
+            </Link>
+          </Button>
+          <Button type="primary" danger style={{ marginLeft: "5px" }}>
+            <Link to="/couponslist" style={{ textDecoration: "none" }}>
+              Delete Coupon
+            </Link>
           </Button>
         </div>
         <RegistrationTable />

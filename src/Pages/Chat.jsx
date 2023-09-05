@@ -142,13 +142,26 @@ const Chat = () => {
   });
   console.log(seen);
 
-  const handleEndButtonClicked = () => {
+  const handleEndButtonClicked = async () => {
     if (!exitClicked) {
-      setChatEndedLocally(true); // Mark the chat as ended locally
-      setExitClicked(true);
-      setChatEnded(true);
-
-      clearInterval(timerInterval);
+      try {
+        const response = await axios.post(
+          `${baseUrl}/chat/decline-chat`,
+          {
+            professionalId,
+            userId,
+          },
+          { headers }
+        );
+        // Handle success
+        setChatEndedLocally(true); // Mark the chat as ended locally
+        setExitClicked(true);
+        setChatEnded(true);
+        clearInterval(timerInterval);
+      } catch (error) {
+        // Handle error
+        alert(error.response.data);
+      }
 
       // Display the chat ended alert message
       if (!chatEndedMessageDisplayed) {

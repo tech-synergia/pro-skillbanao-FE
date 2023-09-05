@@ -9,6 +9,7 @@ const RegistrationTable = () => {
   const [professionalsData, setProfessionalsData] = useState([]);
 
   const token = useSelector((state) => state.auth.token);
+  const headers = { Authorization: `Bearer ${token}` };
   // console.log("🚀 ~ file: RegistrationTable.jsx:12 ~ RegistrationTable ~ token:", token)
 
   useEffect(() => {
@@ -17,7 +18,9 @@ const RegistrationTable = () => {
 
   const fetchProfessionals = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/professional/getAllPros`);
+      const response = await axios.get(`${baseUrl}/professional/getProsAdmin`, {
+        headers,
+      });
       setProfessionalsData(response.data.pros); // Use response.data.pros directly
     } catch (error) {
       console.error("Error fetching professionals:", error);
@@ -56,13 +59,22 @@ const RegistrationTable = () => {
       render: (text, record) => (
         <span>
           {record.isVerified ? (
-            <Button
-              className="btn3"
-              danger
-              onClick={() => handleReject(record)}
-            >
-              Delete
-            </Button>
+            <>
+              <Button
+                className="btn3"
+                danger
+                onClick={() => handleReject(record)}
+              >
+                Delete
+              </Button>
+              <Button
+                className="btn3"
+                style={{ marginLeft: "5px" }}
+                onClick={() => handlePause(record)}
+              >
+                Pause
+              </Button>
+            </>
           ) : (
             <>
               <Button
@@ -72,7 +84,11 @@ const RegistrationTable = () => {
               >
                 Accept
               </Button>
-              <Button className="btn3" onClick={() => handleReject(record)}>
+              <Button
+                className="btn3"
+                style={{ marginLeft: "5px" }}
+                onClick={() => handleReject(record)}
+              >
                 Reject
               </Button>
             </>
@@ -92,7 +108,7 @@ const RegistrationTable = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
-        console.log("Professional verified successfully:", record);
+        // console.log("Professional verified successfully:", record);
         const updatedData = professionalsData.map((prof) =>
           prof._id === record._id ? { ...prof, isVerified: true } : prof
         );
@@ -113,7 +129,7 @@ const RegistrationTable = () => {
         }
       );
       if (response.status === 200) {
-        console.log("Professional rejected and data deleted:", record);
+        // console.log("Professional rejected and data deleted:", record);
         const updatedData = professionalsData.filter(
           (prof) => prof._id !== record._id
         );
@@ -121,6 +137,27 @@ const RegistrationTable = () => {
       }
     } catch (error) {
       console.error("Error rejecting professional:", error);
+    }
+  };
+
+  const handlePause = async (record) => {
+    try {
+      const response = await axios.patch(
+        `${baseUrl}/professional/unVerifyPro`,
+        {
+          proId: record._id,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200) {
+        // console.log("Professional unverified successfully:", record);
+        const updatedData = professionalsData.map((prof) =>
+          prof._id === record._id ? { ...prof, isVerified: false } : prof
+        );
+        setProfessionalsData(updatedData);
+      }
+    } catch (error) {
+      console.error("Error verifying professional:", error);
     }
   };
 

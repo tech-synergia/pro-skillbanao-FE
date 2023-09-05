@@ -1,13 +1,11 @@
 .admin-panel-layout {
-    display: flex;
-    flex-direction: row;
-    
-   }
-   
-  
-   @media (max-width: 768px) {
-     .admin-panel-layout {
-       display: block;
-       width: 0px;
-     }
-   }
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .admin-panel-layout {
+    display: block;
+    width: 0px;
+  }
+}

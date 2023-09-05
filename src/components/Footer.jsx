@@ -13,7 +13,7 @@ function Footer() {
           <h5>Important Links</h5>
           <div className="linkContents">
             <a href="#about">About Us</a>
-            <a href="/career">Careers</a>
+            {/* <a href="/career">Careers</a> */}
             <a href="#">Contact us</a>
             <a href="mailto:">support@skillbanao.com</a>
             Copyright @ skillbanao

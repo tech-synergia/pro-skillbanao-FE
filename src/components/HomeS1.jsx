@@ -12,7 +12,7 @@ function HomeS1() {
   // };
 
   const onChange = (currentSlide) => {
-    console.log(currentSlide);
+    // console.log(currentSlide);
   };
 
   return (

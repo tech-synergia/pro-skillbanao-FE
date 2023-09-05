@@ -168,6 +168,10 @@ function Navbar() {
             {isLoggedIn && (
               <li>
                 <NavLink to={"/"} onClick={toggleMenu}>
+                  <i
+                    className="bi bi-person-fill"
+                    style={{ marginRight: "3px" }}
+                  ></i>
                   {userAuthDetails.name}
                 </NavLink>
               </li>
