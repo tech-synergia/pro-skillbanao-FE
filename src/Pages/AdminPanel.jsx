@@ -37,6 +37,11 @@ function AdminPanel() {
               Delete Coupon
             </Link>
           </Button>
+          <Button type="primary" style={{ marginLeft: "5px" }}>
+            <Link to="/changelist" style={{ textDecoration: "none" }}>
+              Change Details
+            </Link>
+          </Button>
         </div>
         <RegistrationTable />
       </Content>

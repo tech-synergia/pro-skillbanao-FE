@@ -10,6 +10,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 function Pros() {
   const [professionals, setProfessionals] = useState([]);
   const [displayCount, setDisplayCount] = useState(8); // Track the number of cards to display
+  const [webDetails, setWebDetails] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,9 +26,22 @@ function Pros() {
     }
   };
 
+  const fetchWebDetails = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/website/details`);
+      setWebDetails(response.data.detail[0]);
+      // console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
   useEffect(() => {
     fetchProfessionals();
+    fetchWebDetails();
   }, []);
+
+  // console.log(webDetails);
 
   const handleViewMore = () => {
     navigate("/all-pro");
@@ -38,7 +52,10 @@ function Pros() {
       <div className="content-container">
         <div className="content">
           <h2 className="mt-5">Our Professionals</h2>
-          <p>13000+ Professionals from India for Online Consultation</p>
+          <p>
+            {webDetails.professionals}+ Professionals from India for Online
+            Consultation
+          </p>
           <div className="pros-grid">
             {professionals.slice(0, displayCount).map((professional) => (
               <div

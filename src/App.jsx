@@ -20,6 +20,7 @@ import RefundPage from "./Pages/RefundPage";
 import Career from "./Pages/Career";
 import Coupon from "./Pages/Coupon";
 import CouponsList from "./Pages/CouponList";
+import ChangeList from "./Pages/ChangeList";
 function App() {
   return (
     <BrowserRouter>
@@ -39,6 +40,7 @@ function App() {
         <Route path="/coupon" element={<Coupon />} />
         <Route path="/blogslist" element={<BlogsList />} />
         <Route path="/couponslist" element={<CouponsList />} />
+        <Route path="/changelist" element={<ChangeList />} />
         <Route path="/registerProf" element={<Professional />} />
         <Route path="/registerUser" element={<User />} />
         <Route path="/terms_conditions" element={<TermsPage />} />
