@@ -28,6 +28,7 @@ const App = () => {
   const headers = { Authorization: `Bearer ${token}` };
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
     showRequestedUsers();
@@ -96,6 +97,15 @@ const App = () => {
     }
   };
 
+  const timestamp = userList.map((user) => {
+    const time = new Date(user.timestamp)
+      .toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+      .split(",");
+    return time;
+  });
+
+  console.log(timestamp);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -131,11 +141,15 @@ const App = () => {
           }}
         >
           <List
-            itemLayout="horizontal"
+            itemLayout={isMobile ? "vertical" : "horizontal"}
             dataSource={userList}
             renderItem={(user) => (
               <List.Item>
                 <List.Item.Meta title={user.name} description={user.phone} />
+                <List.Item.Meta
+                  title={timestamp[0][0]}
+                  description={timestamp[0][1]}
+                />
                 <Button type="primary" onClick={() => handleAccept(user._id)}>
                   Accept
                 </Button>
