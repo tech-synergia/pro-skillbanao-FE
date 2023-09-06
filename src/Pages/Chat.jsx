@@ -17,13 +17,21 @@ const socket = io.connect(baseUrl, { withCredentials: true });
 
 // Replace with your server URL
 
+const welcomeMessage = {
+  // name: "Skillbanao", // You can choose a name for the bot
+  message:
+    ") Hello, Welcome to the Skillbanao Chat! How may I assist you today?",
+  sent: false, // Indicate that it's a received message
+};
+
 const Chat = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([welcomeMessage]);
   const [name, setName] = useState("");
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.userId);
   const professionalId = useSelector((state) => state.auth.professionalId);
   const username = useSelector((state) => state.auth.username);
+  const image = useSelector((state) => state.auth.image);
   const headers = { Authorization: `Bearer ${token}` };
 
   const [exitClicked, setExitClicked] = useState(false);
@@ -215,9 +223,9 @@ const Chat = () => {
       <div className="chatPage">
         <div className="chatHead">
           <div className="profileContent">
-            <img src={male_avatar} alt="no image" />
+            <img src={image ? image : male_avatar} alt="no image" />
             <div className="profileInfo">
-              <h6>{username}</h6>
+              <h6 style={{ textTransform: "capitalize" }}>{username}</h6>
               {/* <span>Balance: (04:35 mins)</span> */}
               <span>
                 Balance: (

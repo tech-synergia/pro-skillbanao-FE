@@ -1,26 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-const baseUrl = import.meta.env.VITE_BASE_URL;
-
-function HomeS3() {
-  const [webDetails, setWebDetails] = useState("");
-
-  useEffect(() => {
-    fetchWebsiteDetails();
-  }, []);
-
-  const fetchWebsiteDetails = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/website/details`);
-      // console.log(response.data);
-      setWebDetails(response.data.detail[0]);
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  };
-
-  // console.log(webDetails);
-
+function HomeS3({ webDetails }) {
   return (
     <div id="section_3">
       <div className="boxes">
