@@ -16,10 +16,10 @@ function Pros({ webDetails }) {
   const fetchProfessionals = async () => {
     try {
       const response = await axios.get(`${baseUrl}/professional/getAllPros`);
-      const verifiedProfessionals = response.data.pros.filter(
-        (professional) => professional.isVerified
-      );
-      setProfessionals(verifiedProfessionals);
+      // const verifiedProfessionals = response.data.pros.filter(
+      //   (professional) => professional.isVerified
+      // );
+      setProfessionals(response.data.pros);
     } catch (error) {
       console.log(error);
     }
