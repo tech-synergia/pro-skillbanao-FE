@@ -21,14 +21,14 @@ const items = [
   getItem("History", "2", <PieChartOutlined />),
 ];
 const App = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const isMobile = window.innerWidth <= 768;
+  const [collapsed, setCollapsed] = useState(isMobile ? true : false);
   const [userList, setUserList] = useState([]);
   const token = useSelector((state) => state.auth.token);
   const professionalId = useSelector((state) => state.auth.professionalId);
   const headers = { Authorization: `Bearer ${token}` };
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
     showRequestedUsers();
@@ -104,7 +104,7 @@ const App = () => {
     return time;
   });
 
-  console.log(timestamp);
+  // console.log(timestamp);
 
   const {
     token: { colorBgContainer },
@@ -147,13 +147,17 @@ const App = () => {
               <List.Item>
                 <List.Item.Meta title={user.name} description={user.phone} />
                 <List.Item.Meta
-                  title={timestamp[0][0]}
-                  description={timestamp[0][1]}
+                  title={timestamp[0][1]}
+                  description={timestamp[0][0]}
                 />
                 <Button type="primary" onClick={() => handleAccept(user._id)}>
                   Accept
                 </Button>
-                <Button danger onClick={() => declineChat(user._id)}>
+                <Button
+                  danger
+                  style={{ marginLeft: "5px" }}
+                  onClick={() => declineChat(user._id)}
+                >
                   Decline
                 </Button>
               </List.Item>
