@@ -17,13 +17,21 @@ const socket = io.connect(baseUrl, { withCredentials: true });
 
 // Replace with your server URL
 
+const welcomeMessage = {
+  // name: "Skillbanao", // You can choose a name for the bot
+  message:
+    ") Hello, Welcome to the Skillbanao Chat! How may I assist you today?",
+  sent: false, // Indicate that it's a received message
+};
+
 const Chat = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([welcomeMessage]);
   const [name, setName] = useState("");
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.userId);
   const professionalId = useSelector((state) => state.auth.professionalId);
   const username = useSelector((state) => state.auth.username);
+  const image = useSelector((state) => state.auth.image);
   const headers = { Authorization: `Bearer ${token}` };
 
   const [exitClicked, setExitClicked] = useState(false);
@@ -39,28 +47,28 @@ const Chat = () => {
 
   const chatContainerRef = useRef(null);
 
-  window.addEventListener("beforeunload", (e) => {
+  window.addEventListener("beforeunload", () => {
     socket.disconnect();
   });
 
   const [formRef] = Form.useForm();
 
-  useEffect(
-    async () => {
-      if (chatStarted && timer > 0 && !chatEnded) {
-        const intervalId = setInterval(() => {
-          setTimer((prevTimer) => prevTimer - 1);
-        }, 1000); // Decrease timer every second
-        setTimerInterval(intervalId);
-        return () => {
-          clearInterval(intervalId);
-          if (chatEndedLocally && !chatEndedMessageDisplayed) {
-            message.info("Chat has ended.");
-            setChatEndedMessageDisplayed(true);
-          }
-        };
-      } else if (timer === 0 && !chatEnded && timerInterval) {
-        // Call the decline API here
+  useEffect(() => {
+    if (chatStarted && timer > 0 && !chatEnded) {
+      const intervalId = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000); // Decrease timer every second
+      setTimerInterval(intervalId);
+      return () => {
+        clearInterval(intervalId);
+        if (chatEndedLocally && !chatEndedMessageDisplayed) {
+          message.info("Chat has ended!");
+          setChatEndedMessageDisplayed(true);
+        }
+      };
+    } else if (timer === 0 && !chatEnded && timerInterval) {
+      // Call the decline API here
+      (async () => {
         await axios.post(
           `${baseUrl}/chat/decline-chat`,
           {
@@ -69,18 +77,17 @@ const Chat = () => {
           },
           { headers }
         );
-        clearInterval(timerInterval);
-        setChatEnded(true); // Chat has ended
-      }
-    },
-    [
-      // chatStarted,
-      // chatEnded,
-      // timer,
-      // chatEndedLocally,
-      // chatEndedMessageDisplayed,
-    ]
-  );
+      })();
+      clearInterval(timerInterval);
+      setChatEnded(true); // Chat has ended
+    }
+  }, [
+    chatStarted,
+    chatEnded,
+    timer,
+    chatEndedLocally,
+    chatEndedMessageDisplayed,
+  ]);
 
   useEffect(() => {
     (async () => {
@@ -135,17 +142,51 @@ const Chat = () => {
     }
   };
 
+  let pollInterval;
+  const pollRequestStatus = (userId) => {
+    pollInterval = setInterval(async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/chat/accepted/${userId}`, {
+          headers,
+        });
+        const { isAccepted } = response.data;
+        if (!isAccepted) {
+          clearInterval(pollInterval); // Stop polling when request is accepted
+          setExitClicked(true);
+          setChatEnded(true);
+          setChatEndedLocally(true);
+          if (!chatEndedMessageDisplayed) {
+            message.info("Chat has ended!");
+            setChatEndedMessageDisplayed(true);
+          }
+        }
+      } catch (error) {
+        console.error("Error checking request status:", error);
+      }
+    }, 5000); // Poll every 5 seconds (adjust as needed)
+  };
+
+  useEffect(() => {
+    // Start polling when the component mounts
+    pollRequestStatus(userId);
+
+    // Cleanup function (optional)
+    return () => {
+      // Perform cleanup if needed
+    };
+  }, []);
+
   const seen = {};
   const uniqueArray = messages.filter((item) => {
     const key = JSON.stringify(item);
     return seen.hasOwnProperty(key) ? false : (seen[key] = true);
   });
-  console.log(seen);
+  // console.log(seen);
 
   const handleEndButtonClicked = async () => {
     if (!exitClicked) {
       try {
-        const response = await axios.post(
+        await axios.post(
           `${baseUrl}/chat/decline-chat`,
           {
             professionalId,
@@ -182,9 +223,9 @@ const Chat = () => {
       <div className="chatPage">
         <div className="chatHead">
           <div className="profileContent">
-            <img src={male_avatar} alt="no image" />
+            <img src={image ? image : male_avatar} alt="no image" />
             <div className="profileInfo">
-              <h6>{username}</h6>
+              <h6 style={{ textTransform: "capitalize" }}>{username}</h6>
               {/* <span>Balance: (04:35 mins)</span> */}
               <span>
                 Balance: (

@@ -24,7 +24,7 @@ const Login = () => {
     setUserData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
       const endpoint =
         userData.role === "professional"
@@ -43,6 +43,7 @@ const Login = () => {
           userDetail({
             professionalId: response.data.user.proId,
             username: response.data.user.name,
+            image: response.data.user.image,
           })
         );
 

@@ -7,38 +7,26 @@ import female_avatar from "../assets/female_avatar.jpg";
 import { useNavigate } from "react-router-dom";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
-function Pros() {
+function Pros({ webDetails }) {
   const [professionals, setProfessionals] = useState([]);
   const [displayCount, setDisplayCount] = useState(8); // Track the number of cards to display
-  const [webDetails, setWebDetails] = useState("");
 
   const navigate = useNavigate();
 
   const fetchProfessionals = async () => {
     try {
       const response = await axios.get(`${baseUrl}/professional/getAllPros`);
-      const verifiedProfessionals = response.data.pros.filter(
-        (professional) => professional.isVerified
-      );
-      setProfessionals(verifiedProfessionals);
+      // const verifiedProfessionals = response.data.pros.filter(
+      //   (professional) => professional.isVerified
+      // );
+      setProfessionals(response.data.pros);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchWebDetails = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/website/details`);
-      setWebDetails(response.data.detail[0]);
-      // console.log(response.data);
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  };
-
   useEffect(() => {
     fetchProfessionals();
-    fetchWebDetails();
   }, []);
 
   // console.log(webDetails);

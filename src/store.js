@@ -15,10 +15,11 @@ const authSlice = createSlice({
       state.token = action.payload;
     },
     userDetail: (state, action) => {
-      const { userId, professionalId, username } = action.payload;
+      const { userId, professionalId, username, image } = action.payload;
       state.userId = userId;
       state.professionalId = professionalId;
       state.username = username;
+      state.image = image;
     },
     updateKey: (state, action) => {
       const { key, value } = action.payload;
@@ -29,6 +30,7 @@ const authSlice = createSlice({
       state.userId = null;
       state.professionalId = null;
       state.username = null;
+      state.image = null;
     },
   },
 });
