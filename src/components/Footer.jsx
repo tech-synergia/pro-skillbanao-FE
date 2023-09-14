@@ -16,7 +16,7 @@ function Footer() {
             {/* <a href="/career">Careers</a> */}
             <a href="#">Contact us</a>
             <a href="mailto:">support@skillbanao.com</a>
-            Copyright @ skillbanao
+            Copyright @ Riya Manocha & Assosciates
           </div>
         </div>
         <div className="links">
@@ -51,7 +51,8 @@ function Footer() {
           textDecoration: "none",
         }}
         href="https://techsynergia.com"
-        target="_blank" rel="noreferrer"
+        target="_blank"
+        rel="noreferrer"
       >
         Powered by Tech Synergia
       </a>
