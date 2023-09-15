@@ -167,7 +167,7 @@ const ProfileCard = () => {
           </div>
           <div className="chatBtn">
             <NavLink className="text-decoration-none">
-              <Button onClick={(e) => handleChat(professional._id)}>
+              <Button onClick={() => handleChat(professional._id)}>
                 <CheckCircleFilled className="chat" /> Chat
               </Button>
             </NavLink>
@@ -187,7 +187,11 @@ const ProfileCard = () => {
         onCancel={null} // Prevent closing when clicking outside
         closable={false}
         footer={[
-          <Button key="cancel" onClick={handleCancel}>
+          <Button
+            key="cancel"
+            onClick={handleCancel}
+            style={{ backgroundColor: "#f0df20" }}
+          >
             Cancel
           </Button>,
         ]}
@@ -200,7 +204,11 @@ const ProfileCard = () => {
         onCancel={() => setLoginAlert(false)} // Prevent closing when clicking outside
         closable={true}
         footer={[
-          <Button key="Login" onClick={() => navigate("/login")}>
+          <Button
+            key="Login"
+            onClick={() => navigate("/login")}
+            style={{ backgroundColor: "#f0df20" }}
+          >
             Login
           </Button>,
         ]}
