@@ -64,10 +64,12 @@ const ProfileCard = () => {
         const { isAccepted } = response.data;
         if (isAccepted) {
           clearInterval(pollInterval); // Stop polling when request is accepted
-          setTimeout(() => {
-            navigate("/chat");
-            window.location.reload(true);
-          }, 1500);
+          location.href = "/chat";
+          // setTimeout(() => {
+          //   navigate("/chat");
+          //   window.location.reload(true);
+
+          // }, 1500);
         }
       } catch (error) {
         console.error("Error checking request status:", error);
@@ -154,7 +156,11 @@ const ProfileCard = () => {
               <p>{randomOrders()}</p>
             </div>
             <div className="info">
-              <NavLink to={"#"} className={isMobile ? "ellipsis-name" : ""}>
+              <NavLink
+                to={"#"}
+                className={isMobile ? "ellipsis-name" : ""}
+                style={{ textTransform: "capitalize" }}
+              >
                 {professional.name}
               </NavLink>
               <Text>{professional.role}</Text>

@@ -87,11 +87,12 @@ const App = () => {
         },
         { headers }
       );
+      location.href = "/chat";
+      // setTimeout(() => {
 
-      setTimeout(() => {
-        navigate("/chat");
-        window.location.reload(true);
-      }, 1500);
+      //   navigate("/chat");
+      //   window.location.reload(true);
+      // }, 1500);
     } catch (error) {
       alert(error.response.data.message);
     }
