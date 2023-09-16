@@ -17,10 +17,11 @@ import User from "./Pages/User";
 import TermsPage from "./Pages/TermsPage";
 import PrivacyPage from "./Pages/PrivacyPage";
 import RefundPage from "./Pages/RefundPage";
-import Career from "./Pages/Career";
+// import Career from "./Pages/Career";
 import Coupon from "./Pages/Coupon";
 import CouponsList from "./Pages/CouponList";
 import ChangeList from "./Pages/ChangeList";
+import PendingChats from "./Pages/PendingChats";
 function App() {
   return (
     <BrowserRouter>
@@ -46,6 +47,7 @@ function App() {
         <Route path="/terms_conditions" element={<TermsPage />} />
         <Route path="/privacy_policy" element={<PrivacyPage />} />
         <Route path="/refund_cancellation" element={<RefundPage />} />
+        <Route path="/pending" element={<PendingChats />} />
       </Routes>
     </BrowserRouter>
   );

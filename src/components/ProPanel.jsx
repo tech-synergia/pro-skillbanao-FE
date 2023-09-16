@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { DesktopOutlined, PieChartOutlined } from "@ant-design/icons";
 import { List, Layout, Menu, theme, Button } from "antd";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateKey } from "../store";
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -27,7 +27,7 @@ const App = () => {
   const token = useSelector((state) => state.auth.token);
   const professionalId = useSelector((state) => state.auth.professionalId);
   const headers = { Authorization: `Bearer ${token}` };
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -87,12 +87,12 @@ const App = () => {
         },
         { headers }
       );
-      location.href = "/chat";
-      // setTimeout(() => {
 
-      //   navigate("/chat");
-      //   window.location.reload(true);
-      // }, 1500);
+      setTimeout(() => {
+        location.href = "/chat";
+        // navigate("/chat");
+        // window.location.reload(true);
+      }, 1500);
     } catch (error) {
       alert(error.response.data.message);
     }

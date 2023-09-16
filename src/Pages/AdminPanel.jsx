@@ -31,7 +31,11 @@ function AdminPanel() {
               Add Coupon
             </Link>
           </Button>
-          <Button type="primary" danger style={{ marginLeft: "5px" }}>
+          <Button
+            type="primary"
+            danger
+            style={{ marginLeft: "5px", marginBottom: "5px" }}
+          >
             <Link to="/couponslist" style={{ textDecoration: "none" }}>
               Delete Coupon
             </Link>
@@ -39,6 +43,11 @@ function AdminPanel() {
           <Button type="primary" style={{ marginLeft: "5px" }}>
             <Link to="/changelist" style={{ textDecoration: "none" }}>
               Change Details
+            </Link>
+          </Button>
+          <Button type="primary" style={{ marginLeft: "5px" }}>
+            <Link to="/pending" style={{ textDecoration: "none" }}>
+              Pending Chats
             </Link>
           </Button>
         </div>

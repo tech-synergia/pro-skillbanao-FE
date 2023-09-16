@@ -75,6 +75,12 @@ const Login = () => {
         response.data.user.mainRole === "admin"
       ) {
         setSuccessMessage("Login successful! Redirecting...");
+        dispatch(
+          userDetail({
+            userId: response.data.user.userId,
+            username: response.data.user.name,
+          })
+        );
 
         setTimeout(() => {
           navigate("/adminpanel");
