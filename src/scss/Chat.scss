@@ -30,7 +30,7 @@ body {
     height: 90.5%;
     padding: 24px;
     position: relative;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     .messageBox {
       overflow-y: scroll;
       height: 95%;
@@ -41,6 +41,7 @@ body {
 
         strong {
           color: black;
+          text-transform: capitalize;
         }
       }
       .dynamic-textbox {
