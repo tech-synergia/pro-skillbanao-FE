@@ -73,8 +73,10 @@ const Chat = () => {
           {/* {console.log("JSX messgae", uniqueArray)} */}
 
           {uniqueArray.map((msg, index) => (
-            <div className="msg dynamic-textbox" key={index}>
-              <strong>{msg.name}</strong>: {msg.message}
+            <div className="msg" key={index}>
+              <span className="dynamic-textbox">
+                <strong>{msg.name}</strong>: {msg.message}
+              </span>
             </div>
           ))}
         </div>

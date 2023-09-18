@@ -32,25 +32,26 @@ body {
     position: relative;
     overflow-y: scroll;
     .messageBox {
-      overflow: hidden;
-
+      overflow-y: scroll;
+      height: 95%;
       .msg {
         margin-bottom: 10px;
-        padding: 5px 8px 5px 8px;
-        border-radius: 8px 8px 0px 8px;
         text-wrap: wrap;
         word-wrap: break-word;
-        background-color: rgba(144, 238, 144, 0.868);
-        color: rgb(96, 82, 82);
+
         strong {
           color: black;
         }
       }
       .dynamic-textbox {
         display: inline-block;
-        min-width: 100px; /* Set your desired minimum width */
-        max-width: 100%; /* To prevent it from growing beyond the parent container */
-        width: auto; /* Initial width will adjust dynamically */
+        padding: 5px 8px 5px 8px;
+        border-radius: 8px 8px 0px 8px;
+        background-color: rgba(144, 238, 144, 0.868);
+        color: rgb(96, 82, 82);
+        min-width: 100px;
+        max-width: 100%;
+        width: auto;
       }
     }
     form {
