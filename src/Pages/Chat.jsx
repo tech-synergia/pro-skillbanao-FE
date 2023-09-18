@@ -5,6 +5,7 @@ import { Input, Form } from "antd";
 import { useSelector } from "react-redux";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const socket = io.connect(baseUrl, { withCredentials: true });
+import "../scss/Chat.scss";
 
 // Replace with your server URL
 
@@ -63,32 +64,32 @@ const Chat = () => {
   });
 
   return (
-    <div>
-      <div>
-        <h1>Chat Application</h1>
-        <div>
-          {console.log("JSX messgae", uniqueArray)}
+    <div className="chatPage">
+      <div className="chatHeaderContainer">
+        <h2>Chat with your Professional</h2>
+      </div>
+      <div className="chatContainer">
+        <div className="messageBox">
+          {/* {console.log("JSX messgae", uniqueArray)} */}
 
           {uniqueArray.map((msg, index) => (
-            <div key={index}>
+            <div className="msg dynamic-textbox" key={index}>
               <strong>{msg.name}</strong>: {msg.message}
             </div>
           ))}
         </div>
-      </div>
-      <div>
         <Form form={formRef}>
-          <Form.Item name="message" label="Enter message">
-            <Input />
+          <Form.Item name="message">
+            <Input placeholder="Enter message" />
           </Form.Item>
+          <button
+            onClick={() => {
+              handleSendMessage();
+            }}
+          >
+            Send
+          </button>
         </Form>
-        <button
-          onClick={() => {
-            handleSendMessage();
-          }}
-        >
-          Send
-        </button>
       </div>
     </div>
   );
