@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Card, Avatar, Typography, Modal } from "antd";
+import { Button, Card, Avatar, Typography, Modal, Form, Input } from "antd";
 import { StarFilled, CheckCircleFilled } from "@ant-design/icons";
 import "../scss/PersonDetails.scss";
 import maleAvatar from "../assets/male_avatar.jpg";
@@ -18,6 +18,7 @@ const ProfileCard = () => {
   const [selectedProfessional, setSelectedProfessional] = useState(null);
   const [visible, setVisible] = useState(false);
   const [loginAlert, setLoginAlert] = useState(false);
+  const [DescriptionModalOpen, setDescriptionModalOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -104,9 +105,9 @@ const ProfileCard = () => {
   };
 
   const handleChat = async (professionalId) => {
+    setDescriptionModalOpen(true);
     dispatch(updateKey({ key: "professionalId", value: professionalId }));
     if (userId) pollRequestStatus(userId);
-
     try {
       await axios.post(
         `${baseUrl}/chat/add-chat`,
@@ -220,6 +221,17 @@ const ProfileCard = () => {
         ]}
       >
         Please login to continue with the chat!
+      </Modal>
+      <Modal open={DescriptionModalOpen}>
+        <Form>
+          <Form.Item label="Description">
+            <Input.TextArea rows={4} />{" "}
+            {/* Use Input.TextArea for multi-line text */}
+          </Form.Item>
+          <Form.Item label="Coupon code">
+            <Input type="text" /> {/* Use Input for single-line text */}
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );
