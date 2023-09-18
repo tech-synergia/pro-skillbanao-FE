@@ -7,10 +7,15 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 const socket = io.connect(baseUrl, { withCredentials: true });
 import "../scss/Chat.scss";
 
-// Replace with your server URL
+const welcomeMessage = {
+  // name: "Skillbanao",
+  message:
+    ": Hello, Welcome to the Skillbanao Chat! How may I assist you today?",
+  sent: false, // Indicate that it's a received message
+};
 
 const Chat = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([welcomeMessage]);
   const [name, setName] = useState("");
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.userId);
