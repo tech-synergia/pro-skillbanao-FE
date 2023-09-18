@@ -78,3 +78,14 @@ body {
     }
   }
 }
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+    .chatPage {
+      width: 90%;
+      .chatContainer form input {
+        width: 230px;
+      }
+    }
+  }
+}
