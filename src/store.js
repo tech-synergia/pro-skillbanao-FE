@@ -15,15 +15,21 @@ const authSlice = createSlice({
       state.token = action.payload;
     },
     userDetail: (state, action) => {
-      const { userId, professionalId, username, image } = action.payload;
+      const { userId, professionalId, username, image, mainRole, minutes } =
+        action.payload;
       state.userId = userId;
       state.professionalId = professionalId;
       state.username = username;
       state.image = image;
+      state.mainRole = mainRole;
+      state.minutes = minutes;
     },
     updateKey: (state, action) => {
       const { key, value } = action.payload;
       state[key] = value;
+    },
+    clearCoupon: (state) => {
+      state.minutes = null;
     },
     clearToken: (state) => {
       state.token = null;
@@ -31,13 +37,15 @@ const authSlice = createSlice({
       state.professionalId = null;
       state.username = null;
       state.image = null;
+      state.mainRole = null;
+      state.minutes = null;
     },
   },
 });
 
 const persistedReducer = persistReducer(persistConfig, authSlice.reducer);
 
-export const { setToken, userDetail, updateKey, clearToken } =
+export const { setToken, userDetail, updateKey, clearToken, clearCoupon } =
   authSlice.actions;
 
 const store = configureStore({

@@ -16,9 +16,11 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 const ProfileCard = () => {
   const [professionals, setProfessionals] = useState([]);
   const [selectedProfessional, setSelectedProfessional] = useState(null);
+  const [description, setDescription] = useState("");
   const [visible, setVisible] = useState(false);
   const [loginAlert, setLoginAlert] = useState(false);
   const [DescriptionModalOpen, setDescriptionModalOpen] = useState(false);
+  const [coupon, setCoupon] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -46,9 +48,6 @@ const ProfileCard = () => {
   const fetchProfessionals = async () => {
     try {
       const response = await axios.get(`${baseUrl}/professional/getAllPros`);
-      // const verifiedProfessionals = response.data.pros.filter(
-      //   (professional) => professional.isVerified
-      // );
       setProfessionals(response.data.pros);
     } catch (error) {
       console.log(error);
@@ -104,9 +103,34 @@ const ProfileCard = () => {
     }
   };
 
-  const handleChat = async (professionalId) => {
+  const handleChat = (professionalId) => {
     setDescriptionModalOpen(true);
     dispatch(updateKey({ key: "professionalId", value: professionalId }));
+  };
+
+  const isCouponValid = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/coupon/${coupon}`, {
+        headers,
+      });
+      dispatch(
+        updateKey({ key: "minutes", value: response.data.coupon.minutes })
+      );
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (coupon) {
+      const minutes = await isCouponValid();
+      if (!minutes) {
+        alert("Coupon is not valid!");
+        return;
+      }
+    }
+    setDescriptionModalOpen(false);
     if (userId) pollRequestStatus(userId);
     try {
       await axios.post(
@@ -114,12 +138,14 @@ const ProfileCard = () => {
         {
           userId,
           professionalId,
+          description,
+          coupon,
         },
         { headers }
       );
       handleShowAlert();
     } catch (error) {
-      // console.log(error.response.data);
+      console.log(error.response);
       if (error.response.data.msg === "Invalid Authentication!") {
         handleLoginAlert();
       } else {
@@ -222,14 +248,34 @@ const ProfileCard = () => {
       >
         Please login to continue with the chat!
       </Modal>
-      <Modal open={DescriptionModalOpen}>
+      <Modal
+        title="Please give a short description..."
+        open={DescriptionModalOpen}
+        onCancel={() => setDescriptionModalOpen(false)}
+        closable={true}
+        footer={[
+          <Button
+            key="sumbmit"
+            onClick={handleSubmit}
+            style={{ backgroundColor: "#f0df20" }}
+          >
+            Submit
+          </Button>,
+        ]}
+      >
         <Form>
           <Form.Item label="Description">
-            <Input.TextArea rows={4} />{" "}
-            {/* Use Input.TextArea for multi-line text */}
+            <Input.TextArea
+              rows={4}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </Form.Item>
           <Form.Item label="Coupon code">
-            <Input type="text" /> {/* Use Input for single-line text */}
+            <Input
+              type="text"
+              placeholder="if any?"
+              onChange={(e) => setCoupon(e.target.value)}
+            />
           </Form.Item>
         </Form>
       </Modal>

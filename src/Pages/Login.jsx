@@ -44,6 +44,7 @@ const Login = () => {
             professionalId: response.data.user.proId,
             username: response.data.user.name,
             image: response.data.user.image,
+            mainRole: response.data.user.mainRole,
           })
         );
 
@@ -64,6 +65,7 @@ const Login = () => {
           userDetail({
             userId: response.data.user.userId,
             username: response.data.user.name,
+            mainRole: response.data.user.mainRole,
           })
         );
 
@@ -79,6 +81,7 @@ const Login = () => {
           userDetail({
             userId: response.data.user.userId,
             username: response.data.user.name,
+            mainRole: response.data.user.mainRole,
           })
         );
 
